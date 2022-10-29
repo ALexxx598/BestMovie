@@ -36,9 +36,10 @@ const Register = () => {
     }, [user])
 
     useEffect(() => {
-        // const result = PASSWORD_REGEX.test(password);
-        const result = true
+        const result = PASSWORD_REGEX.test(password);
+        // const result = true
         setValidPassword(result)
+        console.log('password:' + result)
 
         const match = password === matchPassword
         console.log('match:' + match)
@@ -101,7 +102,7 @@ const Register = () => {
                         autoComplete="off"
                         onChange={(e) => setUser(e.target.value)}
                         required
-                        aria-invalid={validName ? "false" : "true"}
+                        aria-invalid={!validName}
                         aria-describedby="uidnote"
                         onFocus={() => setUserFocus(true)}
                         onBlur={() => setUserFocus(false)}
@@ -130,20 +131,21 @@ const Register = () => {
                         id="password"
                         onChange={(e) => setPassword(e.target.value)}
                         required
-                        aria-invalid={validPassword ? "false" : "true"}
+                        aria-invalid={!validPassword}
                         aria-describedby="pwdnote"
                         onFocus={() => setPasswordFocus(true)}
                         onBlur={() => setPasswordFocus(false)}
                     />
-                    <p
-                        id="pwdnote"
-                        className={passwordFocus && !validPassword ? "instructions" : "offscreen"}
-                    >
-                        <FontAwesomeIcon icon={faInfoCircle} />
-                        {/*    4 to  24 characters. <br/>*/}
-                        {/*    Must begin with letter. <br/>*/}
-                        {/*    Letters, numbers, underscores, hyphens allowed.*/}
-                    </p>
+                    {
+                        !validPassword ? (
+                            <p id="pwdnote">
+                                <FontAwesomeIcon icon={faInfoCircle} />
+                                4 to  24 characters. <br/>
+                                Must begin with letter. <br/>
+                                Letters, numbers, underscores, hyphens allowed.
+                            </p>
+                        ) : null
+                    }
 
                     <label htmlFor="confirmation_password">
                         Confirmation password:
@@ -159,7 +161,7 @@ const Register = () => {
                         id="confirmation_password"
                         onChange={(e) => setMatchPassword(e.target.value)}
                         required
-                        aria-invalid={validMatch ? "false" : "true"}
+                        aria-invalid={!validMatch}
                         aria-describedby="confirmnote"
                         onFocus={() => setPasswordFocus(true)}
                         onBlur={() => setPasswordFocus(false)}
@@ -172,8 +174,8 @@ const Register = () => {
                         {/*must match*/}
                     </p>
 
-                    {/*<button disabled={!validName || !validPassword || !validMatch ? 'true' : 'false'}>*/}
-                    <button>
+                    <button disabled={!validName || !validPassword || !validMatch}>
+                    {/*<button>*/}
                         Sign up
                     </button>
                 </form>
