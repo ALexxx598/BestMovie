@@ -1,61 +1,17 @@
-import {useRef, useState, useEffect, useContext} from "react";
-import UserApiService from "../../Api/User/UserApiService";
-import {useFormik} from 'formik'
-import * as Yup from 'yup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './register.css'
 import '../../components/button.css'
 import {Button, Col, Container, Row} from "react-bootstrap";
-import AuthContext from "../../context/AuthProvider";
+import {useAuth} from "../../hooks/useAuth";
+import {useRegister} from "./useRegister";
 
 const Register = () => {
-    const {setAuth} = useContext(AuthContext)
-
-    const signupSchema = Yup.object().shape({
-        firstName: Yup.string()
-            .min(2, 'Too Short!')
-            .max(50, 'Too Long!')
-            .required('Required'),
-        lastName: Yup.string()
-            .min(2, 'Too Short!')
-            .max(50, 'Too Long!')
-            .required('Required'),
-        email: Yup.string()
-            .email('Invalid email')
-            .required('Required'),
-        password: Yup.string()
-            .required('Required'),
-        passwordConfirmation: Yup.string()
-            .required()
-            .oneOf([Yup.ref("password"), null], "Passwords must match")
-    });
-
-    const handleSignUp = async (values) => {
-        // sign in + set auth
-        const user = UserApiService.register(values.firstName, values.lastName, values.email, values.password)
-        setAuth(user)
-
-        console.log(JSON.stringify(values))
-    }
-
-    const formik = useFormik({
-        initialValues: {
-            'firstName': '',
-            'lastName': '',
-            'email': '',
-            'password': '',
-            'passwordConfirmation': '',
-        },
-        onSubmit: values => {
-            handleSignUp(values);
-        },
-        validationSchema: signupSchema
-    })
+    const {formik} = useRegister()
 
     return (
         <Container>
             <Row>
-                <Col xs={12} md={8}>Logo</Col>
+                <Col xs={12} md={8}><img src={require("../../assets/images/logo.png")}></img></Col>
                 <Col xs={6} md={4} className="formColumn">
                     <Row className="signIn">
                         <Col md={{ offset: 1 }}>Sign In</Col>
@@ -71,8 +27,16 @@ const Register = () => {
                                     type="text"
                                     onChange={formik.handleChange}
                                     value={formik.values.firstName}
-                                    className="form-control"
+                                    className={ !formik.errors.firstName
+                                        ? "form-control"
+                                        : "form-control inputBottomBorder"
+                                    }
                                 />
+                                {
+                                    formik.errors.firstName
+                                        ? <span className="formikError">{formik.errors.firstName}</span>
+                                        : null
+                                }
                             </Col>
                             <Col>
                                 <label htmlFor="lastName" className="labelPadding">Last Name</label>
@@ -82,8 +46,16 @@ const Register = () => {
                                     type="text"
                                     onChange={formik.handleChange}
                                     value={formik.values.lastName}
-                                    className="form-control"
+                                    className={ !formik.errors.lastName
+                                        ? "form-control"
+                                        : "form-control inputBottomBorder"
+                                    }
                                 />
+                                {
+                                    formik.errors.lastName
+                                        ? <span className="formikError">{formik.errors.lastName}</span>
+                                        : null
+                                }
                             </Col>
                         </Row>
                         <Row className="space3">
@@ -94,8 +66,16 @@ const Register = () => {
                                 type="email"
                                 onChange={formik.handleChange}
                                 value={formik.values.email}
-                                className="form-control"
+                                className={ !formik.errors.email
+                                    ? "form-control"
+                                    : "form-control inputBottomBorder"
+                                }
                             />
+                            {
+                                formik.errors.email
+                                    ? <span className="formikError">{formik.errors.email}</span>
+                                    : null
+                            }
                         </Row>
                         <Row className="space3">
                             <label htmlFor="password" className="labelPadding">Password</label>
@@ -105,8 +85,13 @@ const Register = () => {
                                 type="password"
                                 onChange={formik.handleChange}
                                 value={formik.values.password}
-                                className="form-control"
+                                className={ !formik.errors.password ? "form-control" : "form-control inputBottomBorder"}
                             />
+                            {
+                                formik.errors.password
+                                    ? <span className="formikError">{formik.errors.password}</span>
+                                    : null
+                            }
                         </Row>
                         <Row className="space3">
                             <label htmlFor="passwordConfirmation" className="labelPadding">Password Confirmation</label>
@@ -116,11 +101,19 @@ const Register = () => {
                                 type="passwordConfirmation"
                                 onChange={formik.handleChange}
                                 value={formik.values.passwordConfirmation}
-                                className="form-control"
+                                className={ !formik.errors.passwordConfirmation
+                                    ? "form-control"
+                                    : "form-control inputBottomBorder"
+                                }
                             />
+                            {
+                                formik.errors.passwordConfirmation
+                                    ? <span className="formikError">{formik.errors.passwordConfirmation}</span>
+                                    : null
+                            }
                         </Row>
                         <Row className="space3">
-                            <Button type="submit" className="button">Submit</Button>
+                            <Button type="submit" variant="success" className="button">Submit</Button>
                         </Row>
                     </form>
                 </Col>

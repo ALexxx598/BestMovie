@@ -5,13 +5,10 @@
 }
 
 .labelPadding {
+    font-size: 18px;
     padding-top: 12px;
     padding-left: 12px;
     padding-bottom: 6px;
-}
-
-.logo {
-    /*background-image: url("icon");*/
 }
 
 .formColumn {
@@ -21,10 +18,22 @@
     color: azure;
     border-radius: 5%;
     border-color: wheat;
+    padding: 30px;
 }
 
 .signIn {
-    font-size: 36px;
+    font-size: 32px;
     padding-left: 12px;
     padding-bottom: 6px;
+}
+
+.inputBottomBorder {
+    border-bottom-width: medium;
+    border-bottom-color: #e0a800;
+}
+
+.formikError {
+    padding-left: 5px;
+    font-size: 12px;
+    color: #e0a800;
 }

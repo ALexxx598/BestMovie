@@ -10,7 +10,7 @@ export default class UserApiService {
         const response = await axios.post(
             this.REFRESH,
             JSON.stringify({
-                'accessToken': accessToken,
+                accessToken,
             })
         )
 
@@ -21,8 +21,10 @@ export default class UserApiService {
         const response = await axios.post(
             this.REGISTER,
             JSON.stringify({
-                'name': firstName,
-                'password': password,
+                firstName,
+                lastName,
+                email,
+                password,
             })
         )
 

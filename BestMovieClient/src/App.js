@@ -6,8 +6,8 @@ function App() {
 
   return (
     <main className="backgroundContainer">
-      {/*<Register />*/}
-        <Login/>
+      <Register />
+        {/*<Login/>*/}
     </main>
   );
 }

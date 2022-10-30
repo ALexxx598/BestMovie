@@ -1,43 +1,16 @@
-import {useFormik} from "formik";
-import * as Yup from "yup";
 import '../../components/button.css'
 import './login.css'
 import {Button, Col, Container, Row} from "react-bootstrap";
-import {useContext} from "react";
-import AuthContext from "../../context/AuthProvider";
+import {useLogin} from "./useLogin";
 
 const Login = () => {
-    const { setAuth } = useContext(AuthContext);
-
-    const LoginSchema = Yup.object().shape({
-        email: Yup.string()
-            .email('Invalid email')
-            .required('Required'),
-        password: Yup.string()
-            .required('Required'),
-    });
-
-    const handleLogin = async (values) => {
-        // setAuth
-        console.log(values)
-    }
-
-    const formik = useFormik({
-        initialValues: {
-            'email': '',
-            'password': '',
-        },
-        onSubmit: values => {
-            handleLogin(values)
-        },
-        validationSchema: LoginSchema
-    })
+   const {formik} = useLogin()
 
     return (
         <Container>
             <Row>
                 <Col xs={6} md={{ span: 4, offset: 4}} className="containerBack">
-                    <Row className="signIn">
+                    <Row className="logIn">
                         <Col md={{ offset: 1 }}>Log in</Col>
                         <Col md={{ offset: 1 }}><a href="#">Sign In</a></Col>
                     </Row>
@@ -64,9 +37,8 @@ const Login = () => {
                                 className="form-control"
                             />
                         </Row>
-
                         <Row className="space3">
-                            <Button type="submit" className="button">Log in!</Button>
+                            <Button type="submit" variant="success" className="button">Log in!</Button>
                         </Row>
                     </form>
                 </Col>
