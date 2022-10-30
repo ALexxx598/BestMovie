@@ -1,10 +1,13 @@
-import Register from "./Register";
+import Register from "./Page/Register/Register";
+import Login from "./Page/Login/Login";
+import './app.css'
 
 function App() {
 
   return (
-    <main className="App">
-      <Register />
+    <main className="backgroundContainer">
+      {/*<Register />*/}
+        <Login/>
     </main>
   );
 }

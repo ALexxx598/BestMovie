@@ -1,0 +1,14 @@
+.containerBack {
+    background-color: #030F19;
+    opacity: 96%;
+    margin-top: 10%;
+    color: azure;
+    border-radius: 5%;
+    border-color: wheat;
+}
+
+.logIn {
+    font-size: 36px;
+    padding-left: 12px;
+    padding-bottom: 6px;
+}
