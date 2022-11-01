@@ -2,21 +2,22 @@ import * as Yup from "yup";
 import UserApiService from "../../Api/User/UserApiService";
 import {useAuth} from "../../hooks/useAuth";
 import {useFormik} from "formik";
+import useNavigate from "../../hooks/useNavigate";
 
 const signupSchema = Yup.object().shape({
     firstName: Yup.string()
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
-        .required('Required'),
+        .required('This field is required'),
     lastName: Yup.string()
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
-        .required('Required'),
+        .required('This field is required'),
     email: Yup.string()
         .email('Invalid email')
-        .required('Required'),
+        .required('This field is required'),
     password: Yup.string()
-        .required('Required'),
+        .required('This field is required'),
     passwordConfirmation: Yup.string()
         .required()
         .oneOf([Yup.ref("password"), null], "Passwords must match")
@@ -24,11 +25,13 @@ const signupSchema = Yup.object().shape({
 
 export const useRegister = () => {
     const {setAuth} = useAuth()
+    const {navigate, from} = useNavigate();
 
     const handleSignUp = async (values) => {
-        // sign in + set auth
         const user = await UserApiService.register(values.firstName, values.lastName, values.email, values.password)
         setAuth(user)
+
+        navigate(from, {replace: true})
 
         console.log(JSON.stringify(values))
     }
@@ -46,6 +49,6 @@ export const useRegister = () => {
     })
 
     return {
-        formik
+        formik,
     }
 }

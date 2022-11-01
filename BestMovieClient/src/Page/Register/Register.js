@@ -11,11 +11,11 @@ const Register = () => {
     return (
         <Container>
             <Row>
-                <Col xs={12} md={8}><img src={require("../../assets/images/logo.png")}></img></Col>
+                <Col xs={12} md={8}><img src={require("../../assets/images/logo.png")}/></Col>
                 <Col xs={6} md={4} className="formColumn">
                     <Row className="signIn">
                         <Col md={{ offset: 1 }}>Sign In</Col>
-                        <Col md={{ offset: 1 }}><a href="#">Log in</a></Col>
+                        <Col md={{ offset: 1 }}><a href="login">Log in</a></Col>
                     </Row>
                     <form onSubmit={formik.handleSubmit} >
                         <Row>
