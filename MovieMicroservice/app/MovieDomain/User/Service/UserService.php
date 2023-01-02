@@ -34,8 +34,6 @@ class UserService implements UserServiceInterface
 
     /**
      * @inheritDoc
-     * @throws \App\MovieDomain\User\Exception\NonValidPasswordException
-     * @throws \App\MovieDomain\User\Exception\UserNotFoundException
      */
     public function getUserByEmailAndPassword(string $email, string $password): User
     {
@@ -44,7 +42,6 @@ class UserService implements UserServiceInterface
 
     /**
      * @inheritDoc
-     * @throws \App\MovieDomain\User\Exception\UserNotFoundException
      */
     public function hasRole(int $id, RoleType $roleType): bool
     {

@@ -3,6 +3,7 @@ import UserApiService from "../../Api/User/UserApiService";
 import {useAuth} from "../../hooks/useAuth";
 import {useFormik} from "formik";
 import useNavigate from "../../hooks/useNavigate";
+import data from "bootstrap/js/src/dom/data";
 
 const signupSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -34,11 +35,12 @@ export const useRegister = () => {
         }
 
         const user = await UserApiService.register(values.firstName, values.lastName, values.email, values.password)
+        console.log(1)
         setAuth(user)
 
         navigate(from, {replace: true})
 
-        console.log(JSON.stringify(values))
+        // console.log(JSON.stringify(values))
     }
 
     const formik = useFormik({

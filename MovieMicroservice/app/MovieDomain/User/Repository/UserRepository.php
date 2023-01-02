@@ -23,7 +23,6 @@ class UserRepository implements UserRepositoryInterface
 
     /**
      * @inheritDoc
-     * @throws UserNotFoundException
      */
     public function getById(int $id): User
     {
@@ -86,6 +85,9 @@ class UserRepository implements UserRepositoryInterface
         return $model->id;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getUserModel(int $id): UserModel
     {
         if (is_null($user = UserModel::find($id))) {

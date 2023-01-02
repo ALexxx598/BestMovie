@@ -17,6 +17,8 @@ use Mockery as m;
 
 class UserServiceTest extends UnitTestCase
 {
+    use UserStubTrait;
+
     /**
      * @var UserServiceInterface
      */

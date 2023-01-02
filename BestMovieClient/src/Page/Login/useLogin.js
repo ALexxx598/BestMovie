@@ -23,7 +23,7 @@ export const useLogin = () => {
         // work after server auth
         navigate.navigate(navigate.from, {replace: true})
 
-        console.log(values)
+        // console.log(values)
     }
 
     const formik = useFormik({

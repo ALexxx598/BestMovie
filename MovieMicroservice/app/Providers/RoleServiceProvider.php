@@ -1,6 +1,6 @@
 <?php
 
-namespace App\MovieDomain\Role;
+namespace App\Providers;
 
 use App\MovieDomain\Role\Repository\RoleRepository;
 use App\MovieDomain\Role\Repository\RoleRepositoryInterface;

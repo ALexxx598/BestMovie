@@ -8,7 +8,7 @@ trait RoleRepositoryFinderTrait
 {
     private static ?Closure $roleRepositoryResolver;
 
-    private static RoleRepositoryInterface $roleRepository;
+    private static ?RoleRepositoryInterface $roleRepository;
 
     /**
      * @param Closure|null $resolver

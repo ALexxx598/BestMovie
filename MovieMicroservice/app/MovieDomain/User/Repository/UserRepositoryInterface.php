@@ -3,6 +3,7 @@
 namespace App\MovieDomain\User\Repository;
 
 use App\Models\User as UserModel;
+use App\MovieDomain\User\Exception\UserNotFoundException;
 use App\MovieDomain\User\User;
 
 interface UserRepositoryInterface
@@ -10,6 +11,7 @@ interface UserRepositoryInterface
     /**
      * @param int $id
      * @return User
+     * @throws UserNotFoundException
      */
     public function getById(int $id): User;
 
@@ -29,6 +31,7 @@ interface UserRepositoryInterface
     /**
      * @param int $id
      * @return UserModel
+     * @throws UserNotFoundException
      */
     public function getUserModel(int $id): UserModel;
 }

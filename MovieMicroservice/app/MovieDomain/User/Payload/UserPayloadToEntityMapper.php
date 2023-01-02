@@ -9,7 +9,6 @@ class UserPayloadToEntityMapper
     /**
      * @param UserCreatePayload $userPayload
      * @return User
-     * @throws \Exception
      */
     public function mapCreatePayloadToEntity(UserCreatePayload $userPayload): User
     {

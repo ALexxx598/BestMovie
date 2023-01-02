@@ -1,3 +1,5 @@
+import RoleModel from "../Role/RoleModel";
+
 export default class UserModel {
     constructor(id, firstName, lastName, email, password, accessToken, roles) {
         this.id = id
@@ -42,5 +44,12 @@ export default class UserModel {
     get getRoles()
     {
         return this.roles
+    }
+
+    isViewer()
+    {
+        return this.getRoles.filter((roleModel) => {
+            return roleModel.equalViewer
+        })
     }
 }

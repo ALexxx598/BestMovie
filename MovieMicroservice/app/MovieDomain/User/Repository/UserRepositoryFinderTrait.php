@@ -8,7 +8,7 @@ trait UserRepositoryFinderTrait
 {
     private static ?Closure $userRepositoryResolver;
 
-    private static UserRepositoryInterface $userRepository;
+    private static ?UserRepositoryInterface $userRepository;
 
     /**
      * @param Closure|null $resolver

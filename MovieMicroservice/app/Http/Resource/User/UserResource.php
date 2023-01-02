@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\User;
+namespace App\Http\Resource\User;
 
 use App\Common\MovieMicroserviceResource;
 use App\MovieDomain\Role\Role;

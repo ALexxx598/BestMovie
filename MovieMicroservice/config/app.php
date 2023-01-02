@@ -196,8 +196,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         // Movie Domain
-        App\MovieDomain\User\UserServiceProvider::class,
-        App\MovieDomain\Role\RoleServiceProvider::class,
+        App\Providers\RoleServiceProvider::class,
+        App\Providers\UserServiceProvider::class,
 
     ],
 

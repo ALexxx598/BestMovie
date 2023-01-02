@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Request\User;
 
 use App\Common\MovieMicroserviceRequest;
 
@@ -16,9 +16,9 @@ class UserGetRequest extends MovieMicroserviceRequest
                 'required',
                 'string',
                 'min:10',
-                'regex:/[a-z]/',
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/',
+//                'regex:/[a-z]/',
+//                'regex:/[A-Z]/',
+//                'regex:/[0-9]/',
             ],
             'email' => [
                 'required',

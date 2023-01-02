@@ -13,4 +13,9 @@ export default class RoleModel {
     {
         return this.type;
     }
+
+    equalViewer()
+    {
+        return this.type = "VIEWER"
+    }
 }

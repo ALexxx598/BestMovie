@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Request\User;
 
 use App\Common\MovieMicroserviceRequest;
 use Illuminate\Validation\Rule;
@@ -27,9 +27,9 @@ class UserRegistrationRequest extends MovieMicroserviceRequest
                 'required',
                 'string',
                 'min:10',
-                'regex:/[a-z]/',
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/',
+//                'regex:/[a-z]/',
+//                'regex:/[A-Z]/',
+//                'regex:/[0-9]/',
             ],
             'password_confirmation' => [
                 'required',
@@ -48,7 +48,7 @@ class UserRegistrationRequest extends MovieMicroserviceRequest
      */
     public function getName(): string
     {
-        return $this->get('name');
+        return $this->input('name');
     }
 
     /**
@@ -56,7 +56,7 @@ class UserRegistrationRequest extends MovieMicroserviceRequest
      */
     public function getSurname(): string
     {
-        return $this->get('surname');
+        return $this->input('surname');
     }
 
     /**
@@ -64,7 +64,7 @@ class UserRegistrationRequest extends MovieMicroserviceRequest
      */
     public function getUserPassword(): string
     {
-        return $this->get('password');
+        return $this->input('password');
     }
 
     /**
@@ -72,6 +72,6 @@ class UserRegistrationRequest extends MovieMicroserviceRequest
      */
     public function getEmail(): string
     {
-        return $this->get('email');
+        return $this->input('email');
     }
 }
