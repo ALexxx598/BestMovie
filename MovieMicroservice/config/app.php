@@ -195,6 +195,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // Movie Domain
+        App\MovieDomain\User\UserServiceProvider::class,
+        App\MovieDomain\Role\RoleServiceProvider::class,
+
     ],
 
     /*

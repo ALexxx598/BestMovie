@@ -1,9 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './register.css'
 import '../../components/button.css'
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import {useAuth} from "../../hooks/useAuth";
 import {useRegister} from "./useRegister";
+import Button from "../../components/Button/Button";
 
 const Register = () => {
     const {formik} = useRegister()
@@ -112,9 +113,7 @@ const Register = () => {
                                     : null
                             }
                         </Row>
-                        <Row className="space3">
-                            <Button type="submit" variant="success" className="button">Submit</Button>
-                        </Row>
+                        <Button type="submit" variant="success" className="button">Submit</Button>
                     </form>
                 </Col>
             </Row>

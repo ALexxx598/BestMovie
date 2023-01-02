@@ -27,7 +27,12 @@ export const useRegister = () => {
     const {setAuth} = useAuth()
     const {navigate, from} = useNavigate();
 
-    const handleSignUp = async (values) => {
+    const handleSignUp = async (values, {validateForm}) => {
+        const errors = await validateForm(values)
+        if (Object.keys(errors).length) {
+            return
+        }
+
         const user = await UserApiService.register(values.firstName, values.lastName, values.email, values.password)
         setAuth(user)
 
@@ -47,6 +52,8 @@ export const useRegister = () => {
         onSubmit: handleSignUp,
         validationSchema: signupSchema
     })
+
+    const fff = formik.getFieldMeta
 
     return {
         formik,
