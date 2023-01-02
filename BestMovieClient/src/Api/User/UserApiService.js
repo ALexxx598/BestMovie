@@ -1,5 +1,6 @@
 import UserModel from "./UserModel";
 import axios from '../axios'
+import RoleModel from "../Role/RoleModel";
 
 export default class UserApiService {
     static REGISTER = 'api/user/register/';
@@ -51,6 +52,12 @@ export default class UserApiService {
             response.data.email,
             response.data.password,
             response.data.accessToken,
+            response.data.roles.map((role) => {
+                return new RoleModel(
+                    role.id,
+                    role.type
+                )
+            })
         )
     }
 }

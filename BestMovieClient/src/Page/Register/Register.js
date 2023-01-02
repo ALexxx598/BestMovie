@@ -1,9 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './register.css'
 import '../../components/button.css'
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import {useAuth} from "../../hooks/useAuth";
 import {useRegister} from "./useRegister";
+import Button from "../../components/Button/Button";
 
 const Register = () => {
     const {formik} = useRegister()
@@ -11,11 +12,11 @@ const Register = () => {
     return (
         <Container>
             <Row>
-                <Col xs={12} md={8}><img src={require("../../assets/images/logo.png")}></img></Col>
+                <Col xs={12} md={8}><img src={require("../../assets/images/logo.png")}/></Col>
                 <Col xs={6} md={4} className="formColumn">
                     <Row className="signIn">
                         <Col md={{ offset: 1 }}>Sign In</Col>
-                        <Col md={{ offset: 1 }}><a href="#">Log in</a></Col>
+                        <Col md={{ offset: 1 }}><a href="login">Log in</a></Col>
                     </Row>
                     <form onSubmit={formik.handleSubmit} >
                         <Row>
@@ -112,9 +113,7 @@ const Register = () => {
                                     : null
                             }
                         </Row>
-                        <Row className="space3">
-                            <Button type="submit" variant="success" className="button">Submit</Button>
-                        </Row>
+                        <Button type="submit" variant="success" className="button">Submit</Button>
                     </form>
                 </Col>
             </Row>

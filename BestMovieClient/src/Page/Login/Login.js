@@ -2,9 +2,10 @@ import '../../components/button.css'
 import './login.css'
 import {Button, Col, Container, Row} from "react-bootstrap";
 import {useLogin} from "./useLogin";
+import {useLocation} from "react-router-dom";
 
 const Login = () => {
-   const {formik} = useLogin()
+    const { formik } = useLogin()
 
     return (
         <Container>
@@ -12,7 +13,7 @@ const Login = () => {
                 <Col xs={6} md={{ span: 4, offset: 4}} className="containerBack">
                     <Row className="logIn">
                         <Col md={{ offset: 1 }}>Log in</Col>
-                        <Col md={{ offset: 1 }}><a href="#">Sign In</a></Col>
+                        <Col md={{ offset: 1 }}><a href="register">Sign In</a></Col>
                     </Row>
                     <form onSubmit={formik.handleSubmit} >
                         <Row className="space3">
