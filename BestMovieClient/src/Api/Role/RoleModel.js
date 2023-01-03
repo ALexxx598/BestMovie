@@ -16,6 +16,11 @@ export default class RoleModel {
 
     equalViewer()
     {
-        return this.type = "VIEWER"
+        return this.getType === 'VIEWER'
+    }
+
+    equalAdmin()
+    {
+        return this.getType === "ADMIN"
     }
 }

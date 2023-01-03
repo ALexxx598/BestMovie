@@ -7,7 +7,7 @@ import {useRegister} from "./useRegister";
 import Button from "../../components/Button/Button";
 
 const Register = () => {
-    const {formik} = useRegister()
+    const { formik } = useRegister()
 
     return (
         <Container>

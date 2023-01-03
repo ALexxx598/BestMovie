@@ -21,4 +21,12 @@ class MovieMicroserviceRequest extends FormRequest
     {
         return $this->header('authorization');
     }
+
+    /**
+     * @return string
+     */
+    public function getAuthMicroserviceHeader(): string
+    {
+        return $this->header('microservice_authorization');
+    }
 }

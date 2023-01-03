@@ -2,20 +2,15 @@
 
 namespace App\Http\Middleware;
 
-use App\Common\AuthMiddlewareTrait;
-use App\MovieDomain\User\Token\UserTokenServiceInterface;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Validation\UnauthorizedException;
 
-class AccessTokenCheck
+class AccessMicroserviceTokenCheck
 {
-    use AuthMiddlewareTrait;
-
-    /**
-     * @param UserTokenServiceInterface $userTokenService
-     */
     public function __construct(
-        private UserTokenServiceInterface $userTokenService
+        private Config $config
     ) {
     }
 
@@ -29,7 +24,9 @@ class AccessTokenCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        $this->userTokenService->getUserByToken($this->checkAuthToken($request));
+        if ($this->config->get('MICROSERVICE_AUTH_TOKEN') !== $request->header('microservice_authorization')) {
+           throw new UnauthorizedException();
+        }
 
         return $next($request);
     }

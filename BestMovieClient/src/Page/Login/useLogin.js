@@ -18,6 +18,7 @@ export const useLogin = () => {
 
     const handleLogin = async (values) => {
         const user = await UserApiService.login(values.email, values.password)
+        console.log(user)
         setAuth(user)
 
         // work after server auth

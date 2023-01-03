@@ -54,17 +54,17 @@ export default class UserApiService {
     static makeUser(response) {
         return new UserModel(
             response.data.data.id,
-            response.data.data.firstName,
-            response.data.data.lastName,
+            response.data.data.name,
+            response.data.data.surname,
             response.data.data.email,
             response.data.data.password,
-            response.data.data.accessToken,
+            response.data.data.access_token,
             response.data.data.roles.map((role) => {
                 return new RoleModel(
-                    role.id,
-                    role.type
+                    null,
+                    role
                 )
             })
-        )
+        );
     }
 }

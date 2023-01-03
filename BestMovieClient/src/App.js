@@ -3,9 +3,12 @@ import Register from "./Page/Register/Register";
 import Login from "./Page/Login/Login";
 import Main from "./Page/Main/Main";
 import Layout from "./Page/Layout/Layout";
-import RequireAuth from "./hooks/useRequireAuth";
 import './app.css'
 import Admin from "./Page/Admin/Admin";
+import MovieCollections from "./Page/Main/MovieCollections/MovieCollections";
+import MyMovieCollections from "./Page/Main/MyCollections/MyMovieCollections";
+import RequireAdminRoleAuth from "./hooks/useRequireAdminRoleAuth";
+import RequireViewerAuth from "./hooks/useRequireViewerAuth";
 
 function App() {
 
@@ -15,10 +18,16 @@ function App() {
               <Route path="login" element={<Login/>} />
               <Route path="register" element={<Register/>} />
               <Route path="main" element={<Main/>} />
+              <Route path="movieCollections" element={<MovieCollections/>} />
 
-              <Route element={<RequireAuth/>}>
-                <Route path="admin" element={<Admin/>}/>
+              <Route element={<RequireAdminRoleAuth/>} >
+                <Route path="admin" element={<Admin/>} />
               </Route>
+
+              <Route element={<RequireViewerAuth/>} >
+                  <Route path="myMovieCollections" element={<MyMovieCollections/>} />
+              </Route>
+
           </Route>
       </Routes>
   );
