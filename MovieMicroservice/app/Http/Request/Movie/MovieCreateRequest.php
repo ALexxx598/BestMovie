@@ -21,7 +21,7 @@ class MovieCreateRequest extends MovieMicroserviceRequest
                 'required',
                 'string',
             ],
-            'image_movie_link' => [
+            'storage_image_link' => [
                 'required',
                 'string',
             ]

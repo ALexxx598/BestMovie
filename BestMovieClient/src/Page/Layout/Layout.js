@@ -4,7 +4,7 @@ import '../../app.css'
 const Layout = () => {
     return (
         <main className="backgroundContainer">
-            <Outlet/>
+            <Outlet className="backgroundContainer"/>
         </main>
     )
 }

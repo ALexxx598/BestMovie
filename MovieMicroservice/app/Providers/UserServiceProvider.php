@@ -23,6 +23,7 @@ class UserServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // TODO parse on methods
         $this->app->singleton(UserServiceInterface::class, UserService::class);
         $this->app->singleton(UserRepositoryInterface::class, UserRepository::class);
         $this->app->singleton(HashServiceInterface::class, HashService::class);

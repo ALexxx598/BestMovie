@@ -198,7 +198,7 @@ return [
         // Movie Domain
         App\Providers\RoleServiceProvider::class,
         App\Providers\UserServiceProvider::class,
-
+        App\Providers\MovieServiceProvider::class,
     ],
 
     /*

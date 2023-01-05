@@ -15,6 +15,7 @@ class RoleServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // TODO parse on methods
         $this->app->singleton(RoleServiceInterface::class, RoleService::class);
         $this->app->singleton(RoleRepositoryInterface::class, RoleRepository::class);
     }

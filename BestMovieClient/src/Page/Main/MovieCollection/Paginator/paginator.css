@@ -1,0 +1,16 @@
+.paginatorBackground {
+    justify-content: center;
+    background-color:#0c1e25;
+    color:  white;
+    margin-top: 1%;
+}
+
+.paginator li, ul {
+    background-color: #222e33;
+    border-radius: 5px;
+    margin: 1px;
+    padding: 1px;
+}
+.paginator button {
+    color:  white;
+}

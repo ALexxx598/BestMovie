@@ -5,10 +5,11 @@ import Main from "./Page/Main/Main";
 import Layout from "./Page/Layout/Layout";
 import './app.css'
 import Admin from "./Page/Admin/Admin";
-import MovieCollections from "./Page/Main/MovieCollections/MovieCollections";
-import MyMovieCollections from "./Page/Main/MyCollections/MyMovieCollections";
+import MovieCollections from "./Page/Main/MovieCollection/MovieCollections";
+import MyMovieCollections from "./Page/Main/MyMovieCollection/MyMovieCollections";
 import RequireAdminRoleAuth from "./hooks/useRequireAdminRoleAuth";
 import RequireViewerAuth from "./hooks/useRequireViewerAuth";
+import Movies from "./Page/Main/Movies/Movies";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
               <Route path="login" element={<Login/>} />
               <Route path="register" element={<Register/>} />
               <Route path="main" element={<Main/>} />
+              <Route path="movies" element={<Movies/>} />
               <Route path="movieCollections" element={<MovieCollections/>} />
 
               <Route element={<RequireAdminRoleAuth/>} >

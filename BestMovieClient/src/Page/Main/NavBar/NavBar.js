@@ -7,7 +7,7 @@ const NavBar = () => {
             <nav>
                 <div className="nav-options">
                     <h1>BestMovie</h1>
-                    <span>Movies</span>
+                    <span><a href="movies">Movies</a></span>
                     <span>News</span>
                     <span><a href="movieCollections">Movie Collections</a></span>
                     <span><a href="myMovieCollections">My Movie collections</a></span>
