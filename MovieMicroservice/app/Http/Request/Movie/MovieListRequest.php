@@ -4,7 +4,7 @@ namespace App\Http\Request\Movie;
 
 use App\Common\MovieMicroserviceRequest;
 
-class ListMovieRequest extends MovieMicroserviceRequest
+class MovieListRequest extends MovieMicroserviceRequest
 {
     protected const PER_PAGE = 10;
     protected const PAGE = 1;
@@ -13,11 +13,20 @@ class ListMovieRequest extends MovieMicroserviceRequest
     {
         return [
             'per_page' => [
+                'nullable',
                 'int',
             ],
             'page' => [
+                'nullable',
                 'int',
-            ]
+            ],
+            'category_ids' => [
+                'nullable',
+                'array'
+            ],
+            'category_ids.*' => [
+                'int',
+            ],
         ];
     }
 
@@ -35,5 +44,13 @@ class ListMovieRequest extends MovieMicroserviceRequest
     public function getPerPage(): int
     {
         return $this->input('per_page', self::PER_PAGE);
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getCategoryIds(): ?array
+    {
+        return $this->input('category_ids');
     }
 }

@@ -1,7 +1,8 @@
 export default class MovieFilter {
-    constructor(page, perPage) {
+    constructor(page, perPage, categoryIds) {
         this._page = page;
         this._perPage = perPage;
+        this._categoryIds = categoryIds
     }
 
     get page() {
@@ -18,5 +19,13 @@ export default class MovieFilter {
 
     set perPage(value) {
         this._perPage = value;
+    }
+
+    get categoryIds() {
+        return this._categoryIds;
+    }
+
+    set categoryIds(value) {
+        this._categoryIds = value;
     }
 }

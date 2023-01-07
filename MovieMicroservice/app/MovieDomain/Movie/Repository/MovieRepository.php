@@ -7,10 +7,14 @@ use App\MovieDomain\Movie\Movie;
 use App\Models\Movie as MovieModel;
 use App\MovieDomain\Movie\MovieCollection;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Collection;
 
 class MovieRepository implements MovieRepositoryInterface
 {
+    public function __construct(
+        private MoveModelMapper $moveModelMapper,
+    ) {
+    }
+
     /**
      * @param MovieFilter $filter
      * @return MovieCollection
@@ -19,11 +23,12 @@ class MovieRepository implements MovieRepositoryInterface
     {
         $query = MovieModel::query();
 
+        $query->with(['categories']);
         $this->applyToQuery($filter, $query);
 
         $paginator = $query->paginate(perPage: $filter->getPerPage(), page: $filter->getPage());
 
-        return MovieCollection::make($this->mapModelsToEntities(collect($paginator->items())))
+        return MovieCollection::make($this->moveModelMapper->mapModelsToEntities(collect($paginator->items())))
             ->setPerPage($paginator->perPage())
             ->setPage($paginator->currentPage())
             ->setTotal($paginator->total())
@@ -35,7 +40,7 @@ class MovieRepository implements MovieRepositoryInterface
      */
     public function save(Movie $movie): int
     {
-        $model = $this->mapEntityToModel($movie);
+        $model = $this->moveModelMapper->mapEntityToModel($movie);
 
         $model->exists = $model->id ?? false;
         $model->save();
@@ -43,53 +48,6 @@ class MovieRepository implements MovieRepositoryInterface
         return $model->id;
     }
 
-    /**
-     * @param Movie $movie
-     * @return MovieModel
-     *
-     * //TODO move to mapper
-     */
-    private function mapEntityToModel(Movie $movie): MovieModel
-    {
-        $movieModel = new MovieModel();
-
-        $movieModel->name = $movie->getName();
-        $movieModel->description = json_encode($movie->getDescription());
-        $movieModel->storage_image_link = $movie->getStorageImageUrl();
-        $movieModel->storage_movie_link = $movie->getStorageMovieUrl();
-
-        if ($movie->getId() !== null) {
-            $movieModel->id = $movie->getId();
-        }
-
-        return $movieModel;
-    }
-
-    /**
-     * @param MovieModel $movie
-     * @return Movie
-     *
-     * //TODO move to mapper
-     */
-    private function mapModelToEntity(MovieModel $movie): Movie
-    {
-        return new Movie(
-            id: $movie->id,
-            name: $movie->name,
-            description: json_decode($movie->description, true),
-            storageMovieUrl: $movie->storage_movie_link,
-            storageImageUrl: $movie->storage_image_link
-        );
-    }
-
-    /**
-     * @param Collection $models
-     * @return Collection
-     */
-    private function mapModelsToEntities(Collection $models): Collection
-    {
-        return $models->map(fn (MovieModel $model) => $this->mapModelToEntity($model));
-    }
 
     /**
      * @param MovieFilter $filter
@@ -97,6 +55,10 @@ class MovieRepository implements MovieRepositoryInterface
      */
     private function applyToQuery(MovieFilter $filter, Builder $query): void
     {
-        // Todo add filters
+        if ($filter->getCategoryIds() !== null) {
+            $query->whereHas('categories', function (Builder $query) use ($filter) {
+                $query->whereIn('category_id', $filter->getCategoryIds()->toArray());
+            });
+        }
     }
 }

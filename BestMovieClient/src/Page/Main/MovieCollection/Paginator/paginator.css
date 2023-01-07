@@ -3,6 +3,8 @@
     background-color:#0c1e25;
     color:  white;
     margin-top: 1%;
+    width: 90%;
+    /*padding-right: 240px;*/
 }
 
 .paginator li, ul {

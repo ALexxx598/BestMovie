@@ -2,46 +2,47 @@
 
 namespace App\MovieDomain\Movie\Filter;
 
-class MovieFilter
+use App\Common\Filter;
+use Illuminate\Support\Collection;
+
+class MovieFilter extends Filter
 {
     /**
-     * @param int $page
-     * @param int $perPage
+     * @param Collection|null $categoryIds
      */
-    public function __construct(
-        private int $page,
-        private int $perPage,
+    private function __construct(
+        private ?Collection $categoryIds = null,
     ) {
     }
 
     /**
-     * @param int $page
-     * @param int $perPage
-     * @return static
+     * @param Collection<int>|null $categoryIds
+     * @return self
      */
     public static function make(
-        int $page,
-        int $perPage,
+        ?Collection $categoryIds = null,
     ): self {
         return new self(
-            page: $page,
-            perPage: $perPage
+            categoryIds: $categoryIds
         );
     }
 
     /**
-     * @return int
+     * @return Collection|null
      */
-    public function getPage(): int
+    public function getCategoryIds(): ?Collection
     {
-        return $this->page;
+        return $this->categoryIds;
     }
 
     /**
-     * @return int
+     * @param Collection|null $categoryIds
+     * @return self
      */
-    public function getPerPage(): int
+    public function setCategoryIds(?Collection $categoryIds): self
     {
-        return $this->perPage;
+        $this->categoryIds = $categoryIds;
+
+        return $this;
     }
 }

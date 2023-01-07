@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Request\Movie\ListMovieRequest;
+use App\Http\Request\Movie\MovieListRequest;
 use App\Http\Request\Movie\MovieCreateRequest;
 use App\Http\Resource\Movie\MovieListResource;
 use App\Http\Resource\Movie\MovieResource;
@@ -23,16 +23,20 @@ class MovieController extends Controller
     }
 
     /**
-     * @param ListMovieRequest $request
+     * @param MovieListRequest $request
      * @return JsonResponse
      */
-    public function list(ListMovieRequest $request): JsonResponse
+    public function list(MovieListRequest $request): JsonResponse
     {
-        $payload = MovieFilter::make(page: $request->getPage(), perPage: $request->getPerPage());
+        $filter = MovieFilter::make(
+                categoryIds: $request->getCategoryIds() !== null ? collect($request->getCategoryIds()) : null,
+            )
+            ->setPage($request->getPage())
+            ->setPerPage($request->getPerPage());
 
         return response()->json([
             'status' => Response::HTTP_OK,
-            'data' => MovieListResource::make($this->movieService->list($payload))
+            'data' => MovieListResource::make($this->movieService->list($filter))
         ], JsonResponse::HTTP_OK);
     }
 

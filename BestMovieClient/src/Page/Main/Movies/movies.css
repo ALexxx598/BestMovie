@@ -2,9 +2,11 @@ body{
     overflow-x: hidden;
 }
 .movies-container{
+    width: 90%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-right: 240px;
 }
 
 .background {
@@ -19,7 +21,8 @@ body{
     /*background-image: url("https://wallpapercave.com/dwp1x/wp5556216.jpg");*/
     /*background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/79fe83d4-7ef6-4181-9439-46db72599559/4069ab2a-1e9b-43b1-8350-a40932105920/UA-en-20221017-popsignuptwoweeks-perspective_alpha_website_large.jpg");*/
     /*background-repeat: no-repeat;*/
-    background-color:#0c1e25;
+    /*background-size: cover;*/
+    background-color: #0c1e25;
 }
 
 .header {
@@ -110,3 +113,28 @@ body{
 .LightThemeClose{
     color: #ff206e;
 }
+
+.main {
+    /*background-color: red;*/
+    display: flex;
+    /*height: 100%;*/
+}
+
+.listPadding {
+    background-color: #0c1e25;
+    color: white;
+    padding-left: 40px;
+    padding-top: 25px;
+    height: 1000px;
+    /*display: inline-block;*/
+}
+.categoryHeader {
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+.list {
+    /*height: 200px;*/
+    width: 200px;
+}
+
+

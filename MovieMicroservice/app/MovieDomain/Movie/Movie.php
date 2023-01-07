@@ -2,6 +2,8 @@
 
 namespace App\MovieDomain\Movie;
 
+use Illuminate\Support\Collection;
+
 class Movie
 {
     /**
@@ -10,6 +12,7 @@ class Movie
      * @param array $description
      * @param string $storageMovieUrl
      * @param string $storageImageUrl
+     * @param Collection|null $categories
      */
     public function __construct(
         private ?int $id = null,
@@ -17,6 +20,7 @@ class Movie
         private array $description,
         private string $storageMovieUrl,
         private string $storageImageUrl,
+        private ?Collection $categories = null,
     ) {
     }
 
@@ -111,6 +115,25 @@ class Movie
     public function setStorageImageUrl(string $storageImageUrl): self
     {
         $this->storageImageUrl = $storageImageUrl;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|null
+     */
+    public function getCategories(): ?Collection
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param Collection|null $categories
+     * @return self
+     */
+    public function setCategories(?Collection $categories): self
+    {
+        $this->categories = $categories;
 
         return $this;
     }

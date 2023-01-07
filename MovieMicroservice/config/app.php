@@ -199,6 +199,7 @@ return [
         App\Providers\RoleServiceProvider::class,
         App\Providers\UserServiceProvider::class,
         App\Providers\MovieServiceProvider::class,
+        App\Providers\CategoryServiceProvider::class,
     ],
 
     /*

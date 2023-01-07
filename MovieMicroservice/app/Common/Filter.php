@@ -2,6 +2,8 @@
 
 namespace App\Common;
 
+use App\MovieDomain\Movie\Filter\MovieFilter;
+
 class Filter implements FilterInterface
 {
     protected const PAGE = 1;
@@ -10,6 +12,14 @@ class Filter implements FilterInterface
     private ?int $page;
 
     private ?int $perPage;
+
+    /**
+     * @return static
+     */
+    public static function make(): self
+    {
+        return new self();
+    }
 
     /**
      * @param int|null $page
