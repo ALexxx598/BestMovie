@@ -2,6 +2,7 @@
 
 namespace App\MovieDomain\Movie\Repository;
 
+use App\MovieDomain\Movie\Exception\MovieNotFound;
 use App\MovieDomain\Movie\Filter\MovieFilter;
 use App\MovieDomain\Movie\Movie;
 use App\Models\Movie as MovieModel;
@@ -10,9 +11,25 @@ use Illuminate\Database\Eloquent\Builder;
 
 class MovieRepository implements MovieRepositoryInterface
 {
+    /**
+     * @param MoveModelMapper $moveModelMapper
+     */
     public function __construct(
         private MoveModelMapper $moveModelMapper,
     ) {
+    }
+
+    /**
+     * @inheritDoc
+     * @throws MovieNotFound
+     */
+    public function findById(int $id): Movie
+    {
+        if (is_null($movie = MovieModel::find($id))) {
+            throw new MovieNotFound();
+        };
+
+        return $this->moveModelMapper->mapModelToEntity($movie);
     }
 
     /**
@@ -23,7 +40,7 @@ class MovieRepository implements MovieRepositoryInterface
     {
         $query = MovieModel::query();
 
-        $query->with(['categories']);
+        $query->with(['categories', 'collections']);
         $this->applyToQuery($filter, $query);
 
         $paginator = $query->paginate(perPage: $filter->getPerPage(), page: $filter->getPage());
@@ -48,7 +65,6 @@ class MovieRepository implements MovieRepositoryInterface
         return $model->id;
     }
 
-
     /**
      * @param MovieFilter $filter
      * @param Builder $query
@@ -58,6 +74,24 @@ class MovieRepository implements MovieRepositoryInterface
         if ($filter->getCategoryIds() !== null) {
             $query->whereHas('categories', function (Builder $query) use ($filter) {
                 $query->whereIn('category_id', $filter->getCategoryIds()->toArray());
+            });
+        }
+
+        if ($filter->getUserId() !== null) {
+            $query->whereHas('collections', function (Builder $query) use ($filter) {
+                $query->where('user_id', $filter->getUserId());
+            });
+        }
+
+        if ($filter->getCollectionType() !== null) {
+            $query->whereHas('collections', function (Builder $query) use ($filter) {
+                $query->where('type', $filter->getCollectionType()->value);
+            });
+        }
+
+        if ($filter->getCollectionIds() !== null) {
+            $query->whereHas('collections', function (Builder $query) use ($filter) {
+                $query->whereIn('collection_id', $filter->getCollectionIds()->toArray());
             });
         }
     }

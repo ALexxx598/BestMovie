@@ -173,6 +173,22 @@ class User
     }
 
     /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->hasRole(RoleType::ADMIN());
+    }
+
+    /**
+     * @return bool
+     */
+    public function isViewer(): bool
+    {
+        return $this->hasRole(RoleType::VIEWER());
+    }
+
+    /**
      * @param Role $role
      */
     public function addRole(Role $role): void

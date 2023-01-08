@@ -2,9 +2,10 @@
     justify-content: center;
     background-color:#0c1e25;
     color:  white;
-    margin-top: 1%;
+    margin-top: 2%;
     width: 90%;
     /*padding-right: 240px;*/
+    margin-left: 80px;
 }
 
 .paginator li, ul {

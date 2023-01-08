@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -32,7 +33,15 @@ Route::controller(UserController::class)
 Route::controller(MovieController::class)
     ->prefix('movie')
     ->group(function () {
+
         Route::get('/list', 'list');
+
+        Route::group([
+            'prefix' => '/{id}',
+            'where' => ['id' => '[0-9]+']
+        ], function () {
+            Route::get('/', 'get');
+        });
 
         Route::middleware('access_token')->group(function () {
             Route::middleware('role.admin')->group(function () {
@@ -50,5 +59,15 @@ Route::controller(CategoryController::class)
             Route::middleware('role.admin')->group(function () {
                 Route::post('/', 'create');
             });
+        });
+    });
+
+Route::controller(CollectionController::class)
+    ->prefix('collection')
+    ->group(function () {
+        Route::get('/list', 'list');
+
+        Route::middleware('access_token')->group(function () {
+            Route::post('/', 'create');
         });
     });

@@ -24,17 +24,16 @@ nav span:hover{
     border-bottom: 2px solid #EE9B00;
     padding-bottom: 5px;
 }
-
 span a {
     color: inherit; /* blue colors for links too */
     text-decoration: inherit; /* no underline */
 }
-span #HomeLight, #MoviesLight, #TrendingLight, #PricingLight{
-    color: #fff;
-}
-span #HomeLight:hover, #MoviesLight:hover, #TrendingLight:hover, #PricingLight:hover{
-    border-bottom: 2px solid #ff206e;
-}
+/*span #HomeLight, #MoviesLight, #TrendingLight, #PricingLight{*/
+/*    color: #fff;*/
+/*}*/
+/*span #HomeLight:hover, #MoviesLight:hover, #TrendingLight:hover, #PricingLight:hover{*/
+/*    border-bottom: 2px solid #ff206e;*/
+/*}*/
 
 #navBarColor{
     color: white;
@@ -44,6 +43,8 @@ span #HomeLight:hover, #MoviesLight:hover, #TrendingLight:hover, #PricingLight:h
 .nav-options{
     display: flex;
     align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 #heading{
     color: #ff206e;
@@ -53,37 +54,16 @@ span #HomeLight:hover, #MoviesLight:hover, #TrendingLight:hover, #PricingLight:h
     padding-bottom: 5px;
 }
 
+
+
+.logInLogOut {
+    margin-right: 20px;
+}
+
+
 .input-group{
     display: flex;
     align-items: center;
-}
-#Color-switcher{
-    position: relative;
-    margin-right: 40px;
-    background-color: #413E44;
-    width: 80px;
-    height: 40px;
-    border-radius: 20px;
-}
-#Color-switcher-mover{
-    position: absolute;
-    left: 5px;
-    top: 4px;
-    background-color: #fff;
-    width: 33px;
-    height: 33px;
-    border-radius: 50%;
-    transition: .6s;
-}
-#Color-switcher-moved{
-    position: absolute;
-    background-color: #fff;
-    left: 40px;
-    top: 4px;
-    width: 33px;
-    height: 33px;
-    border-radius: 50%;
-    transition: .6s;
 }
 .input-group input{
     position: relative;

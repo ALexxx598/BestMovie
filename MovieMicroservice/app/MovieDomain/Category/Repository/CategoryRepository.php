@@ -7,7 +7,6 @@ use App\MovieDomain\Category\Category;
 use App\MovieDomain\Category\CategoryCollection;
 use App\MovieDomain\Category\Filter\CategoryFilter;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Collection;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
@@ -47,8 +46,6 @@ class CategoryRepository implements CategoryRepositoryInterface
 
         return $model->id;
     }
-
-
 
     /**
      * @param CategoryFilter $filter

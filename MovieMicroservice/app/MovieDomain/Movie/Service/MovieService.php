@@ -10,9 +10,20 @@ use App\MovieDomain\Movie\Repository\MovieRepositoryInterface;
 
 class MovieService implements MovieServiceInterface
 {
+    /**
+     * @param MovieRepositoryInterface $movieRepository
+     */
     public function __construct(
         private MovieRepositoryInterface $movieRepository
     ) {
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findById(int $id): Movie
+    {
+        return $this->movieRepository->findById($id);
     }
 
     /**

@@ -22,7 +22,7 @@ export const useLogin = () => {
         setAuth(user)
 
         // work after server auth
-        navigate.navigate(navigate.from, {replace: true})
+        navigate.navigate(navigate.from ?? '/movies', {replace: true})
 
         // console.log(values)
     }

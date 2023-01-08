@@ -3,6 +3,7 @@
 namespace App\MovieDomain\Movie\Service;
 
 use App\MovieDomain\Movie\Filter\MovieFilter;
+use App\MovieDomain\Movie\Movie;
 use App\MovieDomain\Movie\Payload\MovieCreatePayload;
 use App\MovieDomain\Movie\MovieCollection;
 
@@ -19,4 +20,10 @@ interface MovieServiceInterface
      * @return MovieCollection
      */
     public function list(MovieFilter $filter): MovieCollection;
+
+    /**
+     * @param int $id
+     * @return Movie
+     */
+    public function findById(int $id): Movie;
 }

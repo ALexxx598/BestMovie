@@ -2,6 +2,7 @@
 
 namespace App\MovieDomain\Movie\Repository;
 
+use App\MovieDomain\Movie\Exception\MovieNotFound;
 use App\MovieDomain\Movie\Filter\MovieFilter;
 use App\MovieDomain\Movie\Movie;
 use App\MovieDomain\Movie\MovieCollection;
@@ -17,6 +18,13 @@ interface MovieRepositoryInterface
     /**
      * @param MovieFilter $filter
      * @return MovieCollection
+     * @throws MovieNotFound
      */
     public function list(MovieFilter $filter): MovieCollection;
+
+    /**
+     * @param int $id
+     * @return Movie
+     */
+    public function findById(int $id): Movie;
 }

@@ -1,7 +1,11 @@
 import {useEffect, useState} from "react";
 import CategoryApiService from "../../../Api/Category/CategoryApiService";
+import useMovies from "./useMovies";
+import MovieFilter from "../../../Api/Movie/Filter/MovieFilter";
 
 const useCategories = () => {
+    const movies = useMovies()
+
     const [categories, setCategories] = useState([])
     const [checked, setChecked] = useState([1]);
 
@@ -9,6 +13,12 @@ const useCategories = () => {
         const response = await CategoryApiService.fetchCategories()
 
         setCategories(response.items)
+    }
+
+    const getCategoryIds = (newChecked) => {
+        return newChecked
+            .map((category) => category.id ?? null)
+            .filter(id => id !== null);
     }
 
     const handleToggle = (category) => () => {
@@ -22,6 +32,16 @@ const useCategories = () => {
         }
 
         setChecked(newChecked);
+
+        const defaultFilter = movies.getDefaultFilter()
+
+        const newFilter = new MovieFilter(
+            defaultFilter.page,
+            defaultFilter.perPage,
+            getCategoryIds(newChecked)
+        )
+
+        movies.setFilter(newFilter)
     }
 
     useEffect(() => {
@@ -32,6 +52,7 @@ const useCategories = () => {
         categories,
         checked,
         handleToggle,
+        ...movies
     }
 }
 

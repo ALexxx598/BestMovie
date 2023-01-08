@@ -2,49 +2,64 @@ import {useEffect, useState} from "react";
 import MovieApiService from "../../../Api/Movie/MovieApiService";
 import MovieFilter from "../../../Api/Movie/Filter/MovieFilter";
 import MoviePaginator from "../../../Api/Movie/Filter/MoviePaginator";
+import useMovies from "../Movies/useMovies";
+import CollectionApiService from "../../../Api/Collection/CollectionApiService";
+import CollectionFilter from "../../../Api/Collection/Filter/CollectionFilter";
+import {CUSTOM, DEFAULT} from "../../../Api/Collection/Filter/CollectionType";
 
 const useMovieCollection = () => {
-    const PAGE = 1
-    const PER_PAGE = 10
+    const movies = useMovies()
 
-    const [movies, setMovies] = useState([]);
-    const [filter, setFilter] = useState(new MovieFilter(PAGE, PER_PAGE));
-    const [paginator, setPaginator] = useState(new MoviePaginator(PAGE, PER_PAGE))
+    const [collections, setCollections] = useState([])
 
-    const fetchMovies = async () => {
-        const response = await MovieApiService.fetchMovies(filter)
+    const [filter, setFilter] = useState(new CollectionFilter(DEFAULT))
+    const [checked, setChecked] = useState([1]);
 
-        setMovies(response.items)
+    const fetchCollections = async () => {
+        const response = await CollectionApiService.fetchCollections(filter)
 
-        setFilter(
-            new MovieFilter(
-                response.temp.current_page,
-                response.temp.per_page,
-            )
-        )
-
-        setPaginator(
-            new MoviePaginator(
-                response.temp.current_page,
-                response.temp.per_page,
-                response.temp.last_page,
-                response.temp.total,
-            )
-        )
+        setCollections(response.items)
     }
 
-    const handleChangePage = (page) => {
-        setFilter(new MovieFilter(page, filter.perPage))
+    const getCollectionIds = (newChecked) => {
+        return newChecked
+            .map((category) => category.id ?? null)
+            .filter(id => id !== null);
+    }
+
+    const handleToggle = (category) => () => {
+        const currentIndex = checked.indexOf(category);
+        const newChecked = [...checked];
+
+        if (currentIndex === -1) {
+            newChecked.push(category);
+        } else {
+            newChecked.splice(currentIndex, 1);
+        }
+
+        setChecked(newChecked);
+
+        const defaultFilter = movies.getDefaultFilter()
+
+        const newFilter = new MovieFilter(
+            defaultFilter.page,
+            defaultFilter.perPage,
+            movies.filter.categoryIds,
+            getCollectionIds(newChecked)
+        )
+
+        movies.setFilter(newFilter)
     }
 
     useEffect(() => {
-        fetchMovies()
-    },[ filter.page, filter.perPage ])
+        fetchCollections()
+    }, [])
 
     return {
-        movies,
-        paginator,
-        handleChangePage
+        collections,
+        handleToggle,
+        checked,
+        ...movies,
     }
 }
 

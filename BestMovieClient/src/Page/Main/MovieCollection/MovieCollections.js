@@ -1,12 +1,10 @@
 import NavBar from "../NavBar/NavBar";
 import useMovieCollection from "./useMovieCollections";
-import MovieCollectionItem from "../MovieCollectionItem/MovieCollectionItem";
-import MovieApiService from "../../../Api/Movie/MovieApiService";
-import {Fragment} from "react";
-import "./movies.css"
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
-import './Paginator/paginator.css'
+import MovieList from "../MovieList/MovieList";
+import "../MovieList/movies.css"
+import '../Paginator/paginator.css'
+import MovieCollectionList from "./MovieCollectionList";
+import Paginator from "../Paginator/Paginator";
 
 const MovieCollections = () => {
     const moviesCollection = useMovieCollection()
@@ -15,24 +13,23 @@ const MovieCollections = () => {
         <div className="background">
             <NavBar/>
             <h2 className="header">MovieCollections</h2>
-            <div className='movies-container'>
-                {
-                    moviesCollection.movies.map((movie) => {
-                        return (
-                            <MovieCollectionItem id={movie.id} movie={movie}/>
-                        )
-                    })
-                }
+            <div className="main">
+                <div className="listPadding">
+                    <MovieCollectionList
+                        collections={moviesCollection.collections}
+                        handleToggle={moviesCollection.handleToggle}
+                        checked={moviesCollection.checked}
+                    />
+                </div>
+                <div>
+                    <MovieList movies={moviesCollection.movies} />
+                    <Paginator
+                        lastPage={moviesCollection.paginator.lastPage}
+                        currentPage={moviesCollection.paginator.currentPage}
+                        handleChangePage={moviesCollection.handleChangePage}
+                    />
+                </div>
             </div>
-            <Stack className="paginatorBackground">
-                <Pagination
-                    count={moviesCollection.paginator.lastPage}
-                    // page={moviesCollection.paginator.currentPage}
-                    onChange={ (_, num) => moviesCollection.handleChangePage(num)}
-                    color="primary"
-                    className="paginatorBackground paginator"
-                />
-            </Stack>
             <div color="white">footer</div>v>
         </div>
     )

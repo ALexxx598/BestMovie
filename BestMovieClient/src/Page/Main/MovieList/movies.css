@@ -1,16 +1,11 @@
 body{
     overflow-x: hidden;
 }
-.movies-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
 
 .background {
     width: 100%;
     /*height: 100%;*/
-    position: absolute;
+    /*position: absolute;*/
     /*filter: brightness(85%) opacity(95%);*/
     /*background-image: url("https://img.freepik.com/premium-vector/realistic-movie-clapper-slapstick_260559-141.jpg?w=1380");*/
     /*background-image: url("https://wallpapercave.com/dwp1x/wp4016036.jpg");*/
@@ -28,8 +23,7 @@ body{
     color: white;
 }
 
-.itemsBackground {
-    background-color:#0c1e25;
+.movies-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -46,25 +40,10 @@ body{
 .movies-container img{
     width: 350px;
     height: 550px;
-    margin: 25px 0px 4px 15px;
+    margin: 25px 12px 4px 15px;
     border-radius: 18px;
 }
-.mainColor{
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    font-size: 1rem;
-}
-#Nothing{
-    display: none;
-}
-.secondaryColor{
-    color: #ff206e;
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    font-size: 1rem;
-}
+
 .movies-container h3, .movies-container img{
     cursor: pointer;
     transition: .7s;
@@ -75,15 +54,7 @@ body{
 #container{
     position: relative;
 }
-#hide{
-    display: none;
-}
-#smaller-Text{
-    width: 100%;
-    font-size: 14px;
-    display: flex;
-    justify-content: center;
-}
+
 #playIcon{
     position: absolute;
     bottom: 70px;
@@ -92,21 +63,5 @@ body{
     z-index: 100;
     cursor: pointer;
 }
-#Exit1{
-    position: absolute;
-    margin-left: 475px;
-    margin-top: 67px;
-    z-index: 999;
-}
-#Nothing{
-    color: green;
-}
-#NoContainer{
-    opacity: 0.35;
-}
-.DarkTheme{
-    color:#fff;
-}
-.LightThemeClose{
-    color: #ff206e;
-}
+
+

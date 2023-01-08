@@ -4,6 +4,7 @@ namespace App\MovieDomain\Movie\Repository;
 
 use App\Models\Movie as MovieModel;
 use App\MovieDomain\Category\Repository\CategoryModelMapper;
+use App\MovieDomain\Collection\Repository\CollectionModelMapper;
 use App\MovieDomain\Movie\Movie;
 use Illuminate\Support\Collection;
 
@@ -11,9 +12,11 @@ class MoveModelMapper
 {
     /**
      * @param CategoryModelMapper $categoryModelMapper
+//     * @param CollectionModelMapper $collectionModelMapper
      */
     public function __construct(
         private CategoryModelMapper $categoryModelMapper,
+//        private CollectionModelMapper $collectionModelMapper,
     ) {
     }
 
@@ -54,6 +57,10 @@ class MoveModelMapper
         if ($movieModel->relationLoaded('categories')) {
             $movie->setCategories($this->categoryModelMapper->mapModelsToEntities($movieModel->categories));
         }
+
+//        if ($movieModel->relationLoaded('collections')) {
+//            $movie->seCollections($this->collectionModelMapper->mapModelsToEntities($movieModel->collections));
+//        }
 
         return $movie;
     }

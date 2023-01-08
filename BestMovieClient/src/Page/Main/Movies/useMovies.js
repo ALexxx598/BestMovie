@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import MovieApiService from "../../../Api/Movie/MovieApiService";
 import MovieFilter from "../../../Api/Movie/Filter/MovieFilter";
 import MoviePaginator from "../../../Api/Movie/Filter/MoviePaginator";
-import useCategories from "./useCategories";
+import {useAuth} from "../../../hooks/useAuth";
 
 const useMovies = () => {
     const PAGE = 1
@@ -12,22 +12,12 @@ const useMovies = () => {
     const [filter, setFilter] = useState(new MovieFilter(PAGE, PER_PAGE));
     const [paginator, setPaginator] = useState(new MoviePaginator(PAGE, PER_PAGE))
 
-    const categories = useCategories()
-
-    const getCategoryIds = () => {
-        return categories.checked
-            .map((category) => category.id ?? null)
-            .filter(id => id !== null);
+    const getDefaultFilter = () => {
+        return new MovieFilter(PAGE, PER_PAGE)
     }
 
     const fetchMovies = async () => {
-        const newFilter = new MovieFilter(
-            filter.page,
-            filter.perPage,
-            getCategoryIds()
-        )
-
-        const response = await MovieApiService.fetchMovies(newFilter)
+        const response = await MovieApiService.fetchMovies(filter)
 
         setMovies(response.items)
 
@@ -35,7 +25,8 @@ const useMovies = () => {
             new MovieFilter(
                 response.temp.current_page,
                 response.temp.per_page,
-                getCategoryIds()
+                filter.categoryIds,
+                filter.collectionIds,
             )
         )
 
@@ -50,18 +41,20 @@ const useMovies = () => {
     }
 
     const handleChangePage = (page) => {
-        setFilter(new MovieFilter(page, filter.perPage))
+        setFilter(new MovieFilter(page, filter.perPage, filter.categoryIds))
     }
 
     useEffect(() => {
         fetchMovies()
-    },[ filter.page, filter.perPage, categories.checked ])
+    },[ filter.page, filter.perPage, filter.categoryIds, filter.collectionIds ])
 
     return {
         movies,
         paginator,
         handleChangePage,
-        categories,
+        filter,
+        setFilter,
+        getDefaultFilter
     }
 }
 

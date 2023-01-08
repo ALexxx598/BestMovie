@@ -2,7 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './register.css'
 import '../../components/button.css'
 import {Col, Container, Row} from "react-bootstrap";
-import {useAuth} from "../../hooks/useAuth";
 import {useRegister} from "./useRegister";
 import Button from "../../components/Button/Button";
 

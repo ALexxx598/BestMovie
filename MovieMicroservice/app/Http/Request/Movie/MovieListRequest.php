@@ -3,6 +3,9 @@
 namespace App\Http\Request\Movie;
 
 use App\Common\MovieMicroserviceRequest;
+use App\MovieDomain\Collection\CollectionType;
+use Illuminate\Validation\Rule;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class MovieListRequest extends MovieMicroserviceRequest
 {
@@ -12,11 +15,7 @@ class MovieListRequest extends MovieMicroserviceRequest
     public function rules(): array
     {
         return [
-            'per_page' => [
-                'nullable',
-                'int',
-            ],
-            'page' => [
+            'user_id' => [
                 'nullable',
                 'int',
             ],
@@ -27,7 +26,54 @@ class MovieListRequest extends MovieMicroserviceRequest
             'category_ids.*' => [
                 'int',
             ],
+            'collection_ids' => [
+                'nullable',
+                'array',
+            ],
+            'collection_ids.*' => [
+                'int',
+            ],
+            'per_page' => [
+                'nullable',
+                'int',
+            ],
+            'page' => [
+                'nullable',
+                'int',
+            ],
         ];
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getUserId(): ?int
+    {
+        return $this->input('user_id');
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getCategoryIds(): ?array
+    {
+        return $this->input('category_ids');
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getCollectionIds(): ?array
+    {
+        return $this->input('collection_ids');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCollectionType(): ?string
+    {
+        return $this->input('collection_type');
     }
 
     /**
@@ -44,13 +90,5 @@ class MovieListRequest extends MovieMicroserviceRequest
     public function getPerPage(): int
     {
         return $this->input('per_page', self::PER_PAGE);
-    }
-
-    /**
-     * @return array|null
-     */
-    public function getCategoryIds(): ?array
-    {
-        return $this->input('category_ids');
     }
 }

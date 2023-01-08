@@ -13,6 +13,10 @@ const NavBar = () => {
                     <span><a href="myMovieCollections">My Movie collections</a></span>
                     <span>About us</span>
                 </div>
+                <div className="nav-options logInLogOut">
+                    <span><a href="login">Log in</a></span>
+                    <span><a href="register">Register</a></span>
+                </div>
             </nav>
         </Fragment>
     )
