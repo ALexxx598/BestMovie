@@ -27,7 +27,7 @@ class UserService implements UserServiceInterface
     /**
      * @inheritDoc
      */
-    public function getUser(int $id): User
+    public function findUser(int $id): User
     {
         return $this->userRepository->getById($id);
     }
@@ -45,7 +45,7 @@ class UserService implements UserServiceInterface
      */
     public function hasRole(int $id, RoleType $roleType): bool
     {
-        return $this->getUser($id)->hasRole($roleType);
+        return $this->findUser($id)->hasRole($roleType);
     }
 
     /**
@@ -67,7 +67,7 @@ class UserService implements UserServiceInterface
      */
     public function update(UserUpdatePayload $updatePayload): User
     {
-        $user = $this->getUser($updatePayload->getId());
+        $user = $this->findUser($updatePayload->getId());
 
         if (!is_null($updatePayload->getName())) {
             $user->setName($updatePayload->getName());

@@ -16,7 +16,7 @@ interface UserServiceInterface
      * @return User
      * @throws UserNotFoundException
      */
-    public function getUser(int $id): User;
+    public function findUser(int $id): User;
 
     /**
      * @param UserCreatePayload $userPayload

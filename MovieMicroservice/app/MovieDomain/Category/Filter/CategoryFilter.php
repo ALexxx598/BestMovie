@@ -9,25 +9,30 @@ class CategoryFilter extends Filter
     /**
      * @param array|null $categoryIds
      * @param string|null $name
+     * @param int|null $movieId
      */
     private function __construct(
         private ?array $categoryIds = null,
         private ?string $name = null,
+        private ?int $movieId = null,
     ) {
     }
 
     /**
      * @param array|null $categoryIds
      * @param string|null $name
+     * @param int|null $movieId
      * @return static
      */
     public static function make(
         ?array $categoryIds = null,
         ?string $name = null,
+        ?int $movieId = null,
     ): self {
        return new self(
            categoryIds: $categoryIds,
-           name: $name
+           name: $name,
+           movieId: $movieId
        );
     }
 
@@ -45,5 +50,13 @@ class CategoryFilter extends Filter
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMovieId(): ?int
+    {
+        return $this->movieId;
     }
 }

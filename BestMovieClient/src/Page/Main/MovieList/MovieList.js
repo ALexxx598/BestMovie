@@ -3,7 +3,6 @@ import "./movies.css"
 
 const MovieList = ({...props}) => {
 
-
     return (
         <div className='movies-container'>
             {

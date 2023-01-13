@@ -32,6 +32,17 @@ class CollectionController
      */
     public function list(CollectionListRequest $request): JsonResponse
     {
+        if ($request->getUserId() === null) {
+            return response()->json([
+                'status' => Response::HTTP_OK,
+                'data' => CollectionListResource::make(
+                    $this->collectionService->listOfDefaults(CollectionFilter::make()
+                    )
+                )
+            ], Response::HTTP_OK);
+        }
+
+        // TODO add user id validation
         if ($request->getUserId() !== null && $request->getAuthHeader() == null) {
             throw new AccessDeniedException('You must be authorized !!!');
         }
@@ -40,7 +51,7 @@ class CollectionController
                 userId: $request->getUserId() !== null
                     ? $this->userTokenService->getUserByToken($request->getAuthHeader())->getId()
                     : null,
-                type: CollectionType::tryFrom($request->getType()),
+                types: collect([CollectionType::CUSTOM(), CollectionType::TEST()]),
                 collectionIds: $request->getCollectionIds() !== null
                     ? collect($request->getCollectionIds())
                     : null
@@ -59,8 +70,14 @@ class CollectionController
      */
     public function create(CollectionCreateRequest $request): JsonResponse
     {
+        $user = $this->userTokenService->getUserByToken($request->getAuthHeader());
+
+        if ($user->getId() !== $request->getUserId()) {
+            throw new AccessDeniedException('You must be Authorized');
+        }
+
         $payload = CollectionCreatePayload::make(
-            userId: $this->userTokenService->getUserByToken($request->getAuthHeader())->getId(),
+            userId: $user->getId(),
             name: $request->getName()
         );
 

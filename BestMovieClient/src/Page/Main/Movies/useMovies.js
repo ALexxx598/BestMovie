@@ -8,6 +8,8 @@ const useMovies = () => {
     const PAGE = 1
     const PER_PAGE = 8
 
+    const {auth} = useAuth()
+
     const [movies, setMovies] = useState([]);
     const [filter, setFilter] = useState(new MovieFilter(PAGE, PER_PAGE));
     const [paginator, setPaginator] = useState(new MoviePaginator(PAGE, PER_PAGE))

@@ -2,20 +2,22 @@
 
 namespace App\MovieDomain\Movie\Repository;
 
+use App\Models\Collection as CollectionModel;
 use App\MovieDomain\Movie\Exception\MovieNotFound;
 use App\MovieDomain\Movie\Filter\MovieFilter;
 use App\MovieDomain\Movie\Movie;
 use App\Models\Movie as MovieModel;
 use App\MovieDomain\Movie\MovieCollection;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class MovieRepository implements MovieRepositoryInterface
 {
     /**
-     * @param MoveModelMapper $moveModelMapper
+     * @param MovieModelMapper $moveModelMapper
      */
     public function __construct(
-        private MoveModelMapper $moveModelMapper,
+        private MovieModelMapper $moveModelMapper,
     ) {
     }
 
@@ -25,11 +27,7 @@ class MovieRepository implements MovieRepositoryInterface
      */
     public function findById(int $id): Movie
     {
-        if (is_null($movie = MovieModel::find($id))) {
-            throw new MovieNotFound();
-        };
-
-        return $this->moveModelMapper->mapModelToEntity($movie);
+        return $this->moveModelMapper->mapModelToEntity($this->findModelById($id));
     }
 
     /**
@@ -93,6 +91,34 @@ class MovieRepository implements MovieRepositoryInterface
             $query->whereHas('collections', function (Builder $query) use ($filter) {
                 $query->whereIn('collection_id', $filter->getCollectionIds()->toArray());
             });
+        }
+    }
+
+    /**
+     * @param int $id
+     * @return MovieModel
+     * @throws MovieNotFound
+     */
+    private function findModelById(int $id): MovieModel
+    {
+        if (is_null($movie = MovieModel::find($id))) {
+            throw new MovieNotFound();
+        };
+
+        return $movie;
+    }
+
+    /**
+     * @param int $movieId
+     * @param int[] $collectionIds
+     * @throws MovieNotFound
+     */
+    public function syncCollections(int $movieId, array $collectionIds): void
+    {
+        $movie = $this->findModelById($movieId);
+
+        if (!empty($collectionIds)) {
+            $movie->collections()->sync($collectionIds);
         }
     }
 }

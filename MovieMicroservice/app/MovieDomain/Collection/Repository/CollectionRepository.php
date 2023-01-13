@@ -38,6 +38,7 @@ class CollectionRepository implements CollectionRepositoryInterface
     {
         $query = CollectionModel::query();
 
+        $query->with(['movies']);
         $this->applyToQuery($filter, $query);
 
         $paginator = $query->paginate(perPage: $filter->getPerPage(), page: $filter->getPage());
@@ -63,8 +64,18 @@ class CollectionRepository implements CollectionRepositoryInterface
             $query->where('type', $filter->getType()->value);
         }
 
+        if ($filter->getTypes() !== null) {
+            $query->whereIn('type', $filter->getTypesValuesArray());
+        }
+
         if ($filter->getCollectionIds() !== null) {
-            $query->where('collection_ids',  $filter->getCollectionIds()->toArray());
+            $query->whereIn('id',  $filter->getCollectionIds()->toArray());
+        }
+
+        if ($filter->getMovieId() !== null) {
+            $query->whereHas('movies', function (Builder $query) use ($filter) {
+                $query->where('movie_id', $filter->getMovieId());
+            });
         }
     }
 }

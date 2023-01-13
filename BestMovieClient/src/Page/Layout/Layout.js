@@ -3,8 +3,8 @@ import '../../app.css'
 
 const Layout = () => {
     return (
-        <main className="backgroundContainer">
-            <Outlet className="backgroundContainer"/>
+        <main>
+            <Outlet/>
         </main>
     )
 }

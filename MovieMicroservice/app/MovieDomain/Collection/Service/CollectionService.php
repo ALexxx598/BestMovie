@@ -25,9 +25,21 @@ class CollectionService implements CollectionServiceInterface
     /**
      * @param CollectionFilter $filter
      * @return MovieCollections
+     * @throws \App\MovieDomain\User\Exception\UserNotFoundException
      */
     public function list(CollectionFilter $filter): MovieCollections
     {
+        return $this->collectionRepository->list($filter);
+    }
+
+    /**
+     * @param CollectionFilter $filter
+     * @return MovieCollections
+     */
+    public function listOfDefaults(CollectionFilter $filter): MovieCollections
+    {
+        $filter->setType(CollectionType::DEFAULT());
+
         return $this->collectionRepository->list($filter);
     }
 
@@ -36,7 +48,7 @@ class CollectionService implements CollectionServiceInterface
      */
     public function create(CollectionCreatePayload $payload): Collection
     {
-        $user = $this->userService->getUser($payload->getUserId());
+        $user = $this->userService->findUser($payload->getUserId());
 
         $type = match (true) {
             $user->isAdmin() && $user->isViewer() => CollectionType::TEST(),

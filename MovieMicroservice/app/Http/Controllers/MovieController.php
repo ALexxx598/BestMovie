@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Common\MovieMicroserviceRequest;
+use App\Http\Request\Movie\MovieCollectionsRequest;
 use App\Http\Request\Movie\MovieListRequest;
 use App\Http\Request\Movie\MovieCreateRequest;
+use App\Http\Resource\Collection\CollectionResource;
 use App\Http\Resource\Movie\MovieListResource;
 use App\Http\Resource\Movie\MovieResource;
 use App\MovieDomain\Movie\Filter\MovieFilter;
+use App\MovieDomain\Movie\Payload\MovieCollectionPayload;
 use App\MovieDomain\Movie\Payload\MovieCreatePayload;
 use App\MovieDomain\Movie\Service\MovieServiceInterface;
 use App\MovieDomain\User\Token\UserTokenServiceInterface;
@@ -35,7 +38,7 @@ class MovieController extends Controller
     {
         return response()->json([
             'status' => Response::HTTP_OK,
-            'data' => MovieResource::make($this->movieService->findById(1))
+            'data' => MovieResource::make($this->movieService->findById($id))
         ], JsonResponse::HTTP_OK);
     }
 
@@ -76,7 +79,12 @@ class MovieController extends Controller
     {
         $payload = MovieCreatePayload::make(
             name: $request->getName(),
-            description: $request->getDescription(),
+            descriptionRating: $request->getDescriptionRating(),
+            descriptionSlogan: $request->getDescriptionSlogan(),
+            descriptionScreeningDate: $request->getDescriptionScreeningDate(),
+            descriptionCountry: $request->getDescriptionCountry(),
+            descriptionActors: $request->getDescriptionActors(),
+            shortDescription: $request->getShortDescription(),
             storageMovieUrl: $request->getStorageMovieLink(),
             storageImageUrl: $request->getStorageImageLink()
         );
@@ -85,5 +93,25 @@ class MovieController extends Controller
             'status' => Response::HTTP_OK,
             'data' => MovieResource::make($this->movieService->create($payload))
         ], JsonResponse::HTTP_CREATED);
+    }
+
+    /**
+     * @param int $movieId
+     * @param MovieCollectionsRequest $request
+     * @return JsonResponse
+     */
+    public function updateCollections(MovieCollectionsRequest $request, int $movieId): JsonResponse
+    {
+        $payload = MovieCollectionPayload::make(
+            userId: $request->getUserId(),
+            movieId: $movieId,
+            collectionIds: $request->getCollectionIds()
+        );
+
+        $this->movieService->syncCollections($payload);
+
+        return response()->json([
+            'status' => Response::HTTP_OK,
+        ], Response::HTTP_OK);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\MovieDomain\Collection\Repository;
 
 use App\Models\Collection as CollectionModel;
+use App\Models\Movie;
 use App\MovieDomain\Collection\Collection;
 use App\MovieDomain\Collection\CollectionType;
 use Illuminate\Support\Collection as IlluminateCollection;
@@ -28,14 +29,24 @@ class CollectionModelMapper
         return $model;
     }
 
-    public function mapModelToEntity(CollectionModel $collection): Collection
+    /**
+     * @param CollectionModel $collectionModel
+     * @return Collection
+     */
+    public function mapModelToEntity(CollectionModel $collectionModel): Collection
     {
-        return new Collection(
-            id: $collection->id,
-            userId: $collection->user_id,
-            type: CollectionType::tryFrom($collection->type),
-            name: $collection->name
+        $collection = new Collection(
+            id: $collectionModel->id,
+            userId: $collectionModel->user_id,
+            type: CollectionType::tryFrom($collectionModel->type),
+            name: $collectionModel->name
         );
+
+        if ($collectionModel->relationLoaded('movies')) {
+            $collection->setMovieIds($this->mapMovieIds($collectionModel->movies));
+        }
+
+        return $collection;
     }
 
     /**
@@ -47,5 +58,14 @@ class CollectionModelMapper
         return $models->map(
             fn (CollectionModel $movieCollection): Collection => $this->mapModelToEntity($movieCollection)
         );
+    }
+
+    /**
+     * @param \Illuminate\Support\Collection<Movie> $models
+     * @return IlluminateCollection<int>
+     */
+    private function mapMovieIds(IlluminateCollection $moviesModels): IlluminateCollection
+    {
+        return $moviesModels->map(fn (Movie $movie) => $movie->id);
     }
 }

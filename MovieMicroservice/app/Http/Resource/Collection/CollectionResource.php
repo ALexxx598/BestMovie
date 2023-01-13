@@ -17,6 +17,7 @@ class CollectionResource extends MovieMicroserviceResource
             'user_id' => $this->getUserId(),
             'name' => $this->getName(),
             'type' => $this->getType(),
+            'movie_ids' => $this->getMovieIds()?->toArray(),
         ];
     }
 }

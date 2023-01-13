@@ -12,6 +12,7 @@ use App\MovieDomain\User\Payload\UserCreatePayload;
 use App\MovieDomain\User\Payload\UserUpdatePayload;
 use App\MovieDomain\User\Service\UserServiceInterface;
 use App\MovieDomain\User\Token\UserTokenServiceInterface;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class UserController
 {
@@ -72,10 +73,16 @@ class UserController
      * @return JsonResponse
      * @throws \App\MovieDomain\User\Exception\UserNotFoundException
      */
-    public function getDetails(UserRequest $request): JsonResponse
+    public function refresh(UserRequest $request): JsonResponse
     {
+        $user = $this->userTokenService->getUserByToken($request->getAuthHeader());
+
+        if ($user->getId() !== $request->getUserId()) {
+            throw new AccessDeniedException('You must be authorized!!!');
+        }
+
         return response()->json([
-            'data' => UserResource::make($this->userTokenService->getUserByToken($request->getAuthHeader()))
+            'data' => UserResource::make($user)
         ]);
     }
 

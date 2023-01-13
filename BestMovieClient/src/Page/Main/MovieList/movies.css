@@ -14,12 +14,13 @@ body{
     /*background-image: url("https://wallpapercave.com/dwp1x/wp5556216.jpg");*/
     /*background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/79fe83d4-7ef6-4181-9439-46db72599559/4069ab2a-1e9b-43b1-8350-a40932105920/UA-en-20221017-popsignuptwoweeks-perspective_alpha_website_large.jpg");*/
     /*background-repeat: no-repeat;*/
-    background-color:#0c1e25;
+    background-color: #0c1e25;
 }
 
 .header {
     margin-left: 40px;
     margin-top: 20px;
+    padding-left: 10px;
     color: white;
 }
 
@@ -27,6 +28,8 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    background-color: #222d33;
+    border-radius: 10px;
 }
 
 .mainBgColor{

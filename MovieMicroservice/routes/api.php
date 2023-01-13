@@ -25,7 +25,7 @@ Route::controller(UserController::class)
 
         Route::middleware('access_token')->group(function () {
             Route::patch('/', 'update');
-            Route::get('/detail', 'getDetails');
+            Route::get('/refresh/', 'refresh');
         });
     });
 
@@ -35,15 +35,11 @@ Route::controller(MovieController::class)
     ->group(function () {
 
         Route::get('/list', 'list');
-
-        Route::group([
-            'prefix' => '/{id}',
-            'where' => ['id' => '[0-9]+']
-        ], function () {
-            Route::get('/', 'get');
-        });
+        Route::get('/{id}', 'get');
 
         Route::middleware('access_token')->group(function () {
+            Route::patch('/collections/{movieId}', 'updateCollections');
+
             Route::middleware('role.admin')->group(function () {
                 Route::post('/', 'create');
             });

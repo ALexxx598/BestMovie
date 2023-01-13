@@ -2,25 +2,36 @@
 
 namespace App\MovieDomain\Movie;
 
+use App\MovieDomain\Category\Category;
+use App\MovieDomain\Category\Filter\CategoryFilter;
+use App\MovieDomain\Category\Repository\CategoryRepositoryFinderTrait;
+use App\MovieDomain\Collection\Collection as MovieCollections;
+use App\MovieDomain\Collection\Filter\CollectionFilter;
+use App\MovieDomain\Collection\Repository\CollectionRepositoryFinderTrait;
 use Illuminate\Support\Collection;
 
 class Movie
 {
+    use CategoryRepositoryFinderTrait;
+    use CollectionRepositoryFinderTrait;
+
     /**
      * @param int|null $id
      * @param string $name
-     * @param array $description
+     * @param MovieDescription $description
      * @param string $storageMovieUrl
      * @param string $storageImageUrl
-     * @param Collection|null $categories
+     * @param Collection<Category>|null $categories
+     * @param Collection<MovieCollections>|null $collections
      */
     public function __construct(
         private ?int $id = null,
         private string $name,
-        private array $description,
+        private MovieDescription $description,
         private string $storageMovieUrl,
         private string $storageImageUrl,
         private ?Collection $categories = null,
+        private ?Collection $collections = null,
     ) {
     }
 
@@ -63,18 +74,18 @@ class Movie
     }
 
     /**
-     * @return array
+     * @return MovieDescription
      */
-    public function getDescription(): array
+    public function getDescription(): MovieDescription
     {
         return $this->description;
     }
 
     /**
-     * @param array $description
+     * @param MovieDescription $description
      * @return self
      */
-    public function setDescription(array $description): self
+    public function setDescription(MovieDescription $description): self
     {
         $this->description = $description;
 
@@ -120,15 +131,20 @@ class Movie
     }
 
     /**
-     * @return Collection|null
+     * @return Collection<Category>
      */
-    public function getCategories(): ?Collection
+    public function getCategories(): Collection
     {
-        return $this->categories;
+        if ($this->getId() == null) {
+            return new Collection([]);
+        }
+
+        return $this->categories
+            ?? $this->categories = self::getCategoryRepository()->list(CategoryFilter::make(movieId: $this->getId()));
     }
 
     /**
-     * @param Collection|null $categories
+     * @param Collection<Category>|null $categories
      * @return self
      */
     public function setCategories(?Collection $categories): self
@@ -136,5 +152,39 @@ class Movie
         $this->categories = $categories;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<MovieCollections>|null
+     */
+    public function getCollections(): ?Collection
+    {
+        return $this->collections
+            ?? $this->collections = $this::getCollectionRepository()->list(
+                CollectionFilter::make(movieId: $this->getId())
+            );
+    }
+
+    /**
+     * @param Collection<MovieCollections>|null $collections
+     * @return self
+     */
+    public function setCollections(?Collection $collections): self
+    {
+        $this->collections = $collections;
+
+        return $this;
+    }
+
+    /**
+     * @param int $userId
+     * @return Collection<int>
+     */
+    public function getUserCollectionIds(int $userId): Collection
+    {
+        return $this
+            ->getCollections()
+            ->filter(fn (MovieCollections $collection) => $collection->getUserId() === $userId)
+            ->map(fn (MovieCollections $collection) => $collection->getId());
     }
 }

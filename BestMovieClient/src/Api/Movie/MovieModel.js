@@ -1,8 +1,9 @@
 export default class MovieModel {
-    constructor(id, name, description, storageImageUrl, storageMovieUrl) {
+    constructor(id, name, description, storageImageUrl, storageMovieUrl, categories) {
         this._id = id;
         this._name = name;
         this._description = description;
+        this._categories = categories;
         this._storageImageUrl = storageImageUrl;
         this._storageMovieUrl = storageMovieUrl;
     }
@@ -25,5 +26,9 @@ export default class MovieModel {
 
     get storageMovieUrl() {
         return this._storageMovieUrl;
+    }
+
+    get categories() {
+        return this._categories;
     }
 }

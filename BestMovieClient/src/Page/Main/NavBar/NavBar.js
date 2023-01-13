@@ -1,21 +1,73 @@
 import {Fragment} from "react";
 import "./navBar.css";
+import {ABOUT_US, DOMAIN, LOGIN, MOVIE_COLLECTIONS, MOVIES, MY_MOVIE_COLLECTION, REGISTER} from "../../../Routes";
+import {useAuth} from "../../../hooks/useAuth";
+import useLogOut from "../../LogOut/useLogOut";
+import ProfileModal from "../Profile/ProfileModal";
 
-const NavBar = () => {
+const NavBar = ({...props}) => {
+    const { auth } = useAuth()
+    const { logOut } = useLogOut()
+
     return (
         <Fragment>
             <nav>
                 <div className="nav-options">
                     <h1>BestMovie</h1>
-                    <span><a href="movies">Movies</a></span>
+                    {
+                        props?.allMoviesHighlighted
+                            ? <span className="navSpanGold">
+                                <a href={DOMAIN + MOVIES}>Movies</a>
+                              </span>
+                            : <span>
+                                <a href={DOMAIN + MOVIES}>Movies</a>
+                              </span>
+                    }
                     <span>News</span>
-                    <span><a href="movieCollections">Movie Collections</a></span>
-                    <span><a href="myMovieCollections">My Movie collections</a></span>
-                    <span>About us</span>
+                    {
+                        props?.movieCollectionsHighlighted
+                            ? <span className="navSpanGold">
+                               <a href={DOMAIN + MOVIE_COLLECTIONS}>Movie Collections</a>
+                              </span>
+                            : <span>
+                                <a href={DOMAIN + MOVIE_COLLECTIONS}>Movie Collections</a>
+                              </span>
+                    }
+                    {
+                        props?.myMovieCollectionsHighlighted
+                            ? <span className="navSpanGold">
+                               <a href={DOMAIN + MY_MOVIE_COLLECTION}>My Movie collections</a>
+                              </span>
+                            : <span>
+                               <a href={DOMAIN + MY_MOVIE_COLLECTION}>My Movie collections</a>
+                              </span>
+                    }
+                    {
+                        props?.aboutUs
+                            ? <span className="navSpanGold">
+                                <a href={DOMAIN + ABOUT_US}> About us </a>
+                              </span>
+                            : <span>
+                                <a href={DOMAIN + ABOUT_US}> About us </a>
+                              </span>
+                    }
+
                 </div>
                 <div className="nav-options logInLogOut">
-                    <span><a href="login">Log in</a></span>
-                    <span><a href="register">Register</a></span>
+                    <span>
+                        {
+                            auth?.id !== null
+                                ? <a onClick={logOut} href={DOMAIN + MOVIES}>Log out</a>
+                                : <a href={DOMAIN + LOGIN}>Log in</a>
+                        }
+                    </span>
+                    <span>
+                        {
+                            auth?.id !== null
+                                ? <ProfileModal/>
+                                : null
+                        }
+                    </span>
                 </div>
             </nav>
         </Fragment>

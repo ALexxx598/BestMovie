@@ -6,9 +6,12 @@ import useMovies from "../Movies/useMovies";
 import CollectionApiService from "../../../Api/Collection/CollectionApiService";
 import CollectionFilter from "../../../Api/Collection/Filter/CollectionFilter";
 import {CUSTOM, DEFAULT} from "../../../Api/Collection/Filter/CollectionType";
+import {useAuth} from "../../../hooks/useAuth";
 
 const useMovieCollection = () => {
     const movies = useMovies()
+
+    const {auth, findLocalStorageAuth} = useAuth()
 
     const [collections, setCollections] = useState([])
 
@@ -17,6 +20,10 @@ const useMovieCollection = () => {
 
     const fetchCollections = async () => {
         const response = await CollectionApiService.fetchCollections(filter)
+
+        // console.log(auth)
+        // findLocalStorageAuth()
+        // console.log(response.items)
 
         setCollections(response.items)
     }

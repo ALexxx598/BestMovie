@@ -6,6 +6,7 @@ use App\MovieDomain\Movie\Exception\MovieNotFound;
 use App\MovieDomain\Movie\Filter\MovieFilter;
 use App\MovieDomain\Movie\Movie;
 use App\MovieDomain\Movie\MovieCollection;
+use Illuminate\Support\Collection;
 
 interface MovieRepositoryInterface
 {
@@ -27,4 +28,10 @@ interface MovieRepositoryInterface
      * @return Movie
      */
     public function findById(int $id): Movie;
+
+    /**
+     * @param int $movieId
+     * @param int[] $collectionIds
+     */
+    public function syncCollections(int $movieId, array $collectionIds): void;
 }

@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import {useFormik} from "formik";
 import UserApiService from "../../Api/User/UserApiService";
 import useNavigate from "../../hooks/useNavigate";
+import {DOMAIN, MOVIES} from "../../Routes";
 
 const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -13,18 +14,16 @@ const LoginSchema = Yup.object().shape({
 });
 
 export const useLogin = () => {
-    const { setAuth } = useAuth();
+    const { setAuth, putAuthToLocalStorage } = useAuth();
     const navigate = useNavigate()
 
     const handleLogin = async (values) => {
         const user = await UserApiService.login(values.email, values.password)
-        console.log(user)
+
         setAuth(user)
+        putAuthToLocalStorage(user)
 
-        // work after server auth
-        navigate.navigate(navigate.from ?? '/movies', {replace: true})
-
-        // console.log(values)
+        navigate.navigate('/movies/', false)
     }
 
     const formik = useFormik({

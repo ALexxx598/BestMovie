@@ -19,18 +19,18 @@ class CollectionListRequest extends MovieMicroserviceRequest
                 'nullable',
                 'int',
             ],
-            'type' => [
-                'required',
-                'string',
-                Rule::in(CollectionType::toArray()),
-                function ($attribute, $value, $fail) {
-                    if (($value === CollectionType::CUSTOM()->value || $value === CollectionType::TEST()->value)
-                        && $this->input('user_id') === null
-                    ) {
-                        throw new AccessDeniedException('You must be authorized !!!');
-                    }
-                },
-            ],
+//            'type' => [
+//                'required',
+//                'string',
+//                Rule::in(CollectionType::toArray()),
+//                function ($attribute, $value, $fail) {
+//                    if (($value === CollectionType::CUSTOM()->value || $value === CollectionType::TEST()->value)
+//                        && $this->input('user_id') === null
+//                    ) {
+//                        throw new AccessDeniedException('You must be authorized !!!');
+//                    }
+//                },
+//            ],
             'collection_ids' => [
                 'nullable',
                 'array',
@@ -57,13 +57,13 @@ class CollectionListRequest extends MovieMicroserviceRequest
         return $this->input('user_id');
     }
 
-    /**
-     * @return string|null
-     */
-    public function getType(): ?string
-    {
-        return $this->input('type');
-    }
+//    /**
+//     * @return string|null
+//     */
+//    public function getType(): ?string
+//    {
+//        return $this->input('type');
+//    }
 
     /**
      * @return array|null

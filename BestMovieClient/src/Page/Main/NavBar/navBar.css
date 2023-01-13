@@ -12,13 +12,18 @@ nav h1{
 nav a {
     text-decoration: none;
 }
-nav span{
+nav span {
     cursor: pointer;
     margin-left: 40px;
     font-size: .85rem;
     text-transform: uppercase;
+    color: white;
+}
+
+.navSpanGold {
     color: gold;
 }
+
 nav span:hover{
     color: #fff;
     border-bottom: 2px solid #EE9B00;
@@ -57,7 +62,7 @@ span a {
 
 
 .logInLogOut {
-    margin-right: 20px;
+    margin-right: 40px;
 }
 
 

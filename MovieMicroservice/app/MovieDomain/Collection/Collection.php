@@ -3,6 +3,8 @@
 namespace App\MovieDomain\Collection;
 
 
+use Illuminate\Support\Collection as IlluminateCollection;
+
 class Collection
 {
     /**
@@ -10,12 +12,14 @@ class Collection
      * @param int $userId
      * @param CollectionType $type
      * @param string $name
+     * @param IlluminateCollection|null $movieIds
      */
     public function __construct(
         private ?int $id = null,
         private int $userId,
         private CollectionType $type,
         private string $name,
+        private ?IlluminateCollection $movieIds = null,
     ) {
     }
 
@@ -91,6 +95,25 @@ class Collection
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return IlluminateCollection|null
+     */
+    public function getMovieIds(): ?IlluminateCollection
+    {
+        return $this->movieIds;
+    }
+
+    /**
+     * @param IlluminateCollection|null $movieIds
+     * @return self
+     */
+    public function setMovieIds(?IlluminateCollection $movieIds = null): self
+    {
+        $this->movieIds = $movieIds;
 
         return $this;
     }

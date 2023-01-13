@@ -12,11 +12,23 @@ class CollectionCreateRequest extends MovieMicroserviceRequest
     public function rules(): array
     {
         return [
+            'user_id' => [
+                'required',
+                'int'
+            ],
             'name' => [
                 'required',
                 'string',
             ],
         ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserId(): int
+    {
+        return $this->input('user_id');
     }
 
     /**

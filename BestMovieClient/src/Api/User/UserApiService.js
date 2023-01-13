@@ -7,12 +7,17 @@ export default class UserApiService {
     static LOGIN = 'api/user/';
     static REFRESH = 'api/user/refresh/';
 
-    static async refreshUser(accessToken) {
-        const response = await axios.post(
+    static async refreshUser(id, accessToken) {
+        const response = await axios.get(
             this.REFRESH,
-            JSON.stringify({
-                accessToken,
-            })
+            {
+                params: {
+                    'user_id': id
+                },
+                headers: {
+                    'Authorization': accessToken
+                },
+            },
         )
 
         return this.makeUser(response)
@@ -57,7 +62,6 @@ export default class UserApiService {
             response.data.data.name,
             response.data.data.surname,
             response.data.data.email,
-            response.data.data.password,
             response.data.data.access_token,
             response.data.data.roles.map((role) => {
                 return new RoleModel(

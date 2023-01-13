@@ -1,13 +1,14 @@
 export default class CollectionFilter {
-    constructor(type) {
+    constructor(type, movieId) {
         this._type = type;
+        this._movieId = movieId
     }
 
     get type() {
         return this._type;
     }
 
-    set type(value) {
-        this._type = value;
+    get movieId() {
+        return this._movieId;
     }
 }

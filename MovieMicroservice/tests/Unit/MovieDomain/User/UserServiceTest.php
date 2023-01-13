@@ -52,7 +52,7 @@ class UserServiceTest extends UnitTestCase
             ->once()
             ->andReturn($user = m::mock(User::class));
 
-        $result = $this->userService->getUser($this->faker->numberBetween(1, 9999));
+        $result = $this->userService->findUser($this->faker->numberBetween(1, 9999));
 
         $this->assertEquals($user, $result);
         $this->assertInstanceOf(User::class, $result);

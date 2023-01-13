@@ -18,6 +18,6 @@ class UserTokenService implements UserTokenServiceInterface
      */
     public function getUserByToken(string $token): User
     {
-        return $this->userService->getUser($this->tokenRepository->getUserByToken($token));
+        return $this->userService->findUser($this->tokenRepository->getUserByToken($token));
     }
 }

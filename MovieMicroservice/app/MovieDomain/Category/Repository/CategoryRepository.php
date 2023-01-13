@@ -22,6 +22,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         $query = CategoryModel::query();
 
+        $query->with(['movies']);
         $this->applyToQuery($filter, $query);
 
         $paginator = $query->paginate(perPage: $filter->getPerPage(), page: $filter->getPage());
@@ -53,6 +54,12 @@ class CategoryRepository implements CategoryRepositoryInterface
      */
     private function applyToQuery(CategoryFilter $filter, Builder $query)
     {
+        if ($filter->getMovieId() !== null) {
+            $query->whereHas('movies',  function (Builder $query) use ($filter) {
+               return $query->where('movie_id', $filter->getMovieId());
+            });
+        }
+
         if ($filter->getName() !== null) {
             $query->where('name', 'like', '%' . $filter->getName() . '%');
         }

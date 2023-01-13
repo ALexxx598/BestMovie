@@ -3,6 +3,8 @@
 namespace App\Http\Resource\Movie;
 
 use App\Common\MovieMicroserviceResource;
+use App\Http\Resource\Category\CategoryResource;
+use App\MovieDomain\Category\Category;
 use App\MovieDomain\Movie\Movie;
 
 /**
@@ -19,7 +21,15 @@ class MovieResource extends MovieMicroserviceResource
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
-            'description' => $this->getDescription(),
+            'description' => [
+                'screening_date' => $this->getDescription()->getScreeningDate()?->format('Y-m-d'),
+                'short_description' => $this->getDescription()->getShortDescription(),
+                'rating' => $this->getDescription()->getRating(),
+                'actors' => $this->getDescription()->getActors(),
+                'slogan' => $this->getDescription()->getSlogan(),
+                'country' => $this->getDescription()->getCountry(),
+            ],
+            'categories' => CategoryResource::collection($this->getCategories()),
             'storage_image_url' => $this->getStorageImageUrl(),
             'storage_movie_url' => $this->getStorageMovieUrl(),
         ];

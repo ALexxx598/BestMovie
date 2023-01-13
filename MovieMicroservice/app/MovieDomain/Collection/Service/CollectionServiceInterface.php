@@ -20,4 +20,10 @@ interface CollectionServiceInterface
      * @return MovieCollections
      */
     public function list(CollectionFilter $filter): MovieCollections;
+
+    /**
+     * @param CollectionFilter $filter
+     * @return MovieCollections
+     */
+    public function listOfDefaults(CollectionFilter $filter): MovieCollections;
 }

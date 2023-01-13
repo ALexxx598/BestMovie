@@ -16,9 +16,13 @@ export default class CategoryApiService {
         )
 
         return {
-            items: response.data.data.items.map(category => this.makeCategory(category)),
+            items: this.mapCategories(response.data.data.items),
             temp: response.data.data.temp
         }
+    }
+
+    static mapCategories(categories) {
+        return categories?.map(category => this.makeCategory(category))
     }
 
     static makeCategory(category) {

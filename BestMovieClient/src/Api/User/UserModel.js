@@ -1,10 +1,9 @@
 export default class UserModel {
-    constructor(id, firstName, lastName, email, password, accessToken, roles) {
+    constructor(id, firstName, lastName, email, accessToken, roles) {
         this.id = id
         this.firstName = firstName
         this.lastName = lastName
         this.email = email
-        this.password = password
         this.accessToken = accessToken
         this.roles = roles
     }

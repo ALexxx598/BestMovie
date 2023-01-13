@@ -12,17 +12,13 @@ const MovieCollectionList = ({...props}) => {
                 maxWidth: 200,
                 position: 'relative',
                 overflow: 'auto',
-                maxHeight: '60%',
+                maxHeight: props?.height ?? '60%',
                 '& ul': { padding: 0 },
             }}
         >
             {
                 props.collections.map((collection) => {
                     const labelId = `checkbox-list-secondary-label-${collection}`;
-
-                    {
-                        console.log(props)
-                    }
 
                     return (
                         <ListItem

@@ -52,6 +52,10 @@ const useMyMovieCollection = () => {
         movies.setFilter(newFilter)
     }
 
+    const handleAddCollection = () => {
+
+    }
+
     useEffect(() => {
         fetchCollections()
     }, [])
@@ -61,6 +65,7 @@ const useMyMovieCollection = () => {
         handleToggle,
         checked,
         ...movies,
+        fetchCollections,
     }
 }
 

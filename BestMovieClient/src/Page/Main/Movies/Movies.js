@@ -12,8 +12,8 @@ const Movies = () => {
 
     return (
         <div className="background">
-            <NavBar/>
-            <h2 className="header">All Movies</h2>
+            <NavBar allMoviesHighlighted={true}/>
+            {/*<h2 className="header">All Movies</h2>*/}
             <div className="main">
                 <div className="listPadding">
                     <CategoryList
@@ -22,7 +22,7 @@ const Movies = () => {
                         checked={moviesCollection.checked}
                     />
                 </div>
-                <div>
+                <div style={{paddingTop: 25, width: "100%"}}>
                     <MovieList movies={moviesCollection.movies} />
                     <Paginator
                         lastPage={moviesCollection.paginator.lastPage}

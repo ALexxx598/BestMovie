@@ -67,9 +67,9 @@ class EntityCollection extends Collection
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getItems(): mixed
+    public function getItems(): array
     {
         return $this->items;
     }

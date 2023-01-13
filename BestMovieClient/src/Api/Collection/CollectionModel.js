@@ -1,9 +1,10 @@
 export default class CollectionModel {
-    constructor(id, userId, type, name) {
+    constructor(id, userId, type, name, movieIds) {
         this._id = id;
         this._userId = userId;
         this._type = type;
         this._name = name;
+        this._movieIds = movieIds
     }
 
     get id() {
@@ -36,5 +37,13 @@ export default class CollectionModel {
 
     set name(value) {
         this._name = value;
+    }
+
+    get movieIds() {
+        return this._movieIds;
+    }
+
+    set movieIds(value) {
+        this._movieIds = value;
     }
 }
