@@ -9,6 +9,8 @@ use App\MovieDomain\User\Payload\UserPayloadToEntityMapper;
 use App\MovieDomain\User\Payload\UserUpdatePayload;
 use App\MovieDomain\User\Repository\UserRepositoryInterface;
 use App\MovieDomain\User\User;
+use BestMovie\Common\EmailTemplateMicroservice\Service\EmailTemplateServiceInterface;
+use GuzzleHttp\Exception\GuzzleException;
 
 class UserService implements UserServiceInterface
 {
@@ -16,11 +18,13 @@ class UserService implements UserServiceInterface
      * @param UserRepositoryInterface $userRepository
      * @param UserPayloadToEntityMapper $mapper
      * @param RoleServiceInterface $roleService
+     * @param EmailTemplateServiceInterface $emailTemplateService
      */
     public function __construct(
         private UserRepositoryInterface $userRepository,
         private UserPayloadToEntityMapper $mapper,
-        private RoleServiceInterface $roleService
+        private RoleServiceInterface $roleService,
+        private EmailTemplateServiceInterface $emailTemplateService,
     ) {
     }
 
@@ -53,6 +57,12 @@ class UserService implements UserServiceInterface
      */
     public function create(UserCreatePayload $userPayload): User
     {
+        if ($this->emailTemplateService->getCode($userPayload->getEmail())->getCode()
+            !== $userPayload->getEmailConfirmationCode()
+        ) {
+            //throw exception code non-valid
+        }
+
         $user = $this->mapper->mapCreatePayloadToEntity($userPayload);
 
         $user->setId($this->userRepository->save($user));
@@ -78,5 +88,13 @@ class UserService implements UserServiceInterface
         }
 
         return $user->setId($this->userRepository->save($user));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function preRegister(string $email): void
+    {
+        $this->emailTemplateService->generateCode($email);
     }
 }

@@ -8,6 +8,7 @@ use App\MovieDomain\User\Exception\UserNotFoundException;
 use App\MovieDomain\User\Payload\UserCreatePayload;
 use App\MovieDomain\User\Payload\UserUpdatePayload;
 use App\MovieDomain\User\User;
+use GuzzleHttp\Exception\GuzzleException;
 
 interface UserServiceInterface
 {
@@ -21,6 +22,7 @@ interface UserServiceInterface
     /**
      * @param UserCreatePayload $userPayload
      * @return User
+     * @throws GuzzleException
      */
     public function create(UserCreatePayload $userPayload): User;
 
@@ -47,4 +49,11 @@ interface UserServiceInterface
      * @throws UserNotFoundException
      */
     public function update(UserUpdatePayload $updatePayload): User;
+
+    /**
+     * @param string $email
+     * @return void
+     * @throws GuzzleException
+     */
+    public function preRegister(string $email): void;
 }

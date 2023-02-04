@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Request\User\UserGetRequest;
+use App\Http\Request\User\UserPreRegisterRequest;
 use App\Http\Request\User\UserRegistrationRequest;
 use App\Http\Request\User\UserRequest;
 use App\Http\Request\User\UserUpdateRequest;
 use App\Http\Resource\User\UserResource;
+use BestMovie\Common\EmailTemplateMicroservice\Service\EmailTemplateServiceInterface;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\JsonResponse;
 use App\MovieDomain\User\Payload\UserCreatePayload;
 use App\MovieDomain\User\Payload\UserUpdatePayload;
 use App\MovieDomain\User\Service\UserServiceInterface;
 use App\MovieDomain\User\Token\UserTokenServiceInterface;
+use Illuminate\Http\Response;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class UserController
@@ -19,32 +23,50 @@ class UserController
     /**
      * @param UserServiceInterface $userService
      * @param UserTokenServiceInterface $userTokenService
+     * @param EmailTemplateServiceInterface $emailTemplateService
      */
     public function __construct(
         private UserServiceInterface $userService,
-        private UserTokenServiceInterface $userTokenService
+        private UserTokenServiceInterface $userTokenService,
     ) {
+    }
+
+    /**
+     * @param UserPreRegisterRequest $request
+     * @return JsonResponse
+     * @throws GuzzleException
+     */
+    public function preRegister(UserPreRegisterRequest $request): JsonResponse
+    {
+        $this->userService->preRegister($request->getEmail());
+
+        return response()->json([
+            'status' => Response::HTTP_OK,
+        ], Response::HTTP_OK);
     }
 
     /**
      * @param UserRegistrationRequest $request
      * @return JsonResponse
+     * @throws GuzzleException
      */
     public function register(UserRegistrationRequest $request): JsonResponse
     {
         return response()->json(
             [
+                'status' => Response::HTTP_CREATED,
                 'data' => UserResource::make(
                     $this->userService->create(
-                        new UserCreatePayload(
+                        UserCreatePayload::make(
                             name: $request->getName(),
                             surname: $request->getSurname(),
                             email: $request->getEmail(),
-                            password: $request->getUserPassword()
+                            password: $request->getUserPassword(),
+                            emailConfirmationCode: $request->getEmailConfirmationCode()
                         )
                     )
                 ),
-            ],
+            ], Response::HTTP_CREATED
         );
     }
 

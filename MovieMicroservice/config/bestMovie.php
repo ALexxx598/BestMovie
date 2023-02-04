@@ -1,0 +1,6 @@
+<?php
+
+return [
+    'MICROSERVICE_AUTH_TOKEN' => env('MICROSERVICE_AUTH_TOKEN'),
+    'EMAIL_TEMPLATE_MS' => env('EMAIL_TEMPLATE_MS')
+];

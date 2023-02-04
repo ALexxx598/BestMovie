@@ -5,7 +5,7 @@ namespace App\Http\Request\User;
 use App\Common\MovieMicroserviceRequest;
 use Illuminate\Validation\Rule;
 
-class UserRegistrationRequest extends MovieMicroserviceRequest
+class UserPreRegisterRequest extends MovieMicroserviceRequest
 {
     /**
      * @inheritDoc
@@ -39,37 +39,8 @@ class UserRegistrationRequest extends MovieMicroserviceRequest
                 'required',
                 'email',
                 Rule::unique('users'),
-            ],
-            'email_confirmation_code' => [
-                'required',
-                'string',
-                'max:255'
             ]
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->input('name');
-    }
-
-    /**
-     * @return string
-     */
-    public function getSurname(): string
-    {
-        return $this->input('surname');
-    }
-
-    /**
-     * @return string
-     */
-    public function getUserPassword(): string
-    {
-        return $this->input('password');
     }
 
     /**
@@ -78,13 +49,5 @@ class UserRegistrationRequest extends MovieMicroserviceRequest
     public function getEmail(): string
     {
         return $this->input('email');
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmailConfirmationCode(): string
-    {
-        return $this->input('email_confirmation_code');
     }
 }

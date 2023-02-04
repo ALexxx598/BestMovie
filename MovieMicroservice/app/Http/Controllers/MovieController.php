@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Common\MovieMicroserviceRequest;
 use App\Http\Request\Movie\MovieCollectionsRequest;
 use App\Http\Request\Movie\MovieListRequest;
 use App\Http\Request\Movie\MovieCreateRequest;
-use App\Http\Resource\Collection\CollectionResource;
 use App\Http\Resource\Movie\MovieListResource;
 use App\Http\Resource\Movie\MovieResource;
 use App\MovieDomain\Movie\Filter\MovieFilter;
