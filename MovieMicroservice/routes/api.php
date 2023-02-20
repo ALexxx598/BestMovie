@@ -22,7 +22,7 @@ Route::controller(UserController::class)
     ->group(function () {
         Route::get('/', 'login');
         Route::post('/', 'register');
-        Route::post('/pre-registration', 'preRegister');
+        Route::post('/pre-registration/', 'preRegister');
 
         Route::middleware('access_token')->group(function () {
             Route::patch('/', 'update');

@@ -4,6 +4,7 @@ import RoleModel from "../Role/RoleModel";
 
 export default class UserApiService {
     static REGISTER = 'api/user/';
+    static PRE_REGISTER = 'api/user/pre-registration/';
     static LOGIN = 'api/user/';
     static REFRESH = 'api/user/refresh/';
 
@@ -23,9 +24,25 @@ export default class UserApiService {
         return this.makeUser(response)
     }
 
-    static async register(firstName, lastName, email, password) {
+    static async register(firstName, lastName, email, password, emailConfirmationCode) {
         const response = await axios.post(
             this.REGISTER,
+            {
+                name: firstName,
+                surname: lastName,
+                email: email,
+                password: password,
+                password_confirmation: password,
+                email_confirmation_code: emailConfirmationCode
+            }
+        )
+
+        return this.makeUser(response)
+    }
+
+    static async preRegister(firstName, lastName, email, password) {
+        const response = await axios.post(
+            this.PRE_REGISTER,
             {
                 name: firstName,
                 surname: lastName,

@@ -7,7 +7,7 @@ import Button from "../../components/Button/Button";
 import {LOGIN, DOMAIN} from "../../Routes";
 
 const Register = () => {
-    const { formik } = useRegister()
+    const { formik, preRegister } = useRegister()
 
     return (
         <div className="registerBackground">
@@ -114,6 +114,29 @@ const Register = () => {
                                         : null
                                 }
                             </Row>
+                            {
+                                preRegister
+                                    ?  <Row className="space3">
+                                        <label htmlFor="registerCode" className="labelPadding">Register code</label>
+                                        <input
+                                            id="registerCode"
+                                            name="registerCode"
+                                            type="registerCode"
+                                            onChange={formik.handleChange}
+                                            value={formik.values.registerCode}
+                                            className={ !formik.errors.registerCode
+                                                ? "form-control"
+                                                : "form-control inputBottomBorder"
+                                            }
+                                        />
+                                        {
+                                            formik.errors.registerCode
+                                                ? <span className="formikError">{formik.errors.registerCode}</span>
+                                                : null
+                                        }
+                                    </Row>
+                                    : null
+                            }
                             <Button type="submit" variant="success" className="button">Submit</Button>
                         </form>
                     </Col>
