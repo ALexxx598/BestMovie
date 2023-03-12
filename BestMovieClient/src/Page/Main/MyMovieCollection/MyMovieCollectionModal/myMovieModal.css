@@ -1,0 +1,27 @@
+.myMovieCollectionModal {
+    margin-top: 10%;
+}
+
+.mainMyMovieCollectionModalBackground {
+    color: white;
+    background-color: #222d33;
+}
+
+.myMovieCollectionModalBody {
+    display: flex;
+    padding: 10px;
+    /*height: 400px;*/
+    background-color: #0c1e25;
+    border-radius: 10px;
+}
+
+.myMovieCollectionName {
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin: auto;
+    vertical-align: middle;
+    align-items: center;
+}

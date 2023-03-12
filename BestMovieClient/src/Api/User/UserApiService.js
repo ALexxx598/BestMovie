@@ -1,43 +1,73 @@
 import UserModel from "./UserModel";
 import axios from '../axios'
+import RoleModel from "../Role/RoleModel";
 
 export default class UserApiService {
-    static REGISTER = 'api/user/register/';
-    static LOGIN = 'api/user/login/';
+    static REGISTER = 'api/user/';
+    static PRE_REGISTER = 'api/user/pre-registration/';
+    static LOGIN = 'api/user/';
     static REFRESH = 'api/user/refresh/';
 
-    static async refreshUser(accessToken) {
-        const response = await axios.post(
+    static async refreshUser(id, accessToken) {
+        const response = await axios.get(
             this.REFRESH,
-            JSON.stringify({
-                accessToken,
-            })
+            {
+                params: {
+                    'user_id': id
+                },
+                headers: {
+                    'Authorization': accessToken
+                },
+            },
         )
 
         return this.makeUser(response)
     }
 
-    static async register(firstName, lastName, email, password) {
+    static async register(firstName, lastName, email, password, emailConfirmationCode) {
         const response = await axios.post(
             this.REGISTER,
-            JSON.stringify({
-                firstName,
-                lastName,
-                email,
-                password,
-            })
+            {
+                name: firstName,
+                surname: lastName,
+                email: email,
+                password: password,
+                password_confirmation: password,
+                email_confirmation_code: emailConfirmationCode
+            }
+        )
+
+        return this.makeUser(response)
+    }
+
+    static async preRegister(firstName, lastName, email, password) {
+        const response = await axios.post(
+            this.PRE_REGISTER,
+            {
+                name: firstName,
+                surname: lastName,
+                email: email,
+                password: password,
+                password_confirmation: password,
+            }
         )
 
         return this.makeUser(response)
     }
 
     static async login(email, password) {
-        const response = await axios.post(
+        const response = await axios.get(
             this.LOGIN,
-            JSON.stringify({
-                'email': email,
-                'password': password,
-            })
+            {
+                params: {
+                    email: email,
+                    password: password,
+                },
+                headers: {
+                    'Access-Control-Allow-Origin' : '*',
+                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                }
+            },
         )
 
         return this.makeUser(response)
@@ -45,12 +75,17 @@ export default class UserApiService {
 
     static makeUser(response) {
         return new UserModel(
-            response.data.id,
-            response.data.firstName,
-            response.data.lastName,
-            response.data.email,
-            response.data.password,
-            response.data.accessToken,
-        )
+            response.data.data.id,
+            response.data.data.name,
+            response.data.data.surname,
+            response.data.data.email,
+            response.data.data.access_token,
+            response.data.data.roles.map((role) => {
+                return new RoleModel(
+                    null,
+                    role
+                )
+            })
+        );
     }
 }

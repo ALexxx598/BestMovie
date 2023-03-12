@@ -1,0 +1,33 @@
+.movieModal {
+    margin-top: 10%;
+}
+
+.mainMovieModalBackground {
+    color: white;
+    background-color: #222d33;
+}
+
+.movieModalBody {
+    display: flex;
+    /*flex-wrap: wrap;*/
+    /*justify-content: center;*/
+    padding: 10px;
+    height: 400px;
+    background-color: #0c1e25;
+    border-radius: 10px;
+}
+
+.movieModalPreview {
+    margin-left: 5%;
+}
+
+.movieModalPreviewHeader {
+    margin-left: 1%;
+}
+
+.movieModalContainerImg{
+    width: 200px;
+    height: 300px;
+    /*margin: 25px 12px 4px 15px;*/
+    border-radius: 18px;
+}

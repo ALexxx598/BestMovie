@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +17,54 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::controller(UserController::class)
+    ->prefix('user')
+    ->group(function () {
+        Route::get('/', 'login');
+        Route::post('/', 'register');
+        Route::post('/pre-registration/', 'preRegister');
+
+        Route::middleware('access_token')->group(function () {
+            Route::patch('/', 'update');
+            Route::get('/refresh/', 'refresh');
+        });
+    });
+
+
+Route::controller(MovieController::class)
+    ->prefix('movie')
+    ->group(function () {
+
+        Route::get('/list', 'list');
+        Route::get('/{id}', 'get');
+
+        Route::middleware('access_token')->group(function () {
+            Route::patch('/collections/{movieId}', 'updateCollections');
+
+            Route::middleware('role.admin')->group(function () {
+                Route::post('/', 'create');
+            });
+        });
+    });
+
+Route::controller(CategoryController::class)
+    ->prefix('category')
+    ->group(function () {
+        Route::get('/list', 'list');
+
+        Route::middleware('access_token')->group(function () {
+            Route::middleware('role.admin')->group(function () {
+                Route::post('/', 'create');
+            });
+        });
+    });
+
+Route::controller(CollectionController::class)
+    ->prefix('collection')
+    ->group(function () {
+        Route::get('/list', 'list');
+
+        Route::middleware('access_token')->group(function () {
+            Route::post('/', 'create');
+        });
+    });
