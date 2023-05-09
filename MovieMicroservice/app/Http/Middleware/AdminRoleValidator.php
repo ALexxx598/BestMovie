@@ -21,13 +21,20 @@ class AdminRoleValidator
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @throws \App\MovieDomain\User\Exception\UserNotFoundException
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$this->userTokenService->getUserByToken($this->checkAuthToken($request))->hasRole(RoleType::admin())) {
+        $user = $this->userTokenService->getUserByToken($this->checkAuthToken($request));
+
+        if ($this->getUserId($request) !== $user->getId()) {
+            throw new AccessDeniedException('You must be authorized !!!');
+        }
+
+        if (!$user->hasRole(RoleType::admin())) {
             throw new AccessDeniedException('You must have admin role');
         }
 

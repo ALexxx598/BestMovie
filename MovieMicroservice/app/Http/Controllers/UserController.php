@@ -23,7 +23,6 @@ class UserController
     /**
      * @param UserServiceInterface $userService
      * @param UserTokenServiceInterface $userTokenService
-     * @param EmailTemplateServiceInterface $emailTemplateService
      */
     public function __construct(
         private UserServiceInterface $userService,
@@ -119,7 +118,7 @@ class UserController
             'data' => UserResource::make(
                 $this->userService->update(
                     new UserUpdatePayload(
-                        id: $this->userTokenService->getUserByToken($request->getAuthHeader())->getId(),
+                        id: $request->getUserId(),
                         name: $request->getName(),
                         surname: $request->getSurname()
                     )

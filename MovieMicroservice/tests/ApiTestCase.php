@@ -12,13 +12,6 @@ class ApiTestCase extends TestCase
     use RefreshDatabase;
     use WithFaker;
 
-    /**
-     * The Faker instance.
-     *
-     * @var Generator
-     */
-    protected $faker;
-
     protected function setUp(): void
     {
         parent::setUp();

@@ -24,7 +24,7 @@ class AccessMicroserviceTokenCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($this->config->get('MICROSERVICE_AUTH_TOKEN') !== $request->header('microservice_authorization')) {
+        if ($this->config->get('MICROSERVICE_AUTH_TOKEN') !== $request->header('MICROSERVICE_AUTH')) {
            throw new UnauthorizedException();
         }
 

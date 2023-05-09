@@ -4,28 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f32a29f03d1c3f02e9a13eca4c6f995e",
+    "content-hash": "b00c37ca2a39da6b88ea7a10234b25c4",
     "packages": [
         {
             "name": "bestmovie/common",
-            "version": "v0.0.16",
+            "version": "v0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ALexxx598/BestMovieCommon.git",
-                "reference": "56d9458eef1e0071f6db97a647533ff5056b8a33"
+                "reference": "9b6852caf7b5af77aed19a5c02950fd1150c2cb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ALexxx598/BestMovieCommon/zipball/56d9458eef1e0071f6db97a647533ff5056b8a33",
-                "reference": "56d9458eef1e0071f6db97a647533ff5056b8a33",
+                "url": "https://api.github.com/repos/ALexxx598/BestMovieCommon/zipball/9b6852caf7b5af77aed19a5c02950fd1150c2cb0",
+                "reference": "9b6852caf7b5af77aed19a5c02950fd1150c2cb0",
                 "shasum": ""
             },
             "require": {
                 "fakerphp/faker": "2.x-dev",
                 "guzzlehttp/guzzle": "^7.5",
                 "php": "^8.0",
-                "phpunit/phpunit": "^9.5.10",
-                "stechstudio/laravel-jwt": "^1.11"
+                "phpunit/phpunit": "^9.5.10"
             },
             "require-dev": {
                 "barryvdh/laravel-ide-helper": "^2.2",
@@ -36,7 +35,9 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "BestMovie\\Common\\EmailTemplateServiceProvider"
+                        "BestMovie\\Common\\EmailTemplateServiceProvider",
+                        "BestMovie\\Common\\BestMovieServiceProvider",
+                        "BestMovie\\Common\\BestMovieStorageServiceProvider"
                     ]
                 }
             },
@@ -58,9 +59,9 @@
             "description": "public contracts for best movie microservices app",
             "support": {
                 "issues": "https://github.com/ALexxx598/BestMovieCommon/issues",
-                "source": "https://github.com/ALexxx598/BestMovieCommon/tree/v0.0.16"
+                "source": "https://github.com/ALexxx598/BestMovieCommon/tree/v0.1.2"
             },
-            "time": "2023-02-20T12:47:52+00:00"
+            "time": "2023-03-10T10:22:57+00:00"
         },
         {
             "name": "brick/math",
@@ -1604,68 +1605,6 @@
                 "source": "https://github.com/laravel/tinker/tree/v2.8.0"
             },
             "time": "2023-01-10T18:03:30+00:00"
-        },
-        {
-            "name": "lcobucci/jwt",
-            "version": "3.2.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "82be04b4753f8b7693b62852b7eab30f97524f9b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/82be04b4753f8b7693b62852b7eab30f97524f9b",
-                "reference": "82be04b4753f8b7693b62852b7eab30f97524f9b",
-                "shasum": ""
-            },
-            "require": {
-                "ext-openssl": "*",
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "mdanter/ecc": "~0.3.1",
-                "mikey179/vfsstream": "~1.5",
-                "phpmd/phpmd": "~2.2",
-                "phpunit/php-invoker": "~1.1",
-                "phpunit/phpunit": "~4.5",
-                "squizlabs/php_codesniffer": "~2.3"
-            },
-            "suggest": {
-                "mdanter/ecc": "Required to use Elliptic Curves based algorithms."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lcobucci\\JWT\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Luís Otávio Cobucci Oblonczyk",
-                    "email": "lcobucci@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A simple library to work with JSON Web Token and JSON Web Signature",
-            "keywords": [
-                "JWS",
-                "jwt"
-            ],
-            "support": {
-                "issues": "https://github.com/lcobucci/jwt/issues",
-                "source": "https://github.com/lcobucci/jwt/tree/3.2"
-            },
-            "time": "2018-11-11T12:22:26+00:00"
         },
         {
             "name": "league/commonmark",
@@ -4960,62 +4899,6 @@
                 }
             ],
             "time": "2023-02-10T15:02:18+00:00"
-        },
-        {
-            "name": "stechstudio/laravel-jwt",
-            "version": "1.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/stechstudio/laravel-jwt.git",
-                "reference": "70e9d48878320be0dc0e883613fcca02b81ae67f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/stechstudio/laravel-jwt/zipball/70e9d48878320be0dc0e883613fcca02b81ae67f",
-                "reference": "70e9d48878320be0dc0e883613fcca02b81ae67f",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^5.4|^6.0|^7.0|^8.0|^9.0|^10.0",
-                "lcobucci/jwt": "3.2.*|3.3.*",
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^7.0",
-                "phpunit/phpunit": "~9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "STS\\JWT\\JWTServiceProvider"
-                    ],
-                    "aliases": {
-                        "JWT": "STS\\JWT\\JWTFacade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "STS\\JWT\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Joseph",
-                    "email": "joseph@stechstudio.com"
-                }
-            ],
-            "description": "Simple helper package that makes it easy to generate and consume JWT tokens",
-            "support": {
-                "issues": "https://github.com/stechstudio/laravel-jwt/issues",
-                "source": "https://github.com/stechstudio/laravel-jwt/tree/1.12"
-            },
-            "time": "2023-02-11T16:48:24+00:00"
         },
         {
             "name": "symfony/console",

@@ -1,14 +1,11 @@
 import {useEffect, useState} from "react";
-import MovieApiService from "../../../Api/Movie/MovieApiService";
-import MovieFilter from "../../../Api/Movie/Filter/MovieFilter";
-import MoviePaginator from "../../../Api/Movie/Filter/MoviePaginator";
-import {useAuth} from "../../../hooks/useAuth";
+import MovieFilter from "../Api/Movie/Filter/MovieFilter";
+import MoviePaginator from "../Api/Movie/Filter/MoviePaginator";
+import MovieApiService from "../Api/Movie/MovieApiService";
 
 const useMovies = () => {
     const PAGE = 1
-    const PER_PAGE = 8
-
-    const {auth} = useAuth()
+    const PER_PAGE = 10
 
     const [movies, setMovies] = useState([]);
     const [filter, setFilter] = useState(new MovieFilter(PAGE, PER_PAGE));
@@ -23,15 +20,6 @@ const useMovies = () => {
 
         setMovies(response.items)
 
-        setFilter(
-            new MovieFilter(
-                response.temp.current_page,
-                response.temp.per_page,
-                filter.categoryIds,
-                filter.collectionIds,
-            )
-        )
-
         setPaginator(
             new MoviePaginator(
                 response.temp.current_page,
@@ -40,6 +28,8 @@ const useMovies = () => {
                 response.temp.total,
             )
         )
+
+        console.log(response.items)
     }
 
     const handleChangePage = (page) => {

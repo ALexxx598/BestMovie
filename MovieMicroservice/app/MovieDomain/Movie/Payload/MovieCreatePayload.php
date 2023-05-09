@@ -12,7 +12,7 @@ class MovieCreatePayload
      * @param string|null $descriptionSlogan
      * @param Carbon|null $descriptionScreeningDate
      * @param string|null $descriptionCountry
-     * @param array|null $descriptionActors
+     * @param string|null $descriptionActors
      * @param string|null $shortDescription
      * @param string $storageMovieUrl
      * @param string $storageImageUrl
@@ -23,7 +23,7 @@ class MovieCreatePayload
         private ?string $descriptionSlogan = null,
         private ?Carbon $descriptionScreeningDate = null,
         private ?string $descriptionCountry = null,
-        private ?array $descriptionActors = null,
+        private ?string $descriptionActors = null,
         private ?string $shortDescription = null,
         private string $storageMovieUrl,
         private string $storageImageUrl,
@@ -36,7 +36,7 @@ class MovieCreatePayload
      * @param string|null $descriptionSlogan
      * @param Carbon|null $descriptionScreeningDate
      * @param string|null $descriptionCountry
-     * @param array|null $descriptionActors
+     * @param string|null $descriptionActors
      * @param string|null $shortDescription
      * @param string $storageMovieUrl
      * @param string $storageImageUrl
@@ -48,7 +48,7 @@ class MovieCreatePayload
         ?string $descriptionSlogan = null,
         ?Carbon $descriptionScreeningDate = null,
         ?string $descriptionCountry = null,
-        ?array $descriptionActors = null,
+        ?string $descriptionActors = null,
         ?string $shortDescription = null,
         string $storageMovieUrl,
         string $storageImageUrl,
@@ -107,9 +107,9 @@ class MovieCreatePayload
     }
 
     /**
-     * @return array|null
+     * @return string|null
      */
-    public function getDescriptionActors(): ?array
+    public function getDescriptionActors(): ?string
     {
         return $this->descriptionActors;
     }

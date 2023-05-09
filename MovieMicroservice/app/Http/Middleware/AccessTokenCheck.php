@@ -6,6 +6,7 @@ use App\Common\AuthMiddlewareTrait;
 use App\MovieDomain\User\Token\UserTokenServiceInterface;
 use Closure;
 use Illuminate\Http\Request;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class AccessTokenCheck
 {
@@ -26,10 +27,15 @@ class AccessTokenCheck
      * @param \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      * @throws \App\MovieDomain\User\Exception\UserNotFoundException
+     * @throws AccessDeniedException
      */
     public function handle(Request $request, Closure $next)
     {
-        $this->userTokenService->getUserByToken($this->checkAuthToken($request));
+        $user = $this->userTokenService->getUserByToken($this->checkAuthToken($request));
+
+        if ($user->getId() !== (int)$request->input('user_id')) {
+            throw new AccessDeniedException('You must be authorized !!!');
+        }
 
         return $next($request);
     }

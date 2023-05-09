@@ -3,8 +3,11 @@
 namespace App\MovieDomain\Movie\Service;
 
 use App\MovieDomain\Collection\Collection;
+use App\MovieDomain\Collection\CollectionType;
 use App\MovieDomain\Collection\Filter\CollectionFilter;
 use App\MovieDomain\Collection\Service\CollectionServiceInterface;
+use App\MovieDomain\Movie\Exception\InvalidImageUrl;
+use App\MovieDomain\Movie\Exception\InvalidMovieUrl;
 use App\MovieDomain\Movie\Filter\MovieFilter;
 use App\MovieDomain\Movie\Movie;
 use App\MovieDomain\Movie\MovieCollection;
@@ -13,6 +16,7 @@ use App\MovieDomain\Movie\Payload\MovieCollectionPayload;
 use App\MovieDomain\Movie\Payload\MovieCreatePayload;
 use App\MovieDomain\Movie\Repository\MovieRepositoryInterface;
 use App\MovieDomain\User\Service\UserServiceInterface;
+use BestMovie\Common\BestMovieStorage\Service\BestMovieStorageServiceInterface;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class MovieService implements MovieServiceInterface
@@ -26,6 +30,7 @@ class MovieService implements MovieServiceInterface
         private MovieRepositoryInterface $movieRepository,
         private UserServiceInterface $userService,
         private CollectionServiceInterface $collectionService,
+        private BestMovieStorageServiceInterface $bestMovieStorageService,
     ) {
     }
 
@@ -50,7 +55,13 @@ class MovieService implements MovieServiceInterface
      */
     public function create(MovieCreatePayload $payload): Movie
     {
-        //TODO  Validate links on MediaStorageMS
+        if (!$this->bestMovieStorageService->validatePath($payload->getStorageMovieUrl())) {
+            throw new InvalidMovieUrl();
+        }
+
+        if (!$this->bestMovieStorageService->validatePath($payload->getStorageImageUrl())) {
+            throw new InvalidImageUrl();
+        };
 
         $movie = new Movie(
             name: $payload->getName(),
@@ -70,7 +81,7 @@ class MovieService implements MovieServiceInterface
     }
 
     /**
-     * @throws \App\MovieDomain\User\Exception\UserNotFoundException
+     * @inheritDoc
      */
     public function syncCollections(MovieCollectionPayload $payload): void
     {
@@ -83,6 +94,7 @@ class MovieService implements MovieServiceInterface
             ->list(
                 CollectionFilter::make(
                     userId: $user->getId(),
+                    type: CollectionType::CUSTOM(),
                     collectionIds: $payload->getCollectionIds()
                 )
             )
@@ -90,11 +102,44 @@ class MovieService implements MovieServiceInterface
             ->toArray();
 
         $defaultCollectionIds = $this->collectionService
-            ->listOfDefaults(CollectionFilter::make(movieId: $movie->getId()))
+            ->list(
+                CollectionFilter::make(
+                    movieId: $movie->getId(),
+                    withoutUserId: $user->getId(),
+                ),
+            )
             ->map(fn (Collection $collection): int => $collection->getId())
             ->toArray();
 
         $collectionIds = array_merge($collectionIds, $defaultCollectionIds);
+
+        $this->movieRepository->syncCollections($movie->getId(), $collectionIds);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function syncDefaultCollections(MovieCollectionPayload $payload): void
+    {
+        $movie = $this->movieRepository->findById($payload->getMovieId());
+
+        $collectionIds = $this
+            ->collectionService
+            ->list(
+                CollectionFilter::make(
+                    type: CollectionType::DEFAULT(),
+                    collectionIds: $payload->getCollectionIds()
+                )
+            )
+            ->map(fn (Collection $collection) => $collection->getId())
+            ->toArray();
+
+        $customCollectionIds = $this->collectionService
+            ->list(CollectionFilter::make(movieId: $movie->getId(), type: CollectionType::CUSTOM()))
+            ->map(fn (Collection $collection): int => $collection->getId())
+            ->toArray();
+
+        $collectionIds = array_merge($collectionIds, $customCollectionIds);
 
         $this->movieRepository->syncCollections($movie->getId(), $collectionIds);
     }

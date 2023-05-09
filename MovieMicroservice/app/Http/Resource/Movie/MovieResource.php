@@ -15,6 +15,7 @@ class MovieResource extends MovieMicroserviceResource
     /**
      * @param \Illuminate\Http\Request $request
      * @return array
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function toArray($request): array
     {
@@ -30,8 +31,8 @@ class MovieResource extends MovieMicroserviceResource
                 'country' => $this->getDescription()->getCountry(),
             ],
             'categories' => CategoryResource::collection($this->getCategories()),
-            'storage_image_url' => $this->getStorageImageUrl(),
-            'storage_movie_url' => $this->getStorageMovieUrl(),
+            'storage_image_url' => $this->getFullImagePath(),
+            'storage_movie_url' => $this->getFullMoviePath(),
         ];
     }
 }

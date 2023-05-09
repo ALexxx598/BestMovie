@@ -7,7 +7,14 @@ import MovieCollectionList from "./MovieCollectionList";
 import Paginator from "../Paginator/Paginator";
 
 const MovieCollections = () => {
-    const moviesCollection = useMovieCollection()
+    const {
+        collections,
+        handleToggle,
+        collectionChecked,
+        movies,
+        paginator,
+        handleChangePage,
+    } = useMovieCollection()
 
     return (
         <div className="background">
@@ -15,17 +22,17 @@ const MovieCollections = () => {
             <div className="main">
                 <div className="listPadding">
                     <MovieCollectionList
-                        collections={moviesCollection.collections}
-                        handleToggle={moviesCollection.handleToggle}
-                        checked={moviesCollection.checked}
+                        collections={collections}
+                        handleToggle={handleToggle}
+                        collectionChecked={collectionChecked}
                     />
                 </div>
                 <div style={{paddingTop: 25, width: "100%"}}>
-                    <MovieList movies={moviesCollection.movies} />
+                    <MovieList movies={movies} />
                     <Paginator
-                        lastPage={moviesCollection.paginator.lastPage}
-                        currentPage={moviesCollection.paginator.currentPage}
-                        handleChangePage={moviesCollection.handleChangePage}
+                        lastPage={paginator.lastPage}
+                        currentPage={paginator.currentPage}
+                        handleChangePage={handleChangePage}
                     />
                 </div>
             </div>

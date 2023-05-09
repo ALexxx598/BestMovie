@@ -3,6 +3,7 @@
 namespace App\MovieDomain\Collection;
 
 
+use App\MovieDomain\User\User;
 use Illuminate\Support\Collection as IlluminateCollection;
 
 class Collection
@@ -116,5 +117,30 @@ class Collection
         $this->movieIds = $movieIds;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDefault(): bool
+    {
+        return $this->getType()->equals(CollectionType::DEFAULT());
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCustom(): bool
+    {
+        return $this->getType()->equals(CollectionType::CUSTOM());
+    }
+
+    /**
+     * @param int $id
+     * @return bool
+     */
+    public function isBelongToUser(int $id): bool
+    {
+        return $this->getUserId() === $id;
     }
 }

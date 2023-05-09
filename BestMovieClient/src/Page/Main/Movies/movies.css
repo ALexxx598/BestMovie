@@ -13,17 +13,8 @@ body{
 
 .background {
     width: 100%;
-    /*height: 100%;*/
+    height: 100%;
     position: absolute;
-    /*filter: brightness(85%) opacity(95%);*/
-    /*background-image: url("https://img.freepik.com/premium-vector/realistic-movie-clapper-slapstick_260559-141.jpg?w=1380");*/
-    /*background-image: url("https://wallpapercave.com/dwp1x/wp4016036.jpg");*/
-    /*background-image: url("https://cdn.pixabay.com/photo/2017/11/24/10/43/ticket-2974645_960_720.jpg");*/
-    /*background-image: url("https://wallpapercave.com/dwp1x/wp5243007.jpg");*/
-    /*background-image: url("https://wallpapercave.com/dwp1x/wp5556216.jpg");*/
-    /*background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/79fe83d4-7ef6-4181-9439-46db72599559/4069ab2a-1e9b-43b1-8350-a40932105920/UA-en-20221017-popsignuptwoweeks-perspective_alpha_website_large.jpg");*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: cover;*/
     background-color: #0c1e25;
 }
 
@@ -41,9 +32,7 @@ body{
 }
 
 .main {
-    /*background-color: red;*/
     display: flex;
-    /*height: 100%;*/
 }
 
 .listPadding {
@@ -52,14 +41,19 @@ body{
     padding-left: 40px;
     padding-top: 25px;
     height: 1000px;
-    /*display: inline-block;*/
 }
 .categoryHeader {
-    font-size: 20px;
-    padding-bottom: 20px;
+    font-size: 24px;
+    padding-bottom: 10%;
+    padding-left: 20px;
+}
+.collectionHeader {
+    margin-top: 10%;
+    font-size: 24px;
+    /*padding-bottom: 20px;*/
+    padding-left: 20px;
 }
 .list {
-    /*height: 200px;*/
     width: 200px;
 }
 

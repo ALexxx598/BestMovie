@@ -7,9 +7,16 @@ use Carbon\Carbon;
 
 class MovieCreateRequest extends MovieMicroserviceRequest
 {
+    /**
+     * @inheritDoc
+     */
     public function rules(): array
     {
         return [
+            'user_id' => [
+                'required',
+                'int',
+            ],
             'name' => [
                 'required',
                 'string',
@@ -26,15 +33,12 @@ class MovieCreateRequest extends MovieMicroserviceRequest
             ],
             'description.screening_date' => [
                 'string',
-                'date',
+//                'date',//TODO add validation
             ],
             'description.country' => [
                 'string', //Todo maybe add validation on country
             ],
             'description.actors' => [
-                'array',
-            ],
-            'description.actors.*' => [
                 'string',
             ],
             'description.shortDescription' => [
@@ -49,6 +53,14 @@ class MovieCreateRequest extends MovieMicroserviceRequest
                 'string',
             ]
         ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserId(): int
+    {
+        return $this->input('user_id');
     }
 
     /**
@@ -102,9 +114,9 @@ class MovieCreateRequest extends MovieMicroserviceRequest
     }
 
     /**
-     * @return array|null
+     * @return string|null
      */
-    public function getDescriptionActors(): ?array
+    public function getDescriptionActors(): ?string
     {
         return $this->input('description.actors');
     }

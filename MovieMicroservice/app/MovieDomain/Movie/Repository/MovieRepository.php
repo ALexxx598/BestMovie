@@ -110,14 +110,14 @@ class MovieRepository implements MovieRepositoryInterface
 
     /**
      * @param int $movieId
-     * @param int[] $collectionIds
+     * @param int[]|null $collectionIds
      * @throws MovieNotFound
      */
-    public function syncCollections(int $movieId, array $collectionIds): void
+    public function syncCollections(int $movieId, ?array $collectionIds): void
     {
         $movie = $this->findModelById($movieId);
 
-        if (!empty($collectionIds)) {
+        if ($collectionIds !== null) {
             $movie->collections()->sync($collectionIds);
         }
     }

@@ -19,4 +19,10 @@ interface CategoryRepositoryInterface
      * @return CategoryCollection
      */
     public function list(CategoryFilter $filter): CategoryCollection;
+
+    /**
+     * @param int $categoryId
+     * @return void
+     */
+    public function deleteById(int $categoryId): void;
 }

@@ -1,0 +1,56 @@
+.categoriesTab {
+    font-size: 24px;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    display: flex;
+}
+
+.addCategoryBlock {
+    /*justify-content: center;*/
+    display: flex;
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.categoriesTabButton {
+    margin-left: 5%;
+}
+.categoriesTab button {
+    /*color: green;*/
+    width: 45px;
+    height: 45px;
+    background-color: #198754;
+}
+
+.addCollectionBlock {
+    display: flex;
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.collectionsTab {
+    font-size: 24px;
+    /*margin-bottom: 5%;*/
+    margin-top: 10%;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    display: flex;
+}
+
+.collectionsTabButton {
+    margin-left: 5%;
+}
+
+.modalRemoveButton {
+    justify-content: center;
+    display: flex;
+}
+
+.collectionsTabButton button {
+    /*color: green;*/
+    width: 45px;
+    height: 45px;
+    background-color: #198754;
+}

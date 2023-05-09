@@ -11,3 +11,9 @@
     color: white;
     text-align: center;
 }
+
+.movieName {
+    margin-top: 1%;
+    max-width: 350px;
+    word-wrap: break-word;
+}

@@ -11,10 +11,14 @@ const useMovie = () => {
     const { id } = useParams()
     const [movie, setMovie] = useState([])
 
+    const [ isLoading, setIsLoading] = useState(false)
+
     const fetchMovie = async () => {
         const response = await MovieApiService.fetchMovie(id)
 
         setMovie(response.movie)
+        setIsLoading(true)
+        console.log(response.movie)
     }
 
     const getCategoriesAsText = () => {
@@ -42,6 +46,7 @@ const useMovie = () => {
 
     return {
         movie,
+        isLoading,
         checkIsUserAuth,
         getCategoriesAsText,
     }

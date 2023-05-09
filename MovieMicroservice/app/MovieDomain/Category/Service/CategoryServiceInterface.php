@@ -20,4 +20,9 @@ interface CategoryServiceInterface
      * @return CategoryCollection
      */
     public function list(CategoryFilter $filter): CategoryCollection;
+
+    /**
+     * @param int $categoryId
+     */
+    public function delete(int $categoryId): void;
 }

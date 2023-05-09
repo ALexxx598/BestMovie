@@ -7,6 +7,7 @@ use App\MovieDomain\Category\CategoryCollection;
 use App\MovieDomain\Category\Filter\CategoryFilter;
 use App\MovieDomain\Category\Payload\CategoryCreatePayload;
 use App\MovieDomain\Category\Repository\CategoryRepositoryInterface;
+use App\MovieDomain\MovieCategory\Repository\MovieCategoryRepositoryInterface;
 
 class CategoryService implements CategoryServiceInterface
 {
@@ -15,6 +16,7 @@ class CategoryService implements CategoryServiceInterface
      */
     public function __construct(
         private CategoryRepositoryInterface $categoryRepository,
+        private MovieCategoryRepositoryInterface $movieCategoryRepository,
     ) {
     }
 
@@ -38,5 +40,11 @@ class CategoryService implements CategoryServiceInterface
         );
 
         return $category->setId($this->categoryRepository->save($category));
+    }
+
+    public function delete(int $categoryId): void
+    {
+        $this->movieCategoryRepository->deleteByCategoryId($categoryId);
+        $this->categoryRepository->deleteById($categoryId);
     }
 }

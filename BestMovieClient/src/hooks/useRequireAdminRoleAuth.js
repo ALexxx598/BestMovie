@@ -3,33 +3,25 @@ import {Navigate, Outlet, useLocation} from "react-router-dom";
 import {useState} from "react";
 
 const RequireAdminRoleAuth = () => {
-    const { auth, fetchUser } = useAuth()
-
-    const [isLoading, setIsLoading] = useState(true)
+    const { auth } = useAuth()
     const location = useLocation()
 
-    const checkIsAdmin = async () => {
-        try {
-            const user = await fetchUser()
-
-            if (user?.id === undefined) {
-                setIsLoading(false)
-                return false;
-            }
-
-            setIsLoading(false)
-            return user.isAdmin();
-        } catch (error) {
-            setIsLoading(false)
+    const checkIsAdmin = () => {
+        if (auth === null || auth?.id === undefined || auth?.id === null) {
             return false
         }
 
+        return auth?.isAdmin() ?? false
     }
 
     return (
-        checkIsAdmin() && !isLoading
-            ? <Outlet />
-            : <Navigate to="/login" state={{ from: location}} replace/>
+        <>
+            {
+                checkIsAdmin()
+                    ? <Outlet />
+                    : <Navigate to={'/login/'} state={{ from: location}} replace/>
+            }
+        </>
     )
 }
 

@@ -33,7 +33,7 @@ class UserService implements UserServiceInterface
      */
     public function findUser(int $id): User
     {
-        return $this->userRepository->getById($id);
+        return $this->userRepository->findById($id);
     }
 
     /**

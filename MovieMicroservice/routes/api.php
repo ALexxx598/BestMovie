@@ -39,10 +39,17 @@ Route::controller(MovieController::class)
         Route::get('/{id}', 'get');
 
         Route::middleware('access_token')->group(function () {
-            Route::patch('/collections/{movieId}', 'updateCollections');
+            Route::middleware('role.viewer')->group(function () {
+                Route::patch('/collections/{movieId}', 'updateCollections');
+            });
 
             Route::middleware('role.admin')->group(function () {
                 Route::post('/', 'create');
+                Route::patch('/collections/default/{movieId}', 'updateDefaultCollections');
+
+                Route::group(['prefix' => '{movieId}'], function () {
+                    Route::delete('/', 'delete');
+                });
             });
         });
     });
@@ -55,6 +62,7 @@ Route::controller(CategoryController::class)
         Route::middleware('access_token')->group(function () {
             Route::middleware('role.admin')->group(function () {
                 Route::post('/', 'create');
+                Route::delete('/{categoryId}', 'delete');
             });
         });
     });
@@ -63,8 +71,13 @@ Route::controller(CollectionController::class)
     ->prefix('collection')
     ->group(function () {
         Route::get('/list', 'list');
+        Route::get('/list/defaults/', 'listOfDefaults');
 
         Route::middleware('access_token')->group(function () {
             Route::post('/', 'create');
+
+            Route::group(['prefix' => '{collectionId}'], function () {
+                Route::delete('/', 'delete');
+            });
         });
     });

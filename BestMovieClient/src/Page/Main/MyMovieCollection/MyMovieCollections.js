@@ -7,26 +7,34 @@ import MyMovieCollectionModal from "./MyMovieCollectionModal/MyMovieCollectionMo
 import useMyMovieCollection from "./useMyMovieCollection";
 
 const MyMovieCollections = () => {
-    const moviesCollection = useMyMovieCollection()
+    const {
+        collections,
+        handleToggle,
+        collectionChecked,
+        movies,
+        paginator,
+        handleChangePage,
+        fetchCustomCollections,
+    } = useMyMovieCollection()
 
     return (
         <div className="background">
             <NavBar myMovieCollectionsHighlighted={true}/>
             <div className="main">
                 <div className="listPadding">
-                    <MyMovieCollectionModal fetchCollections={moviesCollection.fetchCollections}/>
+                    <MyMovieCollectionModal fetchCustomCollections={fetchCustomCollections}/>
                     <MovieCollectionList
-                        collections={moviesCollection.collections}
-                        handleToggle={moviesCollection.handleToggle}
-                        checked={moviesCollection.checked}
+                        collections={collections}
+                        handleToggle={handleToggle}
+                        collectionChecked={collectionChecked}
                     />
                 </div>
                 <div style={{paddingTop: 25, width: "100%"}}>
-                    <MovieList movies={moviesCollection.movies} />
+                    <MovieList movies={movies} />
                     <Paginator
-                        lastPage={moviesCollection.paginator.lastPage}
-                        currentPage={moviesCollection.paginator.currentPage}
-                        handleChangePage={moviesCollection.handleChangePage}
+                        lastPage={paginator.lastPage}
+                        currentPage={paginator.currentPage}
+                        handleChangePage={handleChangePage}
                     />
                 </div>
             </div>

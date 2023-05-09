@@ -18,7 +18,7 @@ class MovieCollectionsRequest extends MovieMicroserviceRequest
                 'int',
             ],
             'collection_ids' => [
-                'required',
+                'nullable',
                 'array',
             ],
             'collection_ids.*' => [

@@ -3,73 +3,33 @@ import {useEffect, useState} from "react";
 
 import {useAuth} from "../../../../hooks/useAuth";
 
-import CollectionApiService from "../../../../Api/Collection/CollectionApiService";
-import CollectionFilter from "../../../../Api/Collection/Filter/CollectionFilter";
-
-import { CUSTOM } from "../../../../Api/Collection/Filter/CollectionType";
 import MovieApiService from "../../../../Api/Movie/MovieApiService";
+import useCollections from "../../../../hooks/useCollections";
 
 const useMovieCollectionModal = () => {
-    const { auth } = useAuth()
-
     const { id } = useParams()
+    const { auth } = useAuth()
 
     const [show, setShow] = useState(false);
 
     const handleClose = async () => {
         setShow(false);
-        await fetchCollections()
     }
     const handleShow = () => setShow(true);
 
-    const [collections, setCollections] = useState([])
-
-    const [filter, setFilter] = useState(new CollectionFilter(CUSTOM))
-    const [checked, setChecked] = useState([1]);
+    const {
+        collections,
+        setInitialChecked,
+        fetchCustomCollections,
+        collectionChecked,
+        handleToggle,
+        getCollectionIds,
+    } = useCollections()
 
     const fetchCollections = async () => {
-        let { items } = await CollectionApiService.fetchCollections(filter, auth)
+        const items = await fetchCustomCollections()
 
-        setCollections(items)
-
-        setInitialChecked(items)
-    }
-
-    const setInitialChecked = (collections) => {
-        const newChecked = [...checked]
-
-        collections.forEach(
-            (collection) => {
-                collection.movieIds.filter(
-                    (collectionMovieId) => {
-                        if (parseInt(collectionMovieId) === parseInt(id)) {
-                            newChecked.push(collection)
-                        }
-                    }
-                )
-            }
-        )
-
-        setChecked(newChecked)
-    }
-
-    const handleToggle = (collection) => () => {
-        const currentIndex = checked.indexOf(collection)
-        const newChecked = [...checked]
-
-        if (currentIndex === -1) {
-            newChecked.push(collection)
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
-
-        setChecked(newChecked)
-    }
-
-    const getCollectionIds = () => {
-        return checked
-            .map((category) => category.id ?? null)
-            .filter(id => id !== null);
+        setInitialChecked(items, id)
     }
 
     const handleSaveChanges = async () => {
@@ -78,7 +38,7 @@ const useMovieCollectionModal = () => {
         } catch (error) {
             // log
         } finally {
-            handleClose()
+            await handleClose()
         }
     }
 
@@ -89,7 +49,7 @@ const useMovieCollectionModal = () => {
     return {
         collections,
         handleToggle,
-        checked,
+        collectionChecked,
         handleSaveChanges,
         show,
         handleShow,

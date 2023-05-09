@@ -24,7 +24,7 @@ class UserRepository implements UserRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function getById(int $id): User
+    public function findById(int $id): User
     {
         return $this->userRepositoryMapper->mapModelToEntity($this->getUserModel($id));
     }

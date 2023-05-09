@@ -1,6 +1,6 @@
 import {Fragment} from "react";
 import "./navBar.css";
-import {ABOUT_US, DOMAIN, LOGIN, MOVIE_COLLECTIONS, MOVIES, MY_MOVIE_COLLECTION, REGISTER} from "../../../Routes";
+import {ABOUT_US, DOMAIN, LOGIN, MOVIES, MY_MOVIE_COLLECTION} from "../../../Routes";
 import {useAuth} from "../../../hooks/useAuth";
 import useLogOut from "../../LogOut/useLogOut";
 import ProfileModal from "../Profile/ProfileModal";
@@ -25,15 +25,6 @@ const NavBar = ({...props}) => {
                     }
                     <span>News</span>
                     {
-                        props?.movieCollectionsHighlighted
-                            ? <span className="navSpanGold">
-                               <a href={DOMAIN + MOVIE_COLLECTIONS}>Movie Collections</a>
-                              </span>
-                            : <span>
-                                <a href={DOMAIN + MOVIE_COLLECTIONS}>Movie Collections</a>
-                              </span>
-                    }
-                    {
                         props?.myMovieCollectionsHighlighted
                             ? <span className="navSpanGold">
                                <a href={DOMAIN + MY_MOVIE_COLLECTION}>My Movie collections</a>
@@ -51,7 +42,6 @@ const NavBar = ({...props}) => {
                                 <a href={DOMAIN + ABOUT_US}> About us </a>
                               </span>
                     }
-
                 </div>
                 <div className="nav-options logInLogOut">
                     <span>

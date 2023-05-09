@@ -11,6 +11,7 @@ class CollectionFilter extends Filter
     /**
      * @param int|null $userId
      * @param int|null $movieId
+     * @param int|null $withoutUserId
      * @param CollectionType|null $type
      * @param Collection|null $types
      * @param Collection<int>|null $collectionIds
@@ -18,6 +19,7 @@ class CollectionFilter extends Filter
     private function __construct(
         private ?int $userId = null,
         private ?int $movieId = null,
+        private ?int $withoutUserId = null,
         private ?CollectionType $type = null,
         private ?Collection $types = null,
         private ?Collection $collectionIds = null,
@@ -35,6 +37,7 @@ class CollectionFilter extends Filter
     public static function make(
         ?int $userId = null,
         ?int $movieId = null,
+        ?int $withoutUserId = null,
         ?CollectionType $type = null,
         ?Collection $types = null,
         ?Collection $collectionIds = null,
@@ -42,6 +45,7 @@ class CollectionFilter extends Filter
         return new self(
             userId: $userId,
             movieId: $movieId,
+            withoutUserId: $withoutUserId,
             type: $type,
             types: $types,
             collectionIds: $collectionIds
@@ -108,6 +112,14 @@ class CollectionFilter extends Filter
     public function getTypes(): ?Collection
     {
         return $this->types;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getWithoutUserId(): ?int
+    {
+        return $this->withoutUserId;
     }
 
     /**

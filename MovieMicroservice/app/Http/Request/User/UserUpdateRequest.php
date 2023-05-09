@@ -12,6 +12,10 @@ class UserUpdateRequest extends MovieMicroserviceRequest
     public function rules(): array
     {
         return [
+            'user_id' => [
+                'required',
+                'int',
+            ],
             'name' => [
                 'string',
             ],
@@ -19,6 +23,14 @@ class UserUpdateRequest extends MovieMicroserviceRequest
                 'string',
             ],
         ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserId(): int
+    {
+        return $this->input('user_id');
     }
 
     /**

@@ -4,16 +4,11 @@ const MovieModalDescription = ({...props}) => {
     return (
         <div className="movieModalPreview">
             <Row>
-                <Col className="movieModalPreviewHeader">
-                    <h3>{props?.movie?.name}</h3>
-                </Col>
-            </Row>
-            <Row>
                 <Col>
                     <img
                         className="movieModalContainerImg"
                         src={
-                            "https://m.media-amazon.com/images/M/MV5BOGE4NzU1YTAtNzA3Mi00ZTA2LTg2YmYtMDJmMThiMjlkYjg2XkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_.jpg"
+                            props.movie?.storageImageUrl
                         }
                     >
                     </img>
@@ -21,9 +16,17 @@ const MovieModalDescription = ({...props}) => {
                 <Col>
                     <Row>
                         <Col>
-                            Rating:
+                            Name:
                         </Col>
                         <Col>
+                            {props?.movie?.name ?? 'unknown'}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className="spaceBetweenCol">
+                            Rating:
+                        </Col>
+                        <Col style={{marginTop: 20}}>
                             {props.movie?.description?.rating ?? 'unknown'}
                         </Col>
                     </Row>

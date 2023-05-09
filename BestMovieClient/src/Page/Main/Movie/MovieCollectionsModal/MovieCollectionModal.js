@@ -1,6 +1,5 @@
 import {Col, Row} from "react-bootstrap";
 import Button from "../../../../components/Button/Button";
-import {useEffect, useState} from "react";
 import Modal from 'react-bootstrap/Modal';
 import MovieCollectionList from "../../MovieCollection/MovieCollectionList";
 import useMovieCollectionModal from "./useMovieCollectionModal";
@@ -13,7 +12,7 @@ const MovieCollectionModal = ({...props}) => {
     const {
         collections,
         handleToggle,
-        checked,
+        collectionChecked,
         handleSaveChanges,
         show,
         handleShow,
@@ -57,11 +56,11 @@ const MovieCollectionModal = ({...props}) => {
                 </Modal.Header>
                 <Modal.Body className="mainMovieModalBackground">
                     <div className="movieModalBody">
-                        <div>
+                        <div className="movieModalBodyList">
                             <MovieCollectionList
                                 collections={collections}
                                 handleToggle={handleToggle}
-                                checked={checked}
+                                collectionChecked={collectionChecked}
                                 height="100%"
                             />
                         </div>

@@ -30,10 +30,11 @@ const useMyMovieCollectionModal = ({...props}) => {
     })
 
     const handleSaveChanges = async (values) => {
-        console.log('send')
-        const response = await CollectionApiService.createCollection(values, auth)
+        await CollectionApiService.createCollection(values.name, auth)
+
+        await props.fetchCustomCollections()
+
         handleClose()
-        await props.fetchCollections()
     }
 
     return {

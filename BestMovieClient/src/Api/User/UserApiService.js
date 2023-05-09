@@ -1,5 +1,5 @@
 import UserModel from "./UserModel";
-import axios from '../axios'
+import axios from '../BestMovieAxios'
 import RoleModel from "../Role/RoleModel";
 
 export default class UserApiService {

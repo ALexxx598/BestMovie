@@ -3,6 +3,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import {ListItem} from "@mui/material";
 import List from '@mui/material/List';
+import "./categoryList.css"
 
 const CategoryList = ({...props}) => {
     return (
@@ -12,7 +13,7 @@ const CategoryList = ({...props}) => {
                 maxWidth: 200,
                 position: 'relative',
                 overflow: 'auto',
-                maxHeight: '60%',
+                maxHeight: '50%',
                 '& ul': { padding: 0 },
             }}
         >
@@ -26,15 +27,19 @@ const CategoryList = ({...props}) => {
                             secondaryAction={
                                 <Checkbox
                                     edge="end"
-                                    onChange={props.handleToggle(category)}
-                                    checked={props.checked.indexOf(category) !== -1}
+                                    onChange={props.handleCategoriesToggle(category)}
+                                    checked={props.categoriesChecked.indexOf(category) !== -1}
                                     inputProps={{ 'aria-labelledby': labelId }}
                                 />
                             }
                             disablePadding
                         >
                             <ListItemButton>
-                                <ListItemText id={labelId} primary={category.name} />
+                                <ListItemText
+                                    id={labelId}
+                                    primary={category.name}
+                                    className="categoryName"
+                                />
                             </ListItemButton>
                         </ListItem>
                     )

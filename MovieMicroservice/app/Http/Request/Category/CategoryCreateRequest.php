@@ -12,6 +12,10 @@ class CategoryCreateRequest extends MovieMicroserviceRequest
     public function rules(): array
     {
         return [
+            'user_id' => [
+                'required',
+                'int',
+            ],
             'name' => [
                 'required',
                 'string',

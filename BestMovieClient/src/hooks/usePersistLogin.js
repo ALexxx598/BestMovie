@@ -13,6 +13,9 @@ const PersistLogin = () => {
 
     const fetchUser = async () => {
         try {
+            console.log(auth?.id)
+            console.log(auth?.accessToken)
+
             const user = await UserApiService.refreshUser(
                 auth?.id,
                 auth?.accessToken

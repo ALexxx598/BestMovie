@@ -10,6 +10,7 @@ trait AuthMiddlewareTrait
     /**
      * @param Request $request
      * @return string
+     * @throws AccessDeniedException
      */
     public function checkAuthToken(Request $request): string
     {
@@ -20,5 +21,20 @@ trait AuthMiddlewareTrait
         }
 
         return $token;
+    }
+
+    /**
+     * @param Request $request
+     * @return int
+     */
+    public function getUserId(Request $request): int
+    {
+        $userId = $request->input('user_id');
+
+        if ($userId === null) {
+            throw new AccessDeniedException('You must be authorized !!!');
+        }
+
+        return $userId;
     }
 }

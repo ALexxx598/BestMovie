@@ -1,0 +1,20 @@
+.movieItemBackground {
+    background-color: transparent;
+    justify-content: center;
+    /*padding-left: 20px;*/
+    /*padding: 1%;*/
+    /*margin: 1%;*/
+}
+
+.movieItemBackground h3 {
+    margin-left: 20px;
+    color: white;
+    text-align: center;
+}
+
+
+.movieName {
+    margin-top: 1%;
+    max-width: 350px;
+    word-wrap: break-word;
+}

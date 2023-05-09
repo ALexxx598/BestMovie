@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Request\Category\CategoryCreateRequest;
 use App\Http\Request\Category\CategoryListRequest;
+use App\Http\Request\Category\CategoryRemoveRequest;
 use App\Http\Resource\Category\CategoryListResource;
 use App\Http\Resource\Category\CategoryResource;
 use App\MovieDomain\Category\Filter\CategoryFilter;
@@ -55,6 +56,20 @@ class CategoryController extends Controller
             'status' => Response::HTTP_OK,
             'data' => CategoryResource::make($this->categoryService->create($payload))
 
+        ], Response::HTTP_CREATED);
+    }
+
+    /**
+     * @param CategoryRemoveRequest $request
+     * @param int $categoryId
+     * @return JsonResponse
+     */
+    public function delete(CategoryRemoveRequest $request, int $categoryId): JsonResponse
+    {
+        $this->categoryService->delete($categoryId);
+
+        return response()->json([
+            'status' => Response::HTTP_OK,
         ], Response::HTTP_CREATED);
     }
 }

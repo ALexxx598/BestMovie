@@ -9,6 +9,9 @@ use App\MovieDomain\Movie\Repository\MovieRepository;
 use App\MovieDomain\Movie\Repository\MovieRepositoryInterface;
 use App\MovieDomain\Movie\Service\MovieService;
 use App\MovieDomain\Movie\Service\MovieServiceInterface;
+use App\MovieDomain\Storage\BestMovieCachedStorageServiceInterface;
+use App\MovieDomain\Storage\BestMovieCachedStorageService;
+use BestMovie\Common\BestMovieStorage\Service\BestMovieStorageServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class MovieServiceProvider extends ServiceProvider
@@ -19,7 +22,10 @@ class MovieServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerMovieService();
+
         $this->registerRepository();
+
+        $this->registerBestMovieCachedStorageServiceInterface();
     }
 
     /**
@@ -34,6 +40,10 @@ class MovieServiceProvider extends ServiceProvider
         Movie::setCollectionRepositoryResolver(function (): CollectionRepositoryInterface {
             return $this->app[CollectionRepositoryInterface::class];
         });
+
+        Movie::setBestMovieCachedStorageServiceResolver(function (): BestMovieCachedStorageServiceInterface {
+            return $this->app[BestMovieCachedStorageServiceInterface::class];
+        });
     }
 
     private function registerMovieService(): void
@@ -44,5 +54,13 @@ class MovieServiceProvider extends ServiceProvider
     private function registerRepository()
     {
         $this->app->singleton(MovieRepositoryInterface::class, MovieRepository::class);
+    }
+
+    private function registerBestMovieCachedStorageServiceInterface(): void
+    {
+        $this->app->singleton(
+            BestMovieCachedStorageServiceInterface::class,
+            BestMovieCachedStorageService::class
+        );
     }
 }

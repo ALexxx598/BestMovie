@@ -152,7 +152,7 @@ class User
      */
     public function getRoles(): ?Collection
     {
-        return $this->roles;
+        return $this->roles ?? $this->roles = $this->getRoleRepository()->getRolesByUserId($this->getId());
     }
 
     /**
@@ -161,7 +161,7 @@ class User
      */
     public function hasRole(RoleType $roleType): bool
     {
-        $roles = $this->getRoleRepository()->getRolesByUserId($this->getId());
+        $roles = $this->getRoles();
 
         foreach ($roles as $role) {
             if ($roleType->equals($role->getRole())) {

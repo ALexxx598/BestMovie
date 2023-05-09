@@ -68,4 +68,12 @@ class CategoryRepository implements CategoryRepositoryInterface
             $query->whereIn('id', $filter->getCategoryIds());
         }
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function deleteById(int $categoryId): void
+    {
+        CategoryModel::query()->where('id', $categoryId)->delete();
+    }
 }

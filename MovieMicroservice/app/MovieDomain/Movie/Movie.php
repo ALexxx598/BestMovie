@@ -8,12 +8,14 @@ use App\MovieDomain\Category\Repository\CategoryRepositoryFinderTrait;
 use App\MovieDomain\Collection\Collection as MovieCollections;
 use App\MovieDomain\Collection\Filter\CollectionFilter;
 use App\MovieDomain\Collection\Repository\CollectionRepositoryFinderTrait;
+use App\MovieDomain\Storage\BestMovieCachedStorageServiceServiceFinderTrait;
 use Illuminate\Support\Collection;
 
 class Movie
 {
     use CategoryRepositoryFinderTrait;
     use CollectionRepositoryFinderTrait;
+    use BestMovieCachedStorageServiceServiceFinderTrait;
 
     /**
      * @param int|null $id
@@ -101,6 +103,16 @@ class Movie
     }
 
     /**
+     * @return string|null
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getFullMoviePath(): ?string
+    {
+        return static::getBestMovieCachedStorageService()
+            ->getPath(movieId: $this->getId(), path: $this->getStorageMovieUrl());
+    }
+
+    /**
      * @param string $storageMovieUrl
      * @return self
      */
@@ -117,6 +129,16 @@ class Movie
     public function getStorageImageUrl(): string
     {
         return $this->storageImageUrl;
+    }
+
+    /**
+     * @return string|null
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getFullImagePath(): ?string
+    {
+        return static::getBestMovieCachedStorageService()
+            ->getPath(movieId: $this->getId(), path: $this->getStorageImageUrl());
     }
 
     /**
@@ -184,7 +206,7 @@ class Movie
     {
         return $this
             ->getCollections()
-            ->filter(fn (MovieCollections $collection) => $collection->getUserId() === $userId)
+            ->filter(fn (MovieCollections $collection) => $collection->isBelongToUser($userId))
             ->map(fn (MovieCollections $collection) => $collection->getId());
     }
 }

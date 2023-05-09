@@ -3,7 +3,6 @@ import * as Yup from "yup";
 import {useFormik} from "formik";
 import UserApiService from "../../Api/User/UserApiService";
 import useNavigate from "../../hooks/useNavigate";
-import {DOMAIN, MOVIES} from "../../Routes";
 
 const LoginSchema = Yup.object().shape({
     email: Yup.string()

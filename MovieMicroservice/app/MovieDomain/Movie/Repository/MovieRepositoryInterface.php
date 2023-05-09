@@ -31,7 +31,7 @@ interface MovieRepositoryInterface
 
     /**
      * @param int $movieId
-     * @param int[] $collectionIds
+     * @param int[]|null $collectionIds
      */
-    public function syncCollections(int $movieId, array $collectionIds): void;
+    public function syncCollections(int $movieId, ?array $collectionIds): void;
 }

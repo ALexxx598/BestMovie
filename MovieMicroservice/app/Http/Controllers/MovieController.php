@@ -72,6 +72,9 @@ class MovieController extends Controller
     /**
      * @param MovieCreateRequest $request
      * @return JsonResponse
+     * @throws \App\MovieDomain\Movie\Exception\InvalidImageUrl
+     * @throws \App\MovieDomain\Movie\Exception\InvalidMovieUrl
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function create(MovieCreateRequest $request): JsonResponse
     {
@@ -97,6 +100,7 @@ class MovieController extends Controller
      * @param int $movieId
      * @param MovieCollectionsRequest $request
      * @return JsonResponse
+     * @throws \App\MovieDomain\User\Exception\UserNotFoundException
      */
     public function updateCollections(MovieCollectionsRequest $request, int $movieId): JsonResponse
     {
@@ -107,6 +111,26 @@ class MovieController extends Controller
         );
 
         $this->movieService->syncCollections($payload);
+
+        return response()->json([
+            'status' => Response::HTTP_OK,
+        ], Response::HTTP_OK);
+    }
+
+    /**
+     * @param MovieCollectionsRequest $request
+     * @param int $movieId
+     * @return JsonResponse
+     */
+    public function updateDefaultCollections(MovieCollectionsRequest $request, int $movieId): JsonResponse
+    {
+        $payload = MovieCollectionPayload::make(
+            userId: $request->getUserId(),
+            movieId: $movieId,
+            collectionIds: $request->getCollectionIds()
+        );
+
+        $this->movieService->syncDefaultCollections($payload);
 
         return response()->json([
             'status' => Response::HTTP_OK,

@@ -11,7 +11,7 @@ class MovieDescription
      * @param string|null $slogan
      * @param Carbon|null $screeningDate
      * @param string|null $country
-     * @param array|null $actors
+     * @param string|null $actors
      * @param string|null $shortDescription
      */
     public function __construct(
@@ -19,7 +19,7 @@ class MovieDescription
         private ?string $slogan = null,
         private ?Carbon $screeningDate = null,
         private ?string $country = null,
-        private ?array $actors = null,
+        private ?string $actors = null,
         private ?string $shortDescription = null,
     ) {
     }
@@ -57,9 +57,9 @@ class MovieDescription
     }
 
     /**
-     * @return array|null
+     * @return string|null
      */
-    public function getActors(): ?array
+    public function getActors(): ?string
     {
         return $this->actors;
     }

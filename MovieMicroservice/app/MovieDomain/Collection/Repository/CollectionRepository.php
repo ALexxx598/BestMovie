@@ -4,6 +4,7 @@ namespace App\MovieDomain\Collection\Repository;
 
 use App\Models\Collection as CollectionModel;
 use App\MovieDomain\Collection\Collection;
+use App\MovieDomain\Collection\Exception\CollectionNotFound;
 use App\MovieDomain\Collection\Filter\CollectionFilter;
 use App\MovieDomain\Collection\MovieCollections;
 use Illuminate\Database\Eloquent\Builder;
@@ -16,6 +17,18 @@ class CollectionRepository implements CollectionRepositoryInterface
     public function __construct(
         private CollectionModelMapper $collectionModelMapper,
     ) {
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findById(int $id): Collection
+    {
+        if (is_null($collection = CollectionModel::find($id))) {
+            throw new CollectionNotFound();
+        }
+
+        return $this->collectionModelMapper->mapModelToEntity($collection);
     }
 
     /**
@@ -77,5 +90,13 @@ class CollectionRepository implements CollectionRepositoryInterface
                 $query->where('movie_id', $filter->getMovieId());
             });
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function delete(int $id): void
+    {
+        CollectionModel::query()->where('id', $id)->delete();
     }
 }

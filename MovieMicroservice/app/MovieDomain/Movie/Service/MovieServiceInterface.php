@@ -2,6 +2,8 @@
 
 namespace App\MovieDomain\Movie\Service;
 
+use App\MovieDomain\Movie\Exception\InvalidImageUrl;
+use App\MovieDomain\Movie\Exception\InvalidMovieUrl;
 use App\MovieDomain\Movie\Filter\MovieFilter;
 use App\MovieDomain\Movie\Movie;
 use App\MovieDomain\Movie\Payload\MovieCollectionPayload;
@@ -12,9 +14,12 @@ interface MovieServiceInterface
 {
     /**
      * @param MovieCreatePayload $payload
-     * @return mixed
+     * @throws InvalidMovieUrl
+     * @throws InvalidImageUrl
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return Movie
      */
-    public function create(MovieCreatePayload $payload);
+    public function create(MovieCreatePayload $payload): Movie;
 
     /**
      * @param MovieFilter $filter
@@ -30,6 +35,12 @@ interface MovieServiceInterface
 
     /**
      * @param MovieCollectionPayload $payload
+     * @throws \App\MovieDomain\User\Exception\UserNotFoundException
      */
     public function syncCollections(MovieCollectionPayload $payload): void;
+
+    /**
+     * @param MovieCollectionPayload $payload
+     */
+    public function syncDefaultCollections(MovieCollectionPayload $payload): void;
 }
