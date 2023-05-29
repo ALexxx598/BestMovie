@@ -34,4 +34,14 @@ interface MovieRepositoryInterface
      * @param int[]|null $collectionIds
      */
     public function syncCollections(int $movieId, ?array $collectionIds): void;
+
+    /**
+     * @param int $id
+     */
+    public function delete(int $id): void;
+
+    /**
+     * @param int[] $categoryIds
+     */
+    public function syncCategories(int $movieId, ?array $categoryIds): void;
 }

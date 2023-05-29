@@ -2,7 +2,6 @@
 
 namespace App\MovieDomain\Collection;
 
-
 use App\MovieDomain\User\User;
 use Illuminate\Support\Collection as IlluminateCollection;
 

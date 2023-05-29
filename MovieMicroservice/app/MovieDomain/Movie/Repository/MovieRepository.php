@@ -2,14 +2,12 @@
 
 namespace App\MovieDomain\Movie\Repository;
 
-use App\Models\Collection as CollectionModel;
 use App\MovieDomain\Movie\Exception\MovieNotFound;
 use App\MovieDomain\Movie\Filter\MovieFilter;
 use App\MovieDomain\Movie\Movie;
 use App\Models\Movie as MovieModel;
 use App\MovieDomain\Movie\MovieCollection;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Collection;
 
 class MovieRepository implements MovieRepositoryInterface
 {
@@ -119,6 +117,29 @@ class MovieRepository implements MovieRepositoryInterface
 
         if ($collectionIds !== null) {
             $movie->collections()->sync($collectionIds);
+        }
+    }
+
+    public function delete(int $id): void
+    {
+        if (is_null($movie = MovieModel::find($id))) {
+            throw new MovieNotFound();
+        };
+
+        $movie->delete();
+    }
+
+    /**
+     * @param int $movieId
+     * @param array|null $categoryIds
+     * @throws MovieNotFound
+     */
+    public function syncCategories(int $movieId, ?array $categoryIds): void
+    {
+        $movie = $this->findModelById($movieId);
+
+        if ($categoryIds !== null) {
+            $movie->categories()->sync($categoryIds);
         }
     }
 }

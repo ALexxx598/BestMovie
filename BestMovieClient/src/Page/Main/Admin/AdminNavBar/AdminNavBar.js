@@ -22,23 +22,26 @@ const AdminNavBar = ({...props}) => {
                     {
                         props?.allMoviesHighlighted
                             ? <span className="navSpanGold">
-                                <a href={DOMAIN + ADMIN_MOVIES}>Movies</a>
+                                <a href={DOMAIN + ADMIN_MOVIES}>
+                                    Фільми
+                                </a>
                               </span>
                             : <span>
-                                <a href={DOMAIN + ADMIN_MOVIES}>Movies</a>
+                                <a href={DOMAIN + ADMIN_MOVIES}>
+                                    Фільми
+                                </a>
                               </span>
                     }
-                    <span>News</span>
                     <span>
-                        <a href={DOMAIN + ABOUT_US}> Documentation </a>
+                        <a href={DOMAIN + ABOUT_US}> Документація </a>
                     </span>
                 </div>
                 <div className="nav-options logInLogOut">
                     <span>
                         {
                             auth?.id !== null
-                                ? <a onClick={logOut} href={DOMAIN + MOVIES}>Log out</a>
-                                : <a href={DOMAIN + LOGIN}>Log in</a>
+                                ? <a onClick={logOut} href={DOMAIN + MOVIES}>Вийти</a>
+                                : <a href={DOMAIN + LOGIN}>Увійти</a>
                         }
                     </span>
                     <span>

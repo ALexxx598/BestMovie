@@ -38,7 +38,7 @@ const MovieCollectionModal = ({...props}) => {
                                         padding: 5
                                     }}
                                     onClick={handleShow}
-                                    text="Add to collection"
+                                    text="Додати до колекції"
                                 />
                             </Col>
                         </Row>
@@ -49,14 +49,14 @@ const MovieCollectionModal = ({...props}) => {
             <Modal
                 show={show}
                 onHide={handleClose}
-                className="modal-lg movieModal"
+                className="modal-xl movieModal"
             >
                 <Modal.Header closeButton className="mainMovieModalBackground">
-                    <Modal.Title>Choose collections</Modal.Title>
+                    <Modal.Title>Додати до коллекцій</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="mainMovieModalBackground">
                     <div className="movieModalBody">
-                        <div className="movieModalBodyList">
+                        <div>
                             <MovieCollectionList
                                 collections={collections}
                                 handleToggle={handleToggle}
@@ -68,8 +68,8 @@ const MovieCollectionModal = ({...props}) => {
                     </div>
                 </Modal.Body>
                 <Modal.Footer className="mainMovieModalBackground">
-                    <Button onClick={handleSaveChanges} text="Save changes"/>
-                    <ButtonClose onClick={handleClose} text="Close"/>
+                    <Button onClick={handleSaveChanges} text="Зберегти зміни"/>
+                    <ButtonClose onClick={handleClose} text="Скасувати"/>
                 </Modal.Footer>
             </Modal>
         </>

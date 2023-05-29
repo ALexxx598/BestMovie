@@ -5,6 +5,7 @@ import MovieList from "../MovieList/MovieList";
 import Paginator from "../Paginator/Paginator";
 import MovieCollectionList from "../MovieCollection/MovieCollectionList";
 import useViewerMovies from "./useViewerMovies";
+import Footer from "../Footer/Footer";
 
 const Movies = () => {
     const {
@@ -25,7 +26,8 @@ const Movies = () => {
             <div className="main">
                 <div className="listPadding">
                     <div className="categoryHeader">
-                        Categories
+                        {/*Categories*/}
+                        Категорії
                     </div>
                     <CategoryList
                         categories={categories}
@@ -33,7 +35,8 @@ const Movies = () => {
                         categoriesChecked={categoriesChecked}
                     />
                     <div className="collectionHeader">
-                        Collections
+                        {/*Collections*/}
+                        Колекції
                     </div>
                     <MovieCollectionList
                         collections={collections}
@@ -50,7 +53,7 @@ const Movies = () => {
                     />
                 </div>
             </div>
-            <div>footer</div>
+            <Footer/>
         </div>
     )
 }

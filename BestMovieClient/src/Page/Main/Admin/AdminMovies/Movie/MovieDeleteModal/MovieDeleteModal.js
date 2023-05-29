@@ -28,7 +28,7 @@ const MovieDeleteModal = ({...props}) => {
                     height: 70,
                 }}
             >
-                Remove
+                Видалити
             </ReactButton>
 
             <Modal
@@ -37,11 +37,11 @@ const MovieDeleteModal = ({...props}) => {
                 className="modalPosition"
             >
                 <Modal.Header closeButton className="mainModalTheme">
-                    <Modal.Title>Remove confirmation</Modal.Title>
+                    <Modal.Title>Підтвердження видалення</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="mainModalTheme">
                     <div className="modalRemoveButton">
-                        <ButtonClose text={"Remove"} onClick={handleRemove}/>
+                        <ButtonClose text={"Видалити"} onClick={handleRemove}/>
                     </div>
                 </Modal.Body>
             </Modal>

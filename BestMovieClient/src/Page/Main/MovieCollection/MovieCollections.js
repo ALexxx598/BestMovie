@@ -5,6 +5,7 @@ import "../MovieList/movies.css"
 import '../Paginator/paginator.css'
 import MovieCollectionList from "./MovieCollectionList";
 import Paginator from "../Paginator/Paginator";
+import Footer from "../Footer/Footer";
 
 const MovieCollections = () => {
     const {
@@ -36,7 +37,7 @@ const MovieCollections = () => {
                     />
                 </div>
             </div>
-            <div color="white">footer</div>v>
+            <Footer/>
         </div>
     )
 }

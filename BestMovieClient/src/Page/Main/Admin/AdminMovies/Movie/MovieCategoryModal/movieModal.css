@@ -1,6 +1,6 @@
 .movieModal {
-    margin-top: 10%;
-    max-height: 1200px;
+    /*margin-top: 10%;*/
+    /*max-height: 1200px;*/
 }
 
 .mainMovieModalBackground {
@@ -12,16 +12,11 @@
     display: flex;
     /*flex-wrap: wrap;*/
     /*justify-content: center;*/
-    padding: 20px;
+    padding: 10px;
     /*height: 450px;*/
     background-color: #0c1e25;
     border-radius: 10px;
 }
-
-/*.movieModalBodyList {*/
-/*    width: 200px;*/
-/*    height: 300px;*/
-/*}*/
 
 .movieModalPreview {
     margin-left: 5%;

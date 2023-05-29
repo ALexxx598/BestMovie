@@ -2,6 +2,9 @@
 
 namespace App\MovieDomain\Movie\Service;
 
+use App\MovieDomain\Category\Category;
+use App\MovieDomain\Category\Filter\CategoryFilter;
+use App\MovieDomain\Category\Service\CategoryServiceInterface;
 use App\MovieDomain\Collection\Collection;
 use App\MovieDomain\Collection\CollectionType;
 use App\MovieDomain\Collection\Filter\CollectionFilter;
@@ -12,12 +15,12 @@ use App\MovieDomain\Movie\Filter\MovieFilter;
 use App\MovieDomain\Movie\Movie;
 use App\MovieDomain\Movie\MovieCollection;
 use App\MovieDomain\Movie\MovieDescription;
+use App\MovieDomain\Movie\Payload\MovieCategoryPayload;
 use App\MovieDomain\Movie\Payload\MovieCollectionPayload;
 use App\MovieDomain\Movie\Payload\MovieCreatePayload;
 use App\MovieDomain\Movie\Repository\MovieRepositoryInterface;
 use App\MovieDomain\User\Service\UserServiceInterface;
 use BestMovie\Common\BestMovieStorage\Service\BestMovieStorageServiceInterface;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class MovieService implements MovieServiceInterface
 {
@@ -25,11 +28,14 @@ class MovieService implements MovieServiceInterface
      * @param MovieRepositoryInterface $movieRepository
      * @param UserServiceInterface $userService
      * @param CollectionServiceInterface $collectionService
+     * @param CategoryServiceInterface $categoryService
+     * @param BestMovieStorageServiceInterface $bestMovieStorageService
      */
     public function __construct(
         private MovieRepositoryInterface $movieRepository,
         private UserServiceInterface $userService,
         private CollectionServiceInterface $collectionService,
+        private CategoryServiceInterface $categoryService,
         private BestMovieStorageServiceInterface $bestMovieStorageService,
     ) {
     }
@@ -142,5 +148,27 @@ class MovieService implements MovieServiceInterface
         $collectionIds = array_merge($collectionIds, $customCollectionIds);
 
         $this->movieRepository->syncCollections($movie->getId(), $collectionIds);
+    }
+
+    public function delete(int $id): void
+    {
+        $this->movieRepository->delete($id);
+    }
+
+    public function syncCategories(MovieCategoryPayload $payload): void
+    {
+        $movie = $this->movieRepository->findById($payload->getMovieId());
+
+        $categoryIds = $this
+            ->categoryService
+            ->list(
+                CategoryFilter::make(
+                    categoryIds: $payload->getCategoryIds()->toArray()
+                )
+            )
+            ->map(fn (Category $category) => $category->getId())
+            ->toArray();
+
+        $this->movieRepository->syncCategories($movie->getId(), $categoryIds);
     }
 }

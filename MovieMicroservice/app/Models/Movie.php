@@ -58,4 +58,3 @@ class Movie extends Model
         return $this->belongsToMany(CollectionModel::class, MovieCollection::class);
     }
 }
-

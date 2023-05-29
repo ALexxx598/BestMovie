@@ -4,6 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Button from "../../../../../components/Button/Button";
 import './movieCategoriesList.css'
 import useMovieCategoryAddModal from "./useMovieCategoryAddModal";
+import {Col, Row} from "react-bootstrap";
 
 const MovieCategoryAddModal = ({...props}) => {
     const {
@@ -18,11 +19,11 @@ const MovieCategoryAddModal = ({...props}) => {
             <div className="categoriesTab">
                 <div className="addCategoryBlock">
                     <div>
-                        Categories
+                        Категорії
                     </div>
                     <div className="categoriesTabButton">
                         <Fab aria-label="add">
-                            <AddIcon text={"Add"} onClick={handleShow}/>
+                            <AddIcon text={"Додати"} onClick={handleShow}/>
                         </Fab>
                     </div>
                 </div>
@@ -36,19 +37,24 @@ const MovieCategoryAddModal = ({...props}) => {
             >
                 <form onSubmit={formik.handleSubmit}>
                     <Modal.Header closeButton className="mainModalTheme">
-                        <Modal.Title>Add category</Modal.Title>
+                        <Modal.Title>Додати категорію</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="mainModalTheme">
                         <div>
-                            <input
-                                id="name"
-                                name="name"
-                                type="text"
-                                onChange={formik.handleChange}
-                                value={formik.values.name}
-                                className="form-control"
-                            />
-                            <Button text={"Add"}/>
+                            <Row className="categoryModalBody">
+                                <Col xs={3}>Назва категорії:</Col>
+                                <Col>
+                                    <input
+                                        id="name"
+                                        name="name"
+                                        type="text"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.name}
+                                        className="form-control"
+                                    />
+                                </Col>
+                            </Row>
+                            <Button text={"Додати"}/>
                         </div>
                     </Modal.Body>
                 </form>

@@ -18,11 +18,11 @@ const MovieAddModal = ({...props}) => {
         formik,
         setImage,
         setVideo,
-    } = useMovieAddModal()
+    } = useMovieAddModal({...props})
 
     return (
         <>
-            <Col md={2} style={{paddingLeft:"52px", paddingTop: "1%"}}>
+            <Col md={2} style={{paddingTop: "1%", width: "100%"}}>
                 <Button
                     type="submit"
                     variant="success"
@@ -32,10 +32,10 @@ const MovieAddModal = ({...props}) => {
                         color: "white",
                         border: "#29603b",
                         fontSize: 20,
-                        padding: 5
+                        padding: 5,
                     }}
                     onClick={handleShow}
-                    text="add movie"
+                    text="Додати фільм"
                 />
             </Col>
 
@@ -67,8 +67,8 @@ const MovieAddModal = ({...props}) => {
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="mainMovieModalBackground">
-                        <Button onSubmit={formik.handleSubmit} text={"Save changes"}/>
-                        <ButtonClose onClick={handleClose} text="Close"/>
+                        <Button onSubmit={formik.handleSubmit} text={"Додати"}/>
+                        <ButtonClose onClick={handleClose} text="Скасувати додавання"/>
                     </Modal.Footer>
                 </form>
             </Modal>

@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Request\Movie\MovieCategoriesRequest;
 use App\Http\Request\Movie\MovieCollectionsRequest;
+use App\Http\Request\Movie\MovieDeleteRequest;
 use App\Http\Request\Movie\MovieListRequest;
 use App\Http\Request\Movie\MovieCreateRequest;
 use App\Http\Resource\Movie\MovieListResource;
 use App\Http\Resource\Movie\MovieResource;
 use App\MovieDomain\Movie\Filter\MovieFilter;
+use App\MovieDomain\Movie\Payload\MovieCategoryPayload;
 use App\MovieDomain\Movie\Payload\MovieCollectionPayload;
 use App\MovieDomain\Movie\Payload\MovieCreatePayload;
 use App\MovieDomain\Movie\Service\MovieServiceInterface;
@@ -97,6 +100,19 @@ class MovieController extends Controller
     }
 
     /**
+     * @param MovieDeleteRequest $request
+     * @return JsonResponse
+     */
+    public function delete(MovieDeleteRequest $request, int $movieId): JsonResponse
+    {
+        $this->movieService->delete($movieId);
+
+        return response()->json([
+            'status' => Response::HTTP_OK,
+        ], JsonResponse::HTTP_CREATED);
+    }
+
+    /**
      * @param int $movieId
      * @param MovieCollectionsRequest $request
      * @return JsonResponse
@@ -111,6 +127,27 @@ class MovieController extends Controller
         );
 
         $this->movieService->syncCollections($payload);
+
+        return response()->json([
+            'status' => Response::HTTP_OK,
+        ], Response::HTTP_OK);
+    }
+
+    /**
+     * @param int $movieId
+     * @param MovieCategoriesRequest $request
+     * @return JsonResponse
+     * @throws \App\MovieDomain\User\Exception\UserNotFoundException
+     */
+    public function updateCategories(MovieCategoriesRequest $request, int $movieId): JsonResponse
+    {
+        $payload = MovieCategoryPayload::make(
+            userId: $request->getUserId(),
+            movieId: $movieId,
+            categoryIds: $request->getCategoryIds()
+        );
+
+        $this->movieService->syncCategories($payload);
 
         return response()->json([
             'status' => Response::HTTP_OK,

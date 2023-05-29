@@ -18,6 +18,7 @@ class CategoryResource extends MovieMicroserviceResource
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
+            'movie_ids' => $this->getMovieIds()?->toArray(),
         ];
     }
 }

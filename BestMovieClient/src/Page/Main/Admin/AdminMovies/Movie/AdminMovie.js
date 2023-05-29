@@ -8,6 +8,7 @@ import MovieCollectionModal from "./MovieCollectionsModal/MovieCollectionModal";
 import "./movie.css"
 import AdminNavBar from "../../AdminNavBar/AdminNavBar";
 import MovieDeleteModal from "./MovieDeleteModal/MovieDeleteModal";
+import MovieCategoryModal from "./MovieCategoryModal/MovieCategoryModal";
 
 const AdminMovie = () => {
     const { movie, isLoading, checkIsUserAuth, getCategoriesAsText, removeMovie} = useMovie()
@@ -22,8 +23,14 @@ const AdminMovie = () => {
                     </Col>
                     <Col>
                         <Row>
-                            <Col md={{offset: 6}}>
+                            <Col md={{offset: 4}}>
                                 <MovieCollectionModal
+                                    checkIsUserAuth={checkIsUserAuth}
+                                    movie={movie}
+                                />
+                            </Col>
+                            <Col>
+                                <MovieCategoryModal
                                     checkIsUserAuth={checkIsUserAuth}
                                     movie={movie}
                                 />

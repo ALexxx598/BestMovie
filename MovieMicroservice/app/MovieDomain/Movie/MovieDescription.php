@@ -71,4 +71,15 @@ class MovieDescription
     {
         return $this->shortDescription;
     }
+
+    /**
+     * @param string $actors
+     * @return $this
+     */
+    public function setActors(string $actors): self
+    {
+        $this->actors = $actors;
+
+        return $this;
+    }
 }

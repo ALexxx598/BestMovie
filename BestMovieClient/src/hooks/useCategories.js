@@ -16,9 +16,11 @@ const useCategories = () => {
     const [ categories, setCategories ] = useState([])
 
     const fetchCategories = async () => {
-        const response = await CategoryApiService.fetchCategories()
+        const { items } = await CategoryApiService.fetchCategories()
 
-        setCategories(response.items)
+        setCategories(items)
+
+        return items
     }
 
     const getCategoryIds = (newChecked) => {
@@ -36,10 +38,6 @@ const useCategories = () => {
         await CategoryApiService.create(auth, name)
         await fetchCategories()
     }
-
-    useEffect(() => {
-        fetchCategories()
-    }, [])
 
     return {
         categories,

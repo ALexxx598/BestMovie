@@ -8,7 +8,7 @@ const MovieAddModalDescription = ({...props}) => {
                 <Col style={{marginTop: "5%", marginLeft: "5%"}}>
                     <Row>
                         <Col sm={4}>
-                            <label htmlFor="moviePoster">Download poster</label>
+                            <label htmlFor="moviePoster"> Завнтажити афішу </label>
                         </Col>
                         <Col style={{display: "flex"}}>
                             <input
@@ -33,7 +33,7 @@ const MovieAddModalDescription = ({...props}) => {
                     </Row>
                     <Row style={{marginTop: "5%"}}>
                         <Col sm={4}>
-                            <label htmlFor="movieVideo">Download movie</label>
+                            <label htmlFor="movieVideo"> Завантажити фільм </label>
                         </Col>
                         <Col style={{display: "flex"}}>
                             <input
@@ -59,7 +59,7 @@ const MovieAddModalDescription = ({...props}) => {
                     </Row>
                     <Row style={{marginTop: "5%"}}>
                         <Col sm={4}>
-                            <label htmlFor="name">Name</label>
+                            <label htmlFor="name"> Назва </label>
                         </Col>
                         <Col style={{display: "flex"}}>
                             <input
@@ -82,7 +82,7 @@ const MovieAddModalDescription = ({...props}) => {
                     </Row>
                     <Row style={{marginTop: "5%"}}>
                         <Col sm={4}>
-                            <label htmlFor="rating">Rating</label>
+                            <label htmlFor="rating"> Рейтинг </label>
                         </Col>
                         <Col style={{display: "flex"}}>
                             <input
@@ -105,7 +105,7 @@ const MovieAddModalDescription = ({...props}) => {
                     </Row>
                     <Row style={{marginTop: "5%"}}>
                         <Col sm={4}>
-                            <label htmlFor="slogan">Slogan</label>
+                            <label htmlFor="slogan"> Слоган </label>
                         </Col>
                         <Col style={{display: "flex"}}>
                             <input
@@ -128,7 +128,7 @@ const MovieAddModalDescription = ({...props}) => {
                     </Row>
                     <Row style={{marginTop: "5%"}}>
                         <Col sm={4}>
-                            <label htmlFor="screeningDate">Screening Date</label>
+                            <label htmlFor="screeningDate"> Дата публікації </label>
                         </Col>
                         <Col style={{display: "flex"}}>
                             <input
@@ -151,7 +151,7 @@ const MovieAddModalDescription = ({...props}) => {
                     </Row>
                     <Row style={{marginTop: "5%"}}>
                         <Col sm={4}>
-                            <label htmlFor="country">Country</label>
+                            <label htmlFor="country"> Країна </label>
                         </Col>
                         <Col style={{display: "flex"}}>
                             <input
@@ -174,7 +174,7 @@ const MovieAddModalDescription = ({...props}) => {
                     </Row>
                     <Row style={{marginTop: "5%"}}>
                         <Col sm={4}>
-                            <label htmlFor="actors">Actors</label>
+                            <label htmlFor="actors"> Актори </label>
                         </Col>
                         <Col style={{display: "flex"}}>
                             <input
@@ -197,7 +197,7 @@ const MovieAddModalDescription = ({...props}) => {
                     </Row>
                     <Row style={{marginTop: "5%"}} className="shortDescriptionInput">
                         <Col sm={4}>
-                            <label htmlFor="shortDescription">Short description</label>
+                            <label htmlFor="shortDescription"> Короткий опис </label>
                         </Col>
                         <Col style={{display: "flex"}}>
                             <textarea

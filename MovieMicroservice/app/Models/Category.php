@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property int $id
  * @property string $name
  *
- * @property-read Collection<Movie> $movies
+ * @property-read \Illuminate\Support\Collection<Movie> $movies
  */
 class Category extends Model
 {

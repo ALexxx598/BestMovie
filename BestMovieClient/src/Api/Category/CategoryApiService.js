@@ -65,7 +65,8 @@ export default class CategoryApiService {
     static makeCategory(category) {
         return new CategoryModel(
             category.id,
-            category.name
+            category.name,
+            category?.movie_ids,
         )
     }
 }

@@ -11,8 +11,10 @@ const useMovieDeleteModal = ({...props}) => {
     const handleShow = () => setShow(true);
 
     const handleRemove = async () => {
+
         await props.handleRemove(props.movie.id)
-        navigate.navigate(DOMAIN + MOVIES, false)
+        handleClose()
+        navigate.navigate(DOMAIN + MOVIES, true)
     }
 
     return {

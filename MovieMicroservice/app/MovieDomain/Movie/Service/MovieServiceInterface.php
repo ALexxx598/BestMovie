@@ -6,6 +6,7 @@ use App\MovieDomain\Movie\Exception\InvalidImageUrl;
 use App\MovieDomain\Movie\Exception\InvalidMovieUrl;
 use App\MovieDomain\Movie\Filter\MovieFilter;
 use App\MovieDomain\Movie\Movie;
+use App\MovieDomain\Movie\Payload\MovieCategoryPayload;
 use App\MovieDomain\Movie\Payload\MovieCollectionPayload;
 use App\MovieDomain\Movie\Payload\MovieCreatePayload;
 use App\MovieDomain\Movie\MovieCollection;
@@ -43,4 +44,14 @@ interface MovieServiceInterface
      * @param MovieCollectionPayload $payload
      */
     public function syncDefaultCollections(MovieCollectionPayload $payload): void;
+
+    /**
+     * @param int $getId
+     */
+    public function delete(int $id): void;
+
+    /**
+     * @param MovieCategoryPayload $payload
+     */
+    public function syncCategories(MovieCategoryPayload $payload): void;
 }

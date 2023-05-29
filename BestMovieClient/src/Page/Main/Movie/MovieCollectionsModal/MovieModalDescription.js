@@ -4,7 +4,7 @@ const MovieModalDescription = ({...props}) => {
     return (
         <div className="movieModalPreview">
             <Row>
-                <Col>
+                <Col xs={6} md={4}>
                     <img
                         className="movieModalContainerImg"
                         src={
@@ -15,48 +15,40 @@ const MovieModalDescription = ({...props}) => {
                 </Col>
                 <Col>
                     <Row>
-                        <Col>
-                            Name:
+                        <Col xs={6} md={4}>
+                            Рейтинг:
                         </Col>
                         <Col>
-                            {props?.movie?.name ?? 'unknown'}
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className="spaceBetweenCol">
-                            Rating:
-                        </Col>
-                        <Col style={{marginTop: 20}}>
                             {props.movie?.description?.rating ?? 'unknown'}
                         </Col>
                     </Row>
                     <Row>
-                        <Col className="spaceBetweenCol">
-                            Slogan
+                        <Col xs={6} md={4} className="spaceBetweenCol">
+                            Слоган:
                         </Col>
                         <Col style={{marginTop: 20}}>
                             {props.movie?.description?.slogan ?? 'unknown'}
                         </Col>
                     </Row>
                     <Row>
-                        <Col className="spaceBetweenCol">
-                            Date of screening
+                        <Col xs={6} md={4} className="spaceBetweenCol">
+                            Дата публікації:
                         </Col>
                         <Col className="spaceBetweenCol">
                             {props.movie?.description?.screeningDate ?? 'unknown'}
                         </Col>
                     </Row>
                     <Row>
-                        <Col className="spaceBetweenCol">
-                            Country
+                        <Col xs={6} md={4} className="spaceBetweenCol">
+                            Країна:
                         </Col>
                         <Col className="spaceBetweenCol">
                             {props.movie?.description?.country ?? 'unknown'}
                         </Col>
                     </Row>
                     <Row>
-                        <Col className="spaceBetweenCol">
-                            Actors
+                        <Col xs={6} md={4} className="spaceBetweenCol">
+                            Актори:
                         </Col>
                         <Col className="spaceBetweenCol">
                             {props.movie?.description?.actors ?? 'unknown'}

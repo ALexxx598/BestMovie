@@ -2,7 +2,6 @@ import '../../components/button.css'
 import './login.css'
 import {Button, Col, Container, Row} from "react-bootstrap";
 import {useLogin} from "./useLogin";
-import {useLocation} from "react-router-dom";
 import {DOMAIN, REGISTER} from "../../Routes";
 import NavBar from "../Main/NavBar/NavBar";
 
@@ -16,12 +15,12 @@ const Login = () => {
                 <Row>
                     <Col xs={6} md={{ span: 4, offset: 4}} className="containerBack">
                         <Row className="logIn">
-                            <Col md={{ offset: 1 }}>Log in</Col>
-                            <Col md={{ offset: 1 }}><a href={DOMAIN + REGISTER}>Sign In</a></Col>
+                            <Col>Увійти</Col>
+                            <Col><a href={DOMAIN + REGISTER}>Зареєстурватися</a></Col>
                         </Row>
                         <form onSubmit={formik.handleSubmit} >
                             <Row className="space3">
-                                <label htmlFor="email" className="labelPadding">Email Address</label>
+                                <label htmlFor="email" className="labelPadding">Адрес електронної пошти</label>
                                 <input
                                     id="email"
                                     name="email"
@@ -32,7 +31,7 @@ const Login = () => {
                                 />
                             </Row>
                             <Row className="space3">
-                                <label htmlFor="password" className="labelPadding">Password</label>
+                                <label htmlFor="password" className="labelPadding">Пароль</label>
                                 <input
                                     id="password"
                                     name="password"
@@ -43,7 +42,7 @@ const Login = () => {
                                 />
                             </Row>
                             <Row className="space3">
-                                <Button type="submit" variant="success" className="button">Log in!</Button>
+                                <Button type="submit" variant="success" className="button">Увійти!</Button>
                             </Row>
                         </form>
                     </Col>

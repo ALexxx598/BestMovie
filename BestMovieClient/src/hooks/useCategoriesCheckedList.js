@@ -4,15 +4,15 @@ const useCategoriesCheckedList = () => {
     const [categoriesChecked, setCategoriesChecked] = useState([1]);
     const [categoriesChanged, setCategoriesChanged] = useState([1]);
 
-     const setInitialChecked = (collections, id) => {
+     const setInitialChecked = (categories, id) => {
          const newChecked = [1]
 
-         collections.forEach(
-             (collection) => {
-                 collection.movieIds.filter(
-                     (collectionMovieId) => {
-                         if (parseInt(collectionMovieId) === parseInt(id)) {
-                             newChecked.push(collection)
+         categories.forEach(
+             (category) => {
+                 category.movieIds.filter(
+                     (categoryMovieId) => {
+                         if (parseInt(categoryMovieId) === parseInt(id)) {
+                             newChecked.push(category)
                          }
                      }
                  )

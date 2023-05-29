@@ -38,7 +38,7 @@ const SUPPORTED_FORMATS = [
     "image/png"
 ];
 
-const useMovieAddModal = () => {
+const useMovieAddModal = ({...props}) => {
     const { auth } = useAuth()
 
     const [show, setShow] = useState(false);
@@ -78,6 +78,7 @@ const useMovieAddModal = () => {
                 values.country,
                 values.actors,
                 values.shortDescription,
+                // '/movie/video/202303101234148086732713.mp4',
                 movieVideoLink,
                 moviePosterLink,
                 // '/movie/video/202303101234148086732713.mp4',
@@ -86,9 +87,9 @@ const useMovieAddModal = () => {
 
             await MovieApiService.saveDefaultCollections(getCollectionIds(), movieResponse.movie.id, auth)
         } catch (error) {
-            console.log('error formik')
+            console.log('error formik' + error)
         } finally {
-            await handleClose()
+            await props.fetchMovies()
         }
     }
 

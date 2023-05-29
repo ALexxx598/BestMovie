@@ -5,11 +5,12 @@ import CategoryApiService from "../Category/CategoryApiService";
 
 export default class MovieApiService {
     static LIST = 'api/movie/list';
+    static CREATE = 'api/movie/';
+    static REMOVE = 'api/movie/';
     static GET_ONE = 'api/movie/';
     static UPDATE_COLLECTIONS = 'api/movie/collections/';
     static UPDATE_DEFAULT_COLLECTIONS = 'api/movie/collections/default/';
-    static CREATE = 'api/movie/';
-    static REMOVE = 'api/movie/';
+    static UPDATE_CATEGORIES = 'api/movie/categories/';
 
     static async create(
         auth,
@@ -108,6 +109,23 @@ export default class MovieApiService {
         )
     }
 
+    static async saveCategories(categoryIds, movieId, auth) {
+        await axios.patch(
+            this.UPDATE_CATEGORIES + movieId,
+            {
+                "user_id": auth?.id,
+                "category_ids": categoryIds,
+            },
+            {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                    'Authorization': auth?.accessToken
+                }
+            }
+        )
+    }
+
     static async saveDefaultCollections(collectionIds, movieId, auth) {
         const response = await axios.patch(
             this.UPDATE_DEFAULT_COLLECTIONS + movieId,
@@ -127,7 +145,7 @@ export default class MovieApiService {
 
     static async remove(movieId, auth) {
         const response = await axios.delete(
-            this.REMOVE + movieId,
+            this.REMOVE + movieId + '/',
             {
                 params: {
                     user_id: auth?.id,

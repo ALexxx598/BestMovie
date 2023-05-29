@@ -1,5 +1,5 @@
 import List from "@mui/material/List";
-import {ListItem} from "@mui/material";
+import {IconButton, ListItem, ListItemIcon} from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -9,11 +9,10 @@ const MovieCollectionList = ({...props}) => {
     return (
         <List
             sx={{
-                width: 200,
-                maxWidth: 200,
+                // width: 200,
+                maxWidth: 250,
                 position: 'relative',
                 overflow: 'auto',
-                // marginTop: '10%',
                 maxHeight: props?.height ?? '60%',
                 '& ul': { padding: 0 },
             }}
@@ -25,20 +24,19 @@ const MovieCollectionList = ({...props}) => {
                     return (
                         <ListItem
                             key={collection.id}
-                            secondaryAction={
+                            disablePadding
+                        >
+                            <ListItemButton>
                                 <Checkbox
                                     edge="end"
                                     onChange={props.handleToggle(collection)}
                                     checked={props.collectionChecked.indexOf(collection) !== -1}
                                     inputProps={{ 'aria-labelledby': labelId }}
                                 />
-                            }
-                            disablePadding
-                        >
-                            <ListItemButton>
                                 <ListItemText
                                     id={labelId}
                                     primary={collection.name}
+                                    multiline
                                     className="collectionName"
                                 />
                             </ListItemButton>

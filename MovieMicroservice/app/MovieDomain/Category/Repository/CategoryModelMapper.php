@@ -3,6 +3,7 @@
 namespace App\MovieDomain\Category\Repository;
 
 use App\Models\Category as CategoryModel;
+use App\Models\Movie;
 use App\MovieDomain\Category\Category;
 use Illuminate\Support\Collection;
 
@@ -35,14 +36,29 @@ class CategoryModelMapper
     }
 
     /**
-     * @param CategoryModel $category
+     * @param CategoryModel $categoryModal
      * @return Category
      */
-    public function mapModelToEntity(CategoryModel $category): Category
+    public function mapModelToEntity(CategoryModel $categoryModal): Category
     {
-        return new Category(
-            id: $category->id,
-            name: $category->name,
+        $category = new Category(
+            id: $categoryModal->id,
+            name: $categoryModal->name,
         );
+
+        if ($categoryModal->relationLoaded('movies')) {
+            $category->setMovieIds($this->mapMovieIds($categoryModal->movies));
+        }
+
+        return $category;
+    }
+
+    /**
+     * @param \Illuminate\Support\Collection<Movie> $models
+     * @return Collection<int>
+     */
+    private function mapMovieIds(Collection $moviesModels): Collection
+    {
+        return $moviesModels->map(fn (Movie $movie) => $movie->id);
     }
 }

@@ -1,0 +1,31 @@
+.mainTheme {
+    margin-top: 1%;
+    background-color: #001219;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    border-radius: 10px;
+}
+
+.position {
+    padding-left: 240px;
+    text-align: center;
+    /*vertical-align: middle;*/
+    align-items: flex-start;
+}
+
+.mainTheme a {
+    /*font-size: 24px;*/
+    text-decoration: none;
+    color: white;
+}
+
+.pages {
+    /*font-size: 18px;*/
+    margin-left: 1%;
+    /*text-align: left;*/
+    /*align-items: flex-start;*/
+    color: white;
+}

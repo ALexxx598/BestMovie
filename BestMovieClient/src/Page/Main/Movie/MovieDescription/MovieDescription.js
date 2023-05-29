@@ -16,7 +16,7 @@ const MovieDescription = ({...props}) => {
             <Col sm={8} className="mainDataCol">
                 <Row>
                     <Col xxl={2}>
-                        Rating:
+                        Рейтинг:
                     </Col>
                     <Col>
                         {props.movie?.description?.rating ?? 'unknown'}
@@ -24,7 +24,7 @@ const MovieDescription = ({...props}) => {
                 </Row>
                 <Row>
                     <Col xxl={2} className="spaceBetweenCol">
-                        Slogan
+                        Слоган:
                     </Col>
                     <Col style={{marginTop: 20}}>
                         {props.movie?.description?.slogan ?? 'unknown'}
@@ -32,7 +32,7 @@ const MovieDescription = ({...props}) => {
                 </Row>
                 <Row>
                     <Col xxl={2} className="spaceBetweenCol">
-                        Date of screening
+                        Дата публікації:
                     </Col>
                     <Col className="spaceBetweenCol">
                         {props.movie?.description?.screeningDate ?? 'unknown'}
@@ -40,7 +40,7 @@ const MovieDescription = ({...props}) => {
                 </Row>
                 <Row>
                     <Col xxl={2} className="spaceBetweenCol">
-                        Country
+                        Країна:
                     </Col>
                     <Col className="spaceBetweenCol">
                         {props.movie?.description?.country ?? 'unknown'}
@@ -48,7 +48,7 @@ const MovieDescription = ({...props}) => {
                 </Row>
                 <Row>
                     <Col xxl={2} className="spaceBetweenCol">
-                        Categories
+                        Категорії:
                     </Col>
                     <Col className="spaceBetweenCol">
                         {props.getCategoriesAsText()}
@@ -56,7 +56,7 @@ const MovieDescription = ({...props}) => {
                 </Row>
                 <Row>
                     <Col xxl={2} className="spaceBetweenCol">
-                        Actors
+                        Актори:
                     </Col>
                     <Col className="spaceBetweenCol">
                         {props.movie?.description?.actors ?? 'unknown'}
@@ -64,7 +64,7 @@ const MovieDescription = ({...props}) => {
                 </Row>
                 <Row>
                     <Col xxl={2} className="spaceBetweenCol">
-                        Short Description
+                        Короткий опис:
                     </Col>
                     <Col className="spaceBetweenCol">
                         {props.movie?.description?.shortDescription ?? 'unknown'}

@@ -6,15 +6,12 @@ import MovieAddModal from "./MovieCollectionModal/MovieAddModal";
 import { Row } from "react-bootstrap";
 import useAdminMovies from "./useAdminMovies";
 import "./adminMovies.css"
-import Button from "../../../../components/Button/Button";
 import MovieCollectionList from "./MovieCollections/MovieCollectionList";
 import MovieCategoryList from "./MovieCategories/MovieCategoryList";
-import AddIcon from '@mui/icons-material/Add';
-import Fab from '@mui/material/Fab';
-import {green} from "@mui/material/colors";
 import MovieCategoryAddModal from "./MovieCategories/MovieCategoryAddModal";
 import MovieCollectionAddModal from "./MovieCollections/MovieCollectionAddModal";
 import MovieList from "./MovieList/MovieList";
+import AdminFooter from "../Footer/AdminFooter";
 
 const AdminMovies = () => {
     const {
@@ -32,17 +29,21 @@ const AdminMovies = () => {
         handleRemoveCategory,
         fetchCategories,
         handleAddCategory,
-        handleAddCollection
+        handleAddCollection,
+        fetchMovies,
     } = useAdminMovies()
 
     return (
         <div className="background">
             <AdminNavBar allMoviesHighlighted={true}/>
-            <Row>
-                <MovieAddModal/>
-            </Row>
             <div className="main">
+
                 <div className="listPadding">
+                    <Row>
+                        <MovieAddModal
+                            fetchMovies={fetchMovies}
+                        />
+                    </Row>
                     <MovieCategoryAddModal
                         handleAddCategory={handleAddCategory}
                         fetchCategories={fetchCategories}
@@ -76,7 +77,7 @@ const AdminMovies = () => {
                     />
                 </div>
             </div>
-            <div>footer</div>
+            <AdminFooter/>
         </div>
     )
 }

@@ -39,8 +39,9 @@ const useMovie = () => {
         return auth?.accessToken !== undefined && auth?.accessToken !== null
     }
 
-    const removeMovie = async (id) => {
-        await MovieApiService.remove(id, auth)
+    const removeMovie = async (movieId) => {
+        console.log('r')
+        await MovieApiService.remove(movieId, auth)
     }
 
     useEffect(() => {

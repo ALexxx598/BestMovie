@@ -17,29 +17,28 @@ const NavBar = ({...props}) => {
                     {
                         props?.allMoviesHighlighted
                             ? <span className="navSpanGold">
-                                <a href={DOMAIN + MOVIES}>Movies</a>
+                                <a href={DOMAIN + MOVIES}>Фільми</a>
                               </span>
                             : <span>
-                                <a href={DOMAIN + MOVIES}>Movies</a>
+                                <a href={DOMAIN + MOVIES}>Фільми</a>
                               </span>
                     }
-                    <span>News</span>
                     {
                         props?.myMovieCollectionsHighlighted
                             ? <span className="navSpanGold">
-                               <a href={DOMAIN + MY_MOVIE_COLLECTION}>My Movie collections</a>
+                               <a href={DOMAIN + MY_MOVIE_COLLECTION}>Мої коллекції фільмів</a>
                               </span>
                             : <span>
-                               <a href={DOMAIN + MY_MOVIE_COLLECTION}>My Movie collections</a>
+                               <a href={DOMAIN + MY_MOVIE_COLLECTION}>Мої коллекції фільмів</a>
                               </span>
                     }
                     {
                         props?.aboutUs
                             ? <span className="navSpanGold">
-                                <a href={DOMAIN + ABOUT_US}> About us </a>
+                                <a href={DOMAIN + ABOUT_US}> Про нас </a>
                               </span>
                             : <span>
-                                <a href={DOMAIN + ABOUT_US}> About us </a>
+                                <a href={DOMAIN + ABOUT_US}> Про нас </a>
                               </span>
                     }
                 </div>
@@ -47,8 +46,8 @@ const NavBar = ({...props}) => {
                     <span>
                         {
                             auth?.id !== null
-                                ? <a onClick={logOut} href={DOMAIN + MOVIES}>Log out</a>
-                                : <a href={DOMAIN + LOGIN}>Log in</a>
+                                ? <a onClick={logOut} href={DOMAIN + MOVIES}> Вийти </a>
+                                : <a href={DOMAIN + LOGIN}> Увійти </a>
                         }
                     </span>
                     <span>

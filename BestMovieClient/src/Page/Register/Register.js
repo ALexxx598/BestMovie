@@ -17,12 +17,12 @@ const Register = () => {
                     <Col xs={6} md={4} className="formColumn">
                         <Row className="signIn">
                             <Col md={{ offset: 1 }}>Sign In</Col>
-                            <Col md={{ offset: 1 }}><a href={DOMAIN + LOGIN}>Log in</a></Col>
+                            <Col md={{ offset: 1 }}><a href={DOMAIN + LOGIN}>Увійти</a></Col>
                         </Row>
                         <form onSubmit={formik.handleSubmit} >
                             <Row>
                                 <Col>
-                                    <label htmlFor="firstName" className="labelPadding">First Name</label>
+                                    <label htmlFor="firstName" className="labelPadding">Ім'я</label>
                                     <input
                                         id="firstName"
                                         name="firstName"
@@ -41,7 +41,7 @@ const Register = () => {
                                     }
                                 </Col>
                                 <Col>
-                                    <label htmlFor="lastName" className="labelPadding">Last Name</label>
+                                    <label htmlFor="lastName" className="labelPadding">Прізвище</label>
                                     <input
                                         id="lastName"
                                         name="lastName"
@@ -61,7 +61,7 @@ const Register = () => {
                                 </Col>
                             </Row>
                             <Row className="space3">
-                                <label htmlFor="email" className="labelPadding">Email Address</label>
+                                <label htmlFor="email" className="labelPadding">Адрес електронної пошти</label>
                                 <input
                                     id="email"
                                     name="email"
@@ -80,7 +80,7 @@ const Register = () => {
                                 }
                             </Row>
                             <Row className="space3">
-                                <label htmlFor="password" className="labelPadding">Password</label>
+                                <label htmlFor="password" className="labelPadding">Пароль</label>
                                 <input
                                     id="password"
                                     name="password"
@@ -96,11 +96,11 @@ const Register = () => {
                                 }
                             </Row>
                             <Row className="space3">
-                                <label htmlFor="passwordConfirmation" className="labelPadding">Password Confirmation</label>
+                                <label htmlFor="passwordConfirmation" className="labelPadding">Підтвердження паролю</label>
                                 <input
                                     id="passwordConfirmation"
                                     name="passwordConfirmation"
-                                    type="passwordConfirmation"
+                                    type="password"
                                     onChange={formik.handleChange}
                                     value={formik.values.passwordConfirmation}
                                     className={ !formik.errors.passwordConfirmation
@@ -117,7 +117,7 @@ const Register = () => {
                             {
                                 preRegister
                                     ?  <Row className="space3">
-                                        <label htmlFor="registerCode" className="labelPadding">Register code</label>
+                                        <label htmlFor="registerCode" className="labelPadding">Реєстраційний код</label>
                                         <input
                                             id="registerCode"
                                             name="registerCode"
@@ -137,7 +137,7 @@ const Register = () => {
                                     </Row>
                                     : null
                             }
-                            <Button type="submit" variant="success" className="button">Submit</Button>
+                            <Button type="submit" variant="success" className="button" text="Зареєструватися"/>
                         </form>
                     </Col>
                 </Row>

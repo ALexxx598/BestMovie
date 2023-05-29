@@ -1,10 +1,13 @@
 import NavBar from "../NavBar/NavBar";
 import MovieCollectionList from "../MovieCollection/MovieCollectionList";
 import MovieList from "../MovieList/MovieList";
+import {Col, Row} from "react-bootstrap";
 import Paginator from "../Paginator/Paginator";
 import MyMovieCollectionModal from "./MyMovieCollectionModal/MyMovieCollectionModal";
 
 import useMyMovieCollection from "./useMyMovieCollection";
+import {ABOUT_US, DOMAIN, MOVIES, MY_MOVIE_COLLECTION} from "../../../Routes";
+import Footer from "../Footer/Footer";
 
 const MyMovieCollections = () => {
     const {
@@ -38,7 +41,7 @@ const MyMovieCollections = () => {
                     />
                 </div>
             </div>
-            <div color="white">footer</div>v>
+            <Footer/>
         </div>
     )
 }

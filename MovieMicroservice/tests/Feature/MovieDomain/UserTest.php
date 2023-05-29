@@ -22,6 +22,7 @@ class UserTest extends ApiTestCase
             'password' => $password = 'Some123456',
             'password_confirmation' => $password,
             'email' => $email = $this->faker->email,
+//            'confirmation_email_code' => $code = $this->faker->co
         ]);
 
         $response->assertStatus(200);

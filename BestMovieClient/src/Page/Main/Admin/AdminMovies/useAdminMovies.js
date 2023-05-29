@@ -11,7 +11,8 @@ const useAdminMovies = () => {
         paginator,
         handleChangePage,
         setFilter,
-        getDefaultFilter
+        getDefaultFilter,
+        fetchMovies,
     } = useMovies()
 
     const {
@@ -68,6 +69,10 @@ const useAdminMovies = () => {
         fetchDefaultCollections()
     }, [])
 
+    useEffect(() => {
+        fetchCategories()
+    }, [])
+
     return {
         categories,
         categoriesChecked,
@@ -84,6 +89,7 @@ const useAdminMovies = () => {
         handleRemoveCategory,
         handleAddCategory,
         handleAddCollection,
+        fetchMovies,
     }
 }
 

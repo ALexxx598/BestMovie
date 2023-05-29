@@ -73,6 +73,10 @@ class CollectionRepository implements CollectionRepositoryInterface
             $query->where('user_id', $filter->getUserId());
         }
 
+        if ($filter->getWithoutUserId() !== null) {
+            $query->whereNot('user_id', $filter->getWithoutUserId());
+        }
+
         if ($filter->getType() !== null) {
             $query->where('type', $filter->getType()->value);
         }

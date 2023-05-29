@@ -43,6 +43,7 @@ const useMovies = () => {
     return {
         movies,
         paginator,
+        fetchMovies,
         handleChangePage,
         filter,
         setFilter,

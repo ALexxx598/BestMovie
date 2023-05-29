@@ -16,7 +16,7 @@ const MyMovieCollectionModal = ({...props}) => {
 
     return (
         <>
-            <Button text="Add collection" onClick={handleShow}/>
+            <Button text="Додати колекцію" onClick={handleShow}/>
 
             <Modal
                 show={show}
@@ -25,12 +25,12 @@ const MyMovieCollectionModal = ({...props}) => {
             >
                 <form onSubmit={formik.handleSubmit} >
                     <Modal.Header closeButton className="mainMyMovieCollectionModalBackground">
-                        <Modal.Title>Add collection</Modal.Title>
+                        <Modal.Title>Додати колекцію</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="mainMyMovieCollectionModalBackground">
                         <div className="myMovieCollectionModalBody">
                             <Row>
-                                <Col className="myMovieCollectionName">Collection name:</Col>
+                                <Col className="myMovieCollectionName">Назва колекції:</Col>
                                 <Col>
                                     <input
                                         id="name"
@@ -45,8 +45,8 @@ const MyMovieCollectionModal = ({...props}) => {
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="mainMyMovieCollectionModalBackground">
-                        <Button onClick={handleClose} text="Save changes"/>
-                        <ButtonClose onClick={handleClose} text="Close"/>
+                        <Button onClick={handleClose} text="Зберегти зміни"/>
+                        <ButtonClose onClick={handleClose} text="Скасувати"/>
                     </Modal.Footer>
                 </form>
             </Modal>

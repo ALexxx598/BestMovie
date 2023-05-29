@@ -1,26 +1,24 @@
-import {Col, Row} from "react-bootstrap";
-
 import Modal from 'react-bootstrap/Modal';
-import useMovieCollectionModal from "./useMovieCollectionModal";
+import {Button as ReactButton} from "react-bootstrap";
 
 import './movieModal.css'
 
-import MovieModalDescription from "./MovieModalDescription";
+import MovieModalDescription from "./../MovieCollectionsModal/MovieModalDescription";
 import ButtonClose from "../../../../../../components/Button/ButtonClose";
 import Button from "../../../../../../components/Button/Button";
-import MovieCollectionList from "./MovieCollectionList";
-import {Button as ReactButton} from "react-bootstrap";
+import useMovieCategoryModal from "./useMovieCategoryModal";
+import MovieCategoryList from "./MovieCategoryModalList";
 
-const MovieCollectionModal = ({...props}) => {
+const MovieCategoryModal = ({...props}) => {
     const {
-        collections,
-        handleToggle,
-        collectionChecked,
+        categories,
+        handleCategoriesToggle,
+        categoriesChecked,
         handleSaveChanges,
         show,
         handleShow,
         handleClose,
-    } = useMovieCollectionModal()
+    } = useMovieCategoryModal()
 
     return (
         <>
@@ -36,7 +34,7 @@ const MovieCollectionModal = ({...props}) => {
                 }}
                 onClick={handleShow}
             >
-                Додати до колекції
+                Додати до категорії
             </ReactButton>
 
             <Modal
@@ -45,16 +43,17 @@ const MovieCollectionModal = ({...props}) => {
                 className="modal-xl movieModal"
             >
                 <Modal.Header closeButton className="mainMovieModalBackground">
-                    <Modal.Title>Додати до колекцій</Modal.Title>
+                    <Modal.Title>Додати до категорії</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="mainMovieModalBackground">
                     <div className="movieModalBody">
                         <div>
-                            <MovieCollectionList
-                                collections={collections}
-                                handleToggle={handleToggle}
-                                collectionChecked={collectionChecked}
-                                height="100%"
+                            <MovieCategoryList
+                                categories={categories}
+                                handleCategoriesToggle={handleCategoriesToggle}
+                                categoriesChecked={categoriesChecked}
+                                // fetchCategories={fetchCategories}
+                                // height="100%"
                             />
                         </div>
                         <MovieModalDescription movie={props.movie}/>
@@ -69,4 +68,4 @@ const MovieCollectionModal = ({...props}) => {
     );
 }
 
-export default MovieCollectionModal
+export default MovieCategoryModal

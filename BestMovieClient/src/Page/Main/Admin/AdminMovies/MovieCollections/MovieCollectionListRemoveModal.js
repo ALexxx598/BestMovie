@@ -30,7 +30,7 @@ const MovieCollectionListRemoveModal = ({...props}) => {
                 </Modal.Header>
                 <Modal.Body className="mainModalTheme">
                     <div className="modalRemoveButton">
-                        <ButtonClose text={"Remove"} onClick={handleRemove}/>
+                        <ButtonClose text={"Видалити"} onClick={handleRemove}/>
                     </div>
                 </Modal.Body>
             </Modal>

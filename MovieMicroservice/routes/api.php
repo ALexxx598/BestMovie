@@ -46,6 +46,7 @@ Route::controller(MovieController::class)
             Route::middleware('role.admin')->group(function () {
                 Route::post('/', 'create');
                 Route::patch('/collections/default/{movieId}', 'updateDefaultCollections');
+                Route::patch('/categories/{movieId}', 'updateCategories');
 
                 Route::group(['prefix' => '{movieId}'], function () {
                     Route::delete('/', 'delete');

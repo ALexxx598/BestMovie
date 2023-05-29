@@ -9,13 +9,6 @@ const MovieListItem = ({...props}) => {
         <Fragment>
             <div id="container" className="movieItemBackground">
                 <a href={DOMAIN + ADMIN_MOVIES + props.movie.id}>
-                    <AiFillPlayCircle
-                        color="green"
-                        fontSize={40}
-                        id="playIcon"
-                    />
-                </a>
-                <a href={DOMAIN + ADMIN_MOVIES + props.movie.id}>
                     <img
                         src={
                             props.movie.storageImageUrl

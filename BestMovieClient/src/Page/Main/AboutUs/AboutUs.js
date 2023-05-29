@@ -2,6 +2,7 @@ import NavBar from "../NavBar/NavBar";
 import {Col, Row} from "react-bootstrap";
 
 import './aboutUs.css'
+import Footer from "../Footer/Footer";
 
 const AboutUs = () => {
     return (
